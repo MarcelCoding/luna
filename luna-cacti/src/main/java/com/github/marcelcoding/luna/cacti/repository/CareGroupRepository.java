@@ -1,4 +1,4 @@
-package com.github.marcelcoding.luna.cacti.reposetory;
+package com.github.marcelcoding.luna.cacti.repository;
 
 import com.github.marcelcoding.luna.cacti.model.CareGroup;
 import java.util.List;
