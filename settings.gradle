@@ -1,2 +1,6 @@
-rootProject.name = 'luna-backend'
+rootProject.name = 'luna'
+include(
+  'luna-cacti',
+  'luna-main'
+)
 

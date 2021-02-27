@@ -1,0 +1,22 @@
+plugins {
+  id 'java-library'
+}
+
+dependencies {
+  implementation "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}"
+  implementation("net.getnova.framework:nova-core:${novaVersion}") { changing true }
+
+  implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+  implementation("net.getnova.framework:nova-data-jpa:${novaVersion}") { changing true }
+
+  annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+  // testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  // testImplementation 'io.projectreactor:reactor-test'
+}
+
+// Since this library is included as a jar in our jib projects, we want the
+// jar to built reproducibly.
+jar {
+  preserveFileTimestamps false
+  reproducibleFileOrder true
+}

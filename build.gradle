@@ -1,19 +1,104 @@
 plugins {
-    id('base')
+  id 'base'
+  id 'io.freefair.git-version' version '5.3.0'
+  id 'io.freefair.lombok' version '5.3.0' // apply, because javadoc
+  id 'com.github.spotbugs' version '4.6.0' apply false
+  id 'org.springframework.boot' version '2.4.3' apply false
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE' apply false
+  id 'com.google.cloud.tools.jib' version '2.8.0' apply false
+//io.freefair.maven-optional
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+if (version.toString().endsWith('SNAPSHOT')) {
+  version = 'edge'
+}
 
-//repositories {
-//    mavenCentral()
-//}
+allprojects {
+  group('com.github.marcelcoding')
 
-//dependencies {
-//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-//}
+  ext {
+    novaVersion = 'edge'
+    springBootVersion = '2.4.3'
+  }
 
-//test {
-//    useJUnitPlatform()
-//}
+  repositories {
+    mavenCentral()
+  }
+}
+
+subprojects {
+  version rootProject.version
+
+  apply plugin: 'java'
+  apply plugin: 'io.freefair.lombok'
+  apply plugin: 'checkstyle'
+  apply plugin: 'pmd'
+  apply plugin: 'com.github.spotbugs'
+  apply plugin: 'io.spring.dependency-management'
+
+  repositories {
+    mavenCentral()
+    maven { url 'https://raw.githubusercontent.com/getnova/maven/main' }
+  }
+
+  sourceCompatibility = targetCompatibility = JavaVersion.VERSION_15
+
+  jar {
+    from "${rootDir}/LICENSE"
+    manifest.attributes([
+      'Specification-Title'     : project.name,
+      'Specification-Version'   : project.version,
+      'Specification-Vendor'    : 'Marcel Coding (https://github.com/MarcelCoding)',
+      'Implementation-Title'    : project.name,
+      'Implementation-Version'  : project.version,
+      'Implementation-Vendor'   : 'Marcel Coding (https://github.com/MarcelCoding)',
+      'Implementation-Timestamp': new Date().format('yyyy-MM-dd\'T\'HH:mm:ssZ')
+    ])
+  }
+
+  tasks.withType(JavaCompile) {
+    doFirst {
+      options.encoding = 'UTF-8'
+      // Java Modularity:
+      // options.compilerArgs.addAll(['--module-path', classpath.asPath])
+    }
+  }
+
+  lombok {
+    config.put('lombok.equalsandhashcode.callsuper', 'CALL')
+    config.put('lombok.tostring.callsuper', 'CALL')
+  }
+
+  tasks.withType(Checkstyle) {
+    exclude('**/module-info.java')
+    ignoreFailures = true
+    reports {
+      xml.enabled(true)
+      html.enabled(false)
+    }
+  }
+
+  checkstyleMain {
+    configFile = file("${rootDir}/config/checkstyle/main.xml")
+  }
+
+  checkstyleTest {
+    configFile = file("${rootDir}/config/checkstyle/test.xml")
+  }
+
+  tasks.withType(Pmd) {
+    ignoreFailures = true
+    reports {
+      xml.enabled(true)
+      html.enabled(false)
+    }
+  }
+
+  spotbugs {
+    ignoreFailures = true
+  }
+
+  test {
+    useJUnitPlatform()
+  }
+}

@@ -1,0 +1,23 @@
+FROM adoptopenjdk:${JAVA_VERSION}-jre-${JVM_IMPL}
+
+ARG LUNA_USER=luna
+ARG LUNA_GROUP=luna
+
+ENV LUNA_HOME /opt/luna
+ENV DATA_DIR /data
+
+RUN set -o errexit -o nounset \
+    && groupadd --system --gid 1000 ${LUNA_GROUP} \
+    && useradd --system --gid ${LUNA_GROUP} --uid 1000 --shell /bin/bash --create-home ${LUNA_USER} \
+    && mkdir -p ${DATA_DIR} \
+    && chown --recursive ${LUNA_USER}:${LUNA_GROUP} ${DATA_DIR} \
+    && chown --recursive ${LUNA_USER}:${LUNA_GROUP} /home/${LUNA_USER}
+
+WORKDIR ${DATA_DIR}
+COPY --chown=${LUNA_USER}:${LUNA_GROUP} ./luna/ ${LUNA_HOME}/
+
+RUN ln --symbolic ${LUNA_HOME}/bin/luna-main /usr/bin/luna \
+  && chmod +x /usr/bin/luna
+USER ${LUNA_USER}
+
+ENTRYPOINT ["luna"]
