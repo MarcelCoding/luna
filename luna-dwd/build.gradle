@@ -1,0 +1,26 @@
+plugins {
+  id 'java-library'
+}
+
+dependencies {
+  implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+  implementation 'org.springframework.boot:spring-boot-starter'
+
+  implementation("net.getnova.framework:nova-api-rest:${novaVersion}") { changing true }
+  implementation 'io.netty:netty-tcnative-boringssl-static'
+
+//  implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+  annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+  annotationProcessor "org.springframework:spring-context-indexer:5.3.4"
+
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  // testImplementation 'io.projectreactor:reactor-test'
+}
+
+// Since this library is included as a jar in our jib projects, we want the
+// jar to built reproducibly.
+jar {
+  preserveFileTimestamps false
+  reproducibleFileOrder true
+}
