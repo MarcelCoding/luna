@@ -19,5 +19,6 @@ COPY --chown=${LUNA_USER}:${LUNA_GROUP} ./luna/ ${LUNA_HOME}/
 RUN ln --symbolic ${LUNA_HOME}/bin/luna-main /usr/bin/luna \
   && chmod +x /usr/bin/luna
 USER ${LUNA_USER}
+EXPOSE 8080
 
 ENTRYPOINT ["luna"]

@@ -33,5 +33,6 @@ COPY --from=builder --chown=${LUNA_USER}:${LUNA_GROUP} /home/src/luna-main/build
 #RUN ln --symbolic ${LUNA_HOME}/bin/luna-main /usr/bin/luna \
 #  && chmod +x /usr/bin/luna
 USER ${LUNA_USER}:${LUNA_GROUP}
+EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "/opt/luna/luna.jar"]
