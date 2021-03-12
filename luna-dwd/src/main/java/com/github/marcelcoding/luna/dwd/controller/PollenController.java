@@ -4,12 +4,12 @@ import com.github.marcelcoding.luna.dwd.dto.PollenData;
 import com.github.marcelcoding.luna.dwd.dto.PollenRegion;
 import com.github.marcelcoding.luna.dwd.service.PollenService;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.api.annotation.GetEndpoint;
-import net.getnova.framework.api.data.ApiResponse;
+import net.getnova.framework.api.data.response.ApiResponse;
 import net.getnova.framework.api.parameter.ApiPathVariable;
 import net.getnova.framework.api.rest.annotation.RestApiController;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class PollenController {
   }
 
   @GetEndpoint("regions")
-  public Flux<PollenRegion> findRegions() {
+  public Mono<Set<PollenRegion>> findRegions() {
     return this.pollenService.findRegions();
   }
 

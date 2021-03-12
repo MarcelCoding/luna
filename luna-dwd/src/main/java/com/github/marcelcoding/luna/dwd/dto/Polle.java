@@ -17,6 +17,6 @@ public class Polle {
   ) {
     this.today = today;
     this.tomorrow = tomorrow;
-    this.dayAfterTomorrow = dayAfterTomorrow;
+    this.dayAfterTomorrow = dayAfterTomorrow.equals("-1") ? null : dayAfterTomorrow;
   }
 }

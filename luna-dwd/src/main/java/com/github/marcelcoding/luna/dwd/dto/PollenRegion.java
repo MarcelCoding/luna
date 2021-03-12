@@ -10,8 +10,6 @@ public class PollenRegion {
 
   private final short id;
   private final String name;
-
-  private final short subId;
   private final String subName;
 
   @JsonIgnore
@@ -24,16 +22,9 @@ public class PollenRegion {
     @JsonProperty("partregion_name") final String subName,
     @JsonProperty("Pollen") final Map<String, Polle> pollen
   ) {
-    this.id = id;
-    this.name = name;
-    this.subId = subId;
-    this.subName = subName;
+    this.id = subId == -1 ? id : subId;
+    this.name = name.strip();
+    this.subName = subName.isEmpty() ? null : subName.strip();
     this.pollen = pollen;
-  }
-
-  public short getRegionId() {
-    return this.getSubId() == -1
-      ? this.getId()
-      : this.getSubId();
   }
 }

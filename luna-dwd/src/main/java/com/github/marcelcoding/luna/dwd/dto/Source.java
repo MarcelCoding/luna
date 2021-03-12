@@ -7,8 +7,8 @@ import lombok.Data;
 public class Source {
 
   private final int id;
-  private final String dwdStationId;
-  private final String wmoStationId;
+//  private final String dwdStationId;
+//  private final String wmoStationId;
   private final String stationName;
   private final ObservationType observationType;
   private final float lat;
@@ -18,8 +18,8 @@ public class Source {
 
   public Source(
     @JsonProperty("id") final int id,
-    @JsonProperty("dwd_station_id") final String dwdStationId,
-    @JsonProperty("wmo_station_id") final String wmoStationId,
+//    @JsonProperty("dwd_station_id") final String dwdStationId,
+//    @JsonProperty("wmo_station_id") final String wmoStationId,
     @JsonProperty("station_name") final String stationName,
     @JsonProperty("observation_type") final ObservationType observationType,
     @JsonProperty("lat") final float lat,
@@ -28,8 +28,8 @@ public class Source {
     @JsonProperty("distance") final float distance
   ) {
     this.id = id;
-    this.dwdStationId = dwdStationId;
-    this.wmoStationId = wmoStationId;
+//    this.dwdStationId = dwdStationId;
+//    this.wmoStationId = wmoStationId;
     this.stationName = stationName;
     this.observationType = observationType;
     this.lat = lat;

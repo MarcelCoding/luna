@@ -5,10 +5,10 @@ import com.github.marcelcoding.luna.dwd.dto.PollenData;
 import com.github.marcelcoding.luna.dwd.dto.PollenRegion;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -21,8 +21,8 @@ public class PollenService {
 
   private PollenData data;
 
-  public Flux<PollenRegion> findRegions() {
-    return this.findData().flatMapIterable(PollenData::getRegions);
+  public Mono<Set<PollenRegion>> findRegions() {
+    return this.findData().map(PollenData::getRegions);
   }
 
   public Mono<PollenData> findData() {
@@ -43,7 +43,7 @@ public class PollenService {
     return this.findData()
       .map(data -> data.getRegions()
         .stream()
-        .filter(region -> region.getRegionId() == regionId)
+        .filter(region -> region.getId() == regionId)
         .findFirst()
         .map(PollenRegion::getPollen)
       );
