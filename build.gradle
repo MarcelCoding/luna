@@ -12,6 +12,7 @@ plugins {
   id 'io.freefair.git-version' version '5.3.0'
   id 'io.freefair.lombok' version '5.3.0' // apply, because javadoc
   id 'com.github.spotbugs' version '4.7.0' apply false
+  id 'com.github.jk1.dependency-license-report' version '1.16'
   id 'org.springframework.boot' version "${springBootVersion}" apply false
   id 'io.spring.dependency-management' version '1.0.11.RELEASE' apply false
   id 'org.springframework.experimental.aot' version "${springNativeVersion}" apply false
