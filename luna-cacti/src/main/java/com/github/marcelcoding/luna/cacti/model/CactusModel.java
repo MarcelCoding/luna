@@ -2,6 +2,7 @@ package com.github.marcelcoding.luna.cacti.model;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.util.Optional;
 import java.util.function.Function;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -23,22 +24,22 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cacti_cactus")
-public class Cactus extends TableModelAutoId {
+public class CactusModel extends TableModelAutoId {
 
   @Column(name = "number", nullable = false, updatable = true, length = 128, unique = true)
   private String number;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "genus_id", nullable = true, updatable = true)
-  private Genus genus;
+  private GenusModel genus;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "specie_id", nullable = true, updatable = true)
-  private Specie specie;
+  private SpecieModel specie;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "form_id", nullable = true, updatable = true)
-  private Form form;
+  private FormModel form;
 
   @Column(name = "field_number", nullable = true, updatable = true, length = 128)
   private String fieldNumber;
@@ -57,7 +58,7 @@ public class Cactus extends TableModelAutoId {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "care_group_id", nullable = true, updatable = true)
-  private CareGroup careGroup;
+  private CareGroupModel careGroup;
 
   @Column(name = "care_group_home", nullable = true, updatable = true, length = 512)
   private String careGroupHome;
@@ -95,7 +96,7 @@ public class Cactus extends TableModelAutoId {
   @Column(name = "care_group_rest_time_other", nullable = true, updatable = true, length = 1024)
   private String careGroupRestTimeOther;
 
-  public Cactus(final String number) {
+  public CactusModel(final String number) {
     this.number = number;
   }
 
@@ -163,19 +164,20 @@ public class Cactus extends TableModelAutoId {
 //  }
 
   public final Duration getAge() {
-    return this.getAcquisition() == null || this.getAcquisition().getTimestamp() == null
-      || this.getAcquisition().getAge() == null
-      ? null
-      : Duration.between(
-        this.getAcquisition().getTimestamp().minus(this.getAcquisition().getAge()),
-        this.getState() == null || this.getState().getNoLongerInPossessionTimestamp() == null
-          ? OffsetDateTime.now()
-          : this.getState().getNoLongerInPossessionTimestamp()
-      );
+    if (this.getAcquisition() == null
+      || this.getAcquisition().getTimestamp() == null
+      || this.getAcquisition().getAge() == null) {
+      return null;
+    }
+
+    return Duration.between(
+      this.getAcquisition().getTimestamp().minus(this.getAcquisition().getAge()),
+      Optional.ofNullable(this.getState()).map(State::getNoLongerInPossessionTimestamp).orElseGet(OffsetDateTime::now)
+    );
   }
 
-  private <T> T getCareGroupValue(final CareGroup careGroup, final T cactusValue,
-    final Function<CareGroup, T> careGroupValue) {
+  private <T> T getCareGroupValue(final CareGroupModel careGroup, final T cactusValue,
+    final Function<CareGroupModel, T> careGroupValue) {
     return cactusValue == null ? careGroup == null ? null : careGroupValue.apply(careGroup) : cactusValue;
   }
 

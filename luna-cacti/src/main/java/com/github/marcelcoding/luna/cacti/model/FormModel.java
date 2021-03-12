@@ -1,8 +1,11 @@
 package com.github.marcelcoding.luna.cacti.model;
 
-import com.github.marcelcoding.luna.cacti.dto.GenusDto;
+import com.github.marcelcoding.luna.cacti.dto.Form;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,17 +19,22 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cacti_genus")
-public class Genus extends TableModelAutoId implements ToDto<GenusDto> {
+@Table(name = "cacti_form")
+public class FormModel extends TableModelAutoId implements ToDto<Form> {
 
   @Column(name = "name", nullable = false, updatable = true, length = 128)
   private String name;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "specie_id", nullable = false, updatable = false)
+  private SpecieModel specie;
+
   @Override
-  public GenusDto toDto() {
-    return new GenusDto(
+  public Form toDto() {
+    return new Form(
       this.getId(),
-      this.getName()
+      this.getName(),
+      this.getSpecie().getId()
     );
   }
 }

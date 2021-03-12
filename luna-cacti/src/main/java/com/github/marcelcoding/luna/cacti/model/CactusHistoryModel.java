@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.model;
 
-import com.github.marcelcoding.luna.cacti.dto.CactusHistoryDto;
+import com.github.marcelcoding.luna.cacti.dto.CactusHistory;
 import java.time.OffsetDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,11 +21,11 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cacti_cactus_history")
-public class CactusHistory extends TableModelAutoId implements ToDto<CactusHistoryDto> {
+public class CactusHistoryModel extends TableModelAutoId implements ToDto<CactusHistory> {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "cactus_id", nullable = false, updatable = false)
-  private Cactus cactus;
+  private CactusModel cactus;
 
   @Column(name = "timestamp", nullable = false, updatable = true)
   private OffsetDateTime timestamp;
@@ -34,8 +34,8 @@ public class CactusHistory extends TableModelAutoId implements ToDto<CactusHisto
   private String content;
 
   @Override
-  public CactusHistoryDto toDto() {
-    return new CactusHistoryDto(
+  public CactusHistory toDto() {
+    return new CactusHistory(
       this.getId(),
       this.getCactus().getId(),
       this.getTimestamp(),

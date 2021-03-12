@@ -3,13 +3,18 @@ plugins {
 }
 
 dependencies {
-  implementation "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}"
-  implementation("net.getnova.framework:nova-core:${novaVersion}") { changing true }
+  implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+  implementation 'org.springframework.boot:spring-boot-starter'
 
-  implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation("net.getnova.framework:nova-data-jpa:${novaVersion}") { changing true }
 
+  implementation("net.getnova.framework:nova-api-rest:${novaVersion}") { changing true }
+
+  implementation 'org.springframework.boot:spring-boot-starter-validation'
+
   annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+  annotationProcessor "org.springframework:spring-context-indexer:5.3.4"
   // testImplementation 'org.springframework.boot:spring-boot-starter-test'
   // testImplementation 'io.projectreactor:reactor-test'
 }

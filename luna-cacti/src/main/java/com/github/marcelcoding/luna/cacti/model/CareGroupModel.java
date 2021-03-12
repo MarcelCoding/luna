@@ -16,7 +16,7 @@ import net.getnova.framework.jpa.model.TableModel;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cacti_care_group")
-public class CareGroup extends TableModel {
+public class CareGroupModel extends TableModel {
 
   @Id
   @Column(name = "id", nullable = false, updatable = false, length = 2)
