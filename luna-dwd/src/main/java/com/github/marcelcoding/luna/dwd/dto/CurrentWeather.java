@@ -62,9 +62,9 @@ public class CurrentWeather {
     @JsonProperty("wind_gust_direction_10") final float windGustDirection10,
     @JsonProperty("wind_gust_direction_30") final float windGustDirection30,
     @JsonProperty("wind_gust_direction_60") final float windGustDirection60,
-    @JsonProperty("wind_gust_speed_10") float windGustSpeed10,
-    @JsonProperty("wind_gust_speed_30") float windGustSpeed30,
-    @JsonProperty("wind_gust_speed_60") float windGustSpeed60,
+    @JsonProperty("wind_gust_speed_10") final float windGustSpeed10,
+    @JsonProperty("wind_gust_speed_30") final float windGustSpeed30,
+    @JsonProperty("wind_gust_speed_60") final float windGustSpeed60,
     @JsonProperty("fallback_source_ids") final JsonNode fallbackSourceIds
   ) {
     this.timestamp = timestamp;

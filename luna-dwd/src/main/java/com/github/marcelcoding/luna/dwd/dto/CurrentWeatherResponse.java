@@ -1,7 +1,6 @@
 package com.github.marcelcoding.luna.dwd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 import java.util.Set;
 import lombok.Data;
 
