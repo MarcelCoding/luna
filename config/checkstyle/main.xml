@@ -45,7 +45,7 @@
     <property name="message" value="Line has trailing spaces."/>
   </module>
 
-  <module name="SuppressWarningsFilter" />
+  <module name="SuppressWarningsFilter"/>
 
   <!-- Checks for whitespace                               -->
   <!-- See https://checkstyle.org/config_whitespace.html -->

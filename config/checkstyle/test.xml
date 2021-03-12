@@ -41,6 +41,8 @@
     <property name="message" value="Line has trailing spaces."/>
   </module>
 
+  <module name="SuppressWarningsFilter"/>
+
   <!-- Checks for whitespace                               -->
   <!-- See https://checkstyle.org/config_whitespace.html -->
   <module name="TreeWalker">
@@ -133,6 +135,9 @@
     <module name="FinalParameters"/>
     <module name="TodoComment"/>
     <module name="UpperEll"/>
+
+
+    <module name="SuppressWarningsHolder"/>
   </module>
 
   <!-- Miscellaneous other checks.                   -->
