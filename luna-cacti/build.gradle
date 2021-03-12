@@ -1,5 +1,6 @@
 plugins {
   id 'java-library'
+  id 'org.hibernate.orm'
 }
 
 dependencies {
@@ -24,4 +25,13 @@ dependencies {
 jar {
   preserveFileTimestamps false
   reproducibleFileOrder true
+}
+
+hibernate {
+  enhance {
+    enableLazyInitialization = true
+    enableDirtyTracking = true
+    enableAssociationManagement = true
+    enableExtendedEnhancement = false
+  }
 }

@@ -2,7 +2,6 @@ plugins {
   id 'org.springframework.boot'
   id 'io.spring.dependency-management'
 //  id 'org.springframework.experimental.aot'
-  id 'com.google.cloud.tools.jib'
 }
 
 dependencies {
@@ -36,72 +35,5 @@ springBoot {
 
 bootBuildImage {
   builder = 'paketobuildpacks/builder:tiny'
-  environment = [
-    'BP_BOOT_NATIVE_IMAGE': 'true'
-  ]
-}
-
-def openj9 = findProperty('jvmImpl') == 'openj9'
-
-jib {
-  pluginExtensions {
-    pluginExtension {
-      implementation = 'com.google.cloud.tools.jib.gradle.extension.springboot.JibSpringBootExtension'
-    }
-  }
-  from {
-    // https://github.com/GoogleContainerTools/distroless/pull/670
-    image = "adoptopenjdk:${targetCompatibility}-jre-${openj9 ? 'openj9' : 'hotspot'}"
-    platforms {
-      platform {
-        architecture = 'amd64'
-        os = 'linux'
-      }
-      platform {
-        architecture = 'arm64'
-        os = 'linux'
-      }
-      if (!openj9) {
-        platform {
-          architecture = 'arm'
-          os = 'linux'
-        }
-      }
-    }
-  }
-  to {
-    def dockerTags = generateTags(openj9)
-    println("::set-output name=tag::${dockerTags.first()}")
-
-    image = "${findProperty('image') ?: 'marcelcoding/luna'}:${dockerTags.first()}"
-
-    dockerTags.remove(0)
-
-    tags = dockerTags
-    auth {
-      username = System.getenv('DOCKER_USERNAME') ?: ''
-      password = System.getenv('DOCKER_TOKEN') ?: ''
-    }
-  }
-}
-
-def generateTags(openj9) {
-  def version = version.toString();
-
-  def flavor = openj9 ? 'openj9' : 'hotspot'
-  def defaultFlavor = !openj9
-
-  def tags = [] as List<String>
-  if (version == 'edge') {
-    tags += "edge-${flavor}"
-    if (defaultFlavor) tags += 'edge'
-  } else {
-    def (major, minor, _) = version.tokenize('.')
-    def versions = [major, "${major}.${minor}", version]
-
-    tags += (versions.collect { it + '-' + flavor } + flavor)
-    if (defaultFlavor) tags += (versions + 'latest')
-  }
-
-  return tags
+  environment = ['BP_NATIVE_IMAGE': 'true']
 }

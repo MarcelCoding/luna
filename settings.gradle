@@ -6,6 +6,14 @@ pluginManagement {
     maven { url 'https://repo.spring.io/milestone' }
     maven { url 'https://repo.spring.io/snapshot' }
   }
+
+  resolutionStrategy {
+    eachPlugin {
+      if (requested.id.id == 'org.hibernate.orm') {
+        useModule('org.hibernate:hibernate-gradle-plugin:5.4.29.Final')
+      }
+    }
+  }
 }
 
 rootProject.name = 'luna'
@@ -15,4 +23,3 @@ include(
   'luna-dwd',
   'luna-main'
 )
-
