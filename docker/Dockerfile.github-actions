@@ -25,6 +25,7 @@ WORKDIR ${DATA_DIR}
 
 USER ${LUNA_USER}:${LUNA_GROUP}
 EXPOSE 8080
+VOLUME ${DATA_DIR}
 
 COPY --from=extractor /src/dependencies/ /opt/luna
 COPY --from=extractor /src/spring-boot-loader/ /opt/luna

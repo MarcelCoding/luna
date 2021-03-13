@@ -17,7 +17,7 @@
       </param>
     </additionalParameters>
     <method v="2">
-      <option name="Gradle.BeforeRunTask" enabled="false" tasks="classes" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="false" tasks="compileJava" externalProjectPath="$PROJECT_DIR$/luna-main" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>

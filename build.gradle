@@ -4,13 +4,14 @@ buildscript {
     springBootVersion = '2.4.4-SNAPSHOT'
     springNativeVersion = '0.9.1-SNAPSHOT'
     autoServiceVersion = '1.0-rc7'
+    freefairVersion = '5.3.0'
   }
 }
 
 plugins {
   id 'base'
-  id 'io.freefair.git-version' version '5.3.0'
-  id 'io.freefair.lombok' version '5.3.0' // apply, because javadoc
+  id 'io.freefair.git-version' version "${freefairVersion}"
+  id 'io.freefair.lombok' version "${freefairVersion}" // apply, because javadoc
   id 'com.github.spotbugs' version '4.7.0' apply false
   id 'com.github.jk1.dependency-license-report' version '1.16'
   id 'org.springframework.boot' version "${springBootVersion}" apply false
@@ -21,7 +22,7 @@ plugins {
 
 if (version.toString().endsWith('SNAPSHOT')) {
   version = 'edge'
-} else if (version.toString().startsWith("v")) {
+} else if (version.toString().startsWith('v')) {
   version = version.toString().substring(1)
 }
 
