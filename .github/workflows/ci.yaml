@@ -35,7 +35,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Lint with Gradle
-        run: ./gradlew checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon
+        run: ./gradlew checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon  --refresh-dependencies
 
       - name: Annotate Checkstyle Issues
         uses: jwgmeligmeyling/checkstyle-github-action@master
@@ -80,7 +80,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run tests with Gradle
-        run: ./gradlew test --stacktrace --no-daemon
+        run: ./gradlew test --stacktrace --no-daemon  --refresh-dependencies
 
   build:
     needs: [ lint, test ]
@@ -107,7 +107,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew :luna-main:assemble --stacktrace --no-daemon
+        run: ./gradlew :luna-main:assemble --stacktrace --no-daemon  --refresh-dependencies
 
       - uses: actions/upload-artifact@v2
         with:
