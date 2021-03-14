@@ -5,7 +5,7 @@ import com.github.marcelcoding.luna.dvb.dto.RouteChange;
 import com.github.marcelcoding.luna.dvb.dto.Stop;
 import com.github.marcelcoding.luna.dvb.service.DvbService;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.api.annotation.GetEndpoint;
+import net.getnova.framework.api.endpoint.GetEndpoint;
 import net.getnova.framework.api.parameter.ApiPathVariable;
 import net.getnova.framework.api.rest.annotation.RestApiController;
 import reactor.core.publisher.Flux;

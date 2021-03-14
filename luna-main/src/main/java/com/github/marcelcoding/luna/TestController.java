@@ -1,8 +1,8 @@
 package com.github.marcelcoding.luna;
 
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.api.annotation.GetEndpoint;
-import net.getnova.framework.api.annotation.PostEndpoint;
+import net.getnova.framework.api.endpoint.GetEndpoint;
+import net.getnova.framework.api.endpoint.PostEndpoint;
 import net.getnova.framework.api.parameter.ApiPathVariable;
 import net.getnova.framework.api.parameter.ApiRequestData;
 import net.getnova.framework.api.ws.annotation.WebsocketApiController;
