@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    novaVersion = 'edge'
+    novaVersion = '3.0.0'
     springBootVersion = '2.4.3'
     springNativeVersion = '0.9.0'
     autoServiceVersion = '1.0-rc7'
