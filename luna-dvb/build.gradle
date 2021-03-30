@@ -7,7 +7,6 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter'
 
   implementation("net.getnova.framework:nova-api-rest:${novaVersion}") { changing true }
-  implementation 'io.netty:netty-tcnative-boringssl-static'
 
 //  implementation 'org.springframework.boot:spring-boot-starter-validation'
 

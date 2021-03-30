@@ -16,7 +16,7 @@ public class DvbController {
 
   private final DvbService dvbService;
 
-  @GetEndpoint("stops/{query}")
+  @GetEndpoint("stations/{query}")
   public Flux<Stop> findStops(@ApiPathVariable("query") final String query) {
     return this.dvbService.findStops(query);
   }
