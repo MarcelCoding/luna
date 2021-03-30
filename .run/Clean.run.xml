@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-3  <configuration default="false" factoryName="Gradle" name="Clean" type="GradleRunConfiguration">
+  3
+  <configuration default="false" factoryName="Gradle" name="Clean" type="GradleRunConfiguration">
     <DebugAllEnabled>false</DebugAllEnabled>
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
