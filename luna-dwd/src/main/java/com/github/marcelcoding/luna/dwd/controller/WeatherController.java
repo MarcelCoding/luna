@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.dwd.controller;
 
 import com.github.marcelcoding.luna.dwd.dto.CurrentWeatherResponse;
-import com.github.marcelcoding.luna.dwd.dto.SourcesResponse;
+import com.github.marcelcoding.luna.dwd.dto.Source;
 import com.github.marcelcoding.luna.dwd.dto.WeatherResponse;
 import com.github.marcelcoding.luna.dwd.service.BrightSkyService;
 import java.time.OffsetDateTime;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -39,7 +40,7 @@ public class WeatherController {
   }
 
   @GetMapping("stations")
-  public Mono<SourcesResponse> stations(
+  public Flux<Source> stations(
     @RequestParam("lat") final float lat,
     @RequestParam("lon") final float lon,
     @RequestParam("radius") final int radius

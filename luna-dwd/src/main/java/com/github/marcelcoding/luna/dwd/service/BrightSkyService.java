@@ -76,7 +76,7 @@ public class BrightSkyService {
    * @param radius is meters ({@code m})
    * @return a {@link Flux} with all matching {@link Source}s
    */
-  public Mono<SourcesResponse> sources(final float lat, final float lon, final int radius) {
+  public Flux<Source> sources(final float lat, final float lon, final int radius) {
     final QueryStringEncoder queryEncoder = new QueryStringEncoder("/sources");
     queryEncoder.addParam("lat", String.valueOf(lat));
     queryEncoder.addParam("lon", String.valueOf(lon));
@@ -85,7 +85,7 @@ public class BrightSkyService {
 
     return this.client.get()
       .uri(queryEncoder.toString())
-      .exchangeToMono(response -> Utils.handleError(response, SourcesResponse.class));
-//      .flatMapIterable(SourcesResponse::getSources);
+      .exchangeToMono(response -> Utils.handleError(response, SourcesResponse.class))
+      .flatMapIterable(SourcesResponse::getSources);
   }
 }

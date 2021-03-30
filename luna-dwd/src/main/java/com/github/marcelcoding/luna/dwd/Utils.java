@@ -6,7 +6,11 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-public class Utils {
+public final class Utils {
+
+  private Utils() {
+    throw new UnsupportedOperationException();
+  }
 
   public static <T> Mono<T> handleError(final ClientResponse response, final Class<T> clazz) {
     if (response.statusCode().equals(HttpStatus.OK)) {
