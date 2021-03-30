@@ -1,28 +1,32 @@
-package com.github.marcelcoding.luna.cacti.dto;
+package com.github.marcelcoding.luna.cacti.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.marcelcoding.luna.cacti.model.SpecieModel;
 import java.util.UUID;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class Specie {
+public final class Specie {
 
-  private final UUID id;
-  @NotNull
+  private UUID id;
   @NotBlank
-  private final String name;
+  private String name;
   @NotNull
-  private final UUID genusId;
+  private UUID genusId;
 
   public Specie(
-    @JsonProperty("id") final UUID id,
     @JsonProperty("name") final String name,
     @JsonProperty("genusId") final UUID genusId
   ) {
-    this.id = id;
     this.name = name;
     this.genusId = genusId;
+  }
+
+  public Specie(final SpecieModel model) {
+    this.id = model.getId();
+    this.name = model.getName();
+    this.genusId = model.getGenus().getId();
   }
 }

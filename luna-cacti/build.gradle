@@ -10,8 +10,7 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation("net.getnova.framework:nova-data-jpa:${novaVersion}") { changing true }
 
-  implementation("net.getnova.framework:nova-api-rest:${novaVersion}") { changing true }
-
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
   implementation 'org.springframework.boot:spring-boot-starter-validation'
 
   annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

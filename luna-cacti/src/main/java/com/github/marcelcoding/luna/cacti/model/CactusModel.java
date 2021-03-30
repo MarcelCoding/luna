@@ -2,8 +2,6 @@ package com.github.marcelcoding.luna.cacti.model;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.Optional;
-import java.util.function.Function;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -12,17 +10,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.getnova.framework.jpa.model.TableModelAutoId;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "cacti_cactus")
 public class CactusModel extends TableModelAutoId {
 
@@ -96,10 +91,6 @@ public class CactusModel extends TableModelAutoId {
   @Column(name = "care_group_rest_time_other", nullable = true, updatable = true, length = 1024)
   private String careGroupRestTimeOther;
 
-  public CactusModel(final String number) {
-    this.number = number;
-  }
-
 //  public final ObjectNode serializeSmall() {
 //    return JsonBuilder.create("id", this.getId())
 //      .add("number", this.getNumber())
@@ -163,29 +154,27 @@ public class CactusModel extends TableModelAutoId {
 //      .close();
 //  }
 
-  public final Duration getAge() {
-    if (this.getAcquisition() == null
-      || this.getAcquisition().getTimestamp() == null
-      || this.getAcquisition().getAge() == null) {
-      return null;
-    }
+//  public final Duration getAge() {
+//    if (this.getAcquisition() == null
+//      || this.getAcquisition().getTimestamp() == null
+//      || this.getAcquisition().getAge() == null) {
+//      return null;
+//    }
+//
+//    return Duration.between(
+//      this.getAcquisition().getTimestamp().minus(this.getAcquisition().getAge()),
+//      Optional.ofNullable(this.getState()).map(State::getNoLongerInPossessionTimestamp).orElseGet(OffsetDateTime::now)
+//    );
+//  }
 
-    return Duration.between(
-      this.getAcquisition().getTimestamp().minus(this.getAcquisition().getAge()),
-      Optional.ofNullable(this.getState()).map(State::getNoLongerInPossessionTimestamp).orElseGet(OffsetDateTime::now)
-    );
-  }
-
-  private <T> T getCareGroupValue(final CareGroupModel careGroup, final T cactusValue,
-    final Function<CareGroupModel, T> careGroupValue) {
-    return cactusValue == null ? careGroup == null ? null : careGroupValue.apply(careGroup) : cactusValue;
-  }
+//  private <T> T getCareGroupValue(final CareGroupModel careGroup, final T cactusValue,
+//    final Function<CareGroupModel, T> careGroupValue) {
+//    return cactusValue == null ? careGroup == null ? null : careGroupValue.apply(careGroup) : cactusValue;
+//  }
 
   @Getter
   @Setter
   @Embeddable
-  @NoArgsConstructor
-  @AllArgsConstructor
   public static class Acquisition {
 
     @Column(name = "acquisition_timestamp", nullable = true, updatable = true)
@@ -214,8 +203,6 @@ public class CactusModel extends TableModelAutoId {
   @Getter
   @Setter
   @Embeddable
-  @NoArgsConstructor
-  @AllArgsConstructor
   public static class State {
 
     @Column(name = "state_no_longer_in_possession_timestamp", nullable = true, updatable = true)

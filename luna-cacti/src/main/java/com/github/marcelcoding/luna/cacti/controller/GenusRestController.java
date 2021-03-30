@@ -1,62 +1,74 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.dto.Genus;
-import com.github.marcelcoding.luna.cacti.model.GenusModel;
+import com.github.marcelcoding.luna.cacti.NotFoundException;
+import com.github.marcelcoding.luna.cacti.api.Genus;
 import com.github.marcelcoding.luna.cacti.service.GenusService;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import java.util.List;
+import java.util.Collection;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.api.data.response.ApiResponse;
-import net.getnova.framework.api.endpoint.DeleteEndpoint;
-import net.getnova.framework.api.endpoint.GetEndpoint;
-import net.getnova.framework.api.endpoint.PatchEndpoint;
-import net.getnova.framework.api.endpoint.PostEndpoint;
-import net.getnova.framework.api.endpoint.PutEndpoint;
-import net.getnova.framework.api.parameter.ApiPathVariable;
-import net.getnova.framework.api.parameter.ApiRequestData;
-import net.getnova.framework.api.rest.annotation.RestApiController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 @RequiredArgsConstructor
-@RestApiController("/cacti/genera")
+@RequestMapping("/cacti/genus")
 public class GenusRestController {
 
   private final GenusService genusService;
 
-  @GetEndpoint
-  public List<GenusModel> findAll() {
+  @GetMapping
+  public Collection<Genus> findAll() {
     return this.genusService.findAll();
   }
 
-  @GetEndpoint("{id}")
-  public ApiResponse findById(@ApiPathVariable("id") final UUID id) {
-    return this.genusService.findById(id)
-      .map(genus -> ApiResponse.of(genus.toDto()))
-      .orElseGet(() -> ApiResponse.of(HttpResponseStatus.NOT_FOUND, "NOT_FOUND", "GENUS"));
+//  @GetEndpoint("{id}")
+//  public ApiResponse findById(@ApiPathVariable("id") final UUID id) {
+//    return this.genusService.findById(id)
+//      .map(genus -> ApiResponse.of(genus.toDto()))
+//      .orElseGet(() -> ApiResponse.of(HttpResponseStatus.NOT_FOUND, "NOT_FOUND", "GENUS"));
+//  }
+
+  @PostMapping
+  public Genus post(
+    @RequestBody @Valid final Genus form
+  ) {
+    return this.genusService.save(form);
   }
 
-  @PostEndpoint
-  public Genus post(@ApiRequestData @Valid final Genus genus) {
-    return this.genusService.save(new GenusModel(genus.getName())).toDto();
-  }
-
-  @PutEndpoint("{id}")
-  public ApiResponse put(@ApiPathVariable("id") final UUID id) {
-    return ApiResponse.of(HttpResponseStatus.NOT_IMPLEMENTED);
-  }
-
-  @PatchEndpoint
-  public ApiResponse patch() {
-    return ApiResponse.of(HttpResponseStatus.NOT_IMPLEMENTED);
-  }
-
-  @DeleteEndpoint("{id}")
-  public ApiResponse deleteById(@ApiPathVariable("id") final UUID id) {
-    if (this.genusService.deleteById(id)) {
-      return ApiResponse.of(HttpResponseStatus.OK);
+  @PutMapping("{id}")
+  public Genus put(
+    @PathVariable("id") final UUID id,
+    @RequestBody @Valid final Genus genus
+  ) {
+    if (!this.genusService.exist(id)) {
+      throw new RuntimeException(new NotFoundException(id, "GENUS_NOT_FOUND"));
     }
 
-    return ApiResponse.of(HttpResponseStatus.NOT_FOUND, "GENUS");
+    genus.setId(id);
+    return this.genusService.save(genus);
+  }
+
+//  @PatchEndpoint
+//  public ApiResponse patch() {
+//    return ApiResponse.of(HttpResponseStatus.NOT_IMPLEMENTED);
+//  }
+
+  @DeleteMapping("{id}")
+  public void deleteById(
+    @PathVariable("id") final UUID id
+  ) {
+    try {
+      this.genusService.delete(id);
+    }
+    catch (NotFoundException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

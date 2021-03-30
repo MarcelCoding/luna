@@ -1,26 +1,21 @@
 package com.github.marcelcoding.luna.cacti.model;
 
-import com.github.marcelcoding.luna.cacti.dto.Form;
+import com.github.marcelcoding.luna.cacti.api.Form;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import net.getnova.framework.core.ToDto;
 import net.getnova.framework.jpa.model.TableModelAutoId;
 
-@Getter
-@Setter
 @Entity
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "cacti_form")
-public class FormModel extends TableModelAutoId implements ToDto<Form> {
+public class FormModel extends TableModelAutoId {
 
   @Column(name = "name", nullable = false, updatable = true, length = 128)
   private String name;
@@ -29,12 +24,12 @@ public class FormModel extends TableModelAutoId implements ToDto<Form> {
   @JoinColumn(name = "specie_id", nullable = false, updatable = false)
   private SpecieModel specie;
 
-  @Override
-  public Form toDto() {
-    return new Form(
-      this.getId(),
-      this.getName(),
-      this.getSpecie().getId()
-    );
+  public FormModel(final Form form, final SpecieModel specieModel) {
+    super(form.getId());
+
+    assert form.getSpecieId() == specieModel.getId();
+
+    this.name = form.getName();
+    this.specie = specieModel;
   }
 }
