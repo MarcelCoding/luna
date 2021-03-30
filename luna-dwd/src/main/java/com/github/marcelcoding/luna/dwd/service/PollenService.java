@@ -1,14 +1,15 @@
 package com.github.marcelcoding.luna.dwd.service;
 
+import com.github.marcelcoding.luna.dwd.Utils;
 import com.github.marcelcoding.luna.dwd.dto.Polle;
 import com.github.marcelcoding.luna.dwd.dto.PollenData;
 import com.github.marcelcoding.luna.dwd.dto.PollenRegion;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -21,8 +22,8 @@ public class PollenService {
 
   private PollenData data;
 
-  public Mono<Set<PollenRegion>> findRegions() {
-    return this.findData().map(PollenData::getRegions);
+  public Flux<PollenRegion> findRegions() {
+    return this.findData().flatMapIterable(PollenData::getRegions);
   }
 
   public Mono<PollenData> findData() {
@@ -36,7 +37,10 @@ public class PollenService {
   }
 
   private Mono<PollenData> fetchData() {
-    return this.dwdService.getClient().get(POLLEN_URI, PollenData.class);
+    return this.dwdService.getClient()
+      .get()
+      .uri(POLLEN_URI)
+      .exchangeToMono(response -> Utils.handleError(response, PollenData.class));
   }
 
   public Mono<Optional<Map<String, Polle>>> findPollen(final short regionId) {

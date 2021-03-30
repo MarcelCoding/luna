@@ -1,48 +1,48 @@
 package com.github.marcelcoding.luna.dwd.controller;
 
 import com.github.marcelcoding.luna.dwd.dto.CurrentWeatherResponse;
-import com.github.marcelcoding.luna.dwd.dto.Source;
+import com.github.marcelcoding.luna.dwd.dto.SourcesResponse;
 import com.github.marcelcoding.luna.dwd.dto.WeatherResponse;
 import com.github.marcelcoding.luna.dwd.service.BrightSkyService;
 import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.api.endpoint.GetEndpoint;
-import net.getnova.framework.api.parameter.ApiQueryVariable;
-import net.getnova.framework.api.rest.annotation.RestApiController;
-import reactor.core.publisher.Flux;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+@RestController
 @RequiredArgsConstructor
-@RestApiController("dwd/weather")
+@RequestMapping("dwd/weather")
 public class WeatherController {
 
   // ?lat=51.0274574F&lon=13.6454864F
   private final BrightSkyService brightSkyService;
 
-  @GetEndpoint
+  @GetMapping
   public Mono<WeatherResponse> weather(
-//    @ApiQueryVariable("from") final OffsetDateTime from,
-//    @ApiQueryVariable("to") final OffsetDateTime to,
-    @ApiQueryVariable("lat") final Float lat,
-    @ApiQueryVariable("lon") final Float lon
+    @RequestParam("from") final OffsetDateTime from,
+    @RequestParam("to") final OffsetDateTime to,
+    @RequestParam("lat") final float lat,
+    @RequestParam("lon") final float lon
   ) {
-    return this.brightSkyService.weather(OffsetDateTime.now(), OffsetDateTime.now().plus(1, ChronoUnit.DAYS), lat, lon);
+    return this.brightSkyService.weather(from, to, lat, lon);
   }
 
-  @GetEndpoint("current")
+  @GetMapping("current")
   public Mono<CurrentWeatherResponse> currentWeather(
-    @ApiQueryVariable("lat") final Float lat,
-    @ApiQueryVariable("lon") final Float lon
+    @RequestParam("lat") final float lat,
+    @RequestParam("lon") final float lon
   ) {
     return this.brightSkyService.weather(lat, lon);
   }
 
-  @GetEndpoint("stations")
-  public Flux<Source> stations(
-    @ApiQueryVariable("lat") final Float lat,
-    @ApiQueryVariable("lon") final Float lon,
-    @ApiQueryVariable("radius") final Integer radius
+  @GetMapping("stations")
+  public Mono<SourcesResponse> stations(
+    @RequestParam("lat") final float lat,
+    @RequestParam("lon") final float lon,
+    @RequestParam("radius") final int radius
   ) {
     return this.brightSkyService.sources(lat, lon, radius);
   }

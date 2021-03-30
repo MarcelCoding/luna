@@ -7,7 +7,7 @@ import lombok.Data;
 public class Source {
 
   private final int id;
-//  private final String dwdStationId;
+  //  private final String dwdStationId;
 //  private final String wmoStationId;
   private final String stationName;
   private final ObservationType observationType;

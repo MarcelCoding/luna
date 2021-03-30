@@ -1,39 +1,41 @@
 package com.github.marcelcoding.luna.dwd.controller;
 
+import com.github.marcelcoding.luna.dwd.dto.Polle;
 import com.github.marcelcoding.luna.dwd.dto.PollenData;
 import com.github.marcelcoding.luna.dwd.dto.PollenRegion;
 import com.github.marcelcoding.luna.dwd.service.PollenService;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import java.util.Set;
+import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.api.data.response.ApiResponse;
-import net.getnova.framework.api.endpoint.GetEndpoint;
-import net.getnova.framework.api.parameter.ApiPathVariable;
-import net.getnova.framework.api.rest.annotation.RestApiController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@RestController
 @RequiredArgsConstructor
-@RestApiController("dwd/pollen")
+@RequestMapping("dwd/pollen")
 public class PollenController {
 
   private final PollenService pollenService;
 
-  @GetEndpoint
+  @GetMapping
   public Mono<PollenData> status() {
     return this.pollenService.findData();
   }
 
-  @GetEndpoint("regions")
-  public Mono<Set<PollenRegion>> findRegions() {
+  @GetMapping("regions")
+  public Flux<PollenRegion> findRegions() {
     return this.pollenService.findRegions();
   }
 
-  @GetEndpoint("regions/{regionId}")
-  public Mono<ApiResponse> findPollen(@ApiPathVariable("regionId") final short regionId) {
+  @GetMapping("regions/{regionId}")
+  public Mono<Map<String, Polle>> findPollen(
+    @PathVariable("regionId") final short regionId
+  ) {
     return this.pollenService.findPollen(regionId)
-      .map(optional ->
-        optional.map(ApiResponse::of)
-          .orElseGet(() -> ApiResponse.of(HttpResponseStatus.NOT_FOUND, "REGION", "NOT_FOUND"))
-      );
+      .map(Optional::orElseThrow);
   }
 }
