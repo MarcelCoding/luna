@@ -7,7 +7,7 @@ on:
   pull_request: # if also at push, add "type=ref,event=branch" to docker meta
 
 env:
-  JAVA_VERSION: 15
+  JAVA_VERSION: 16
   IMAGE_NAME: marcelcoding/luna
 
 jobs:
@@ -83,7 +83,7 @@ jobs:
 
     strategy:
       matrix:
-        java-version: [ 11, 15 ]
+        java-version: [ 11, 16 ]
 
     steps:
       - uses: actions/checkout@v2
