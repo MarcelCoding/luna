@@ -1,17 +1,12 @@
 pluginManagement {
   repositories {
-//    maven {
-//      url 'https://repo.spring.io/release'
-//      content {
-//        includeModule('org.springframework.experimental.aot', 'org.springframework.experimental.aot.gradle.plugin')
-//      }
-//    }
     mavenCentral {
-      content {
-        includeModule('org.hibernate', 'hibernate-gradle-plugin')
-      }
+      content { includeModule('org.hibernate', 'hibernate-gradle-plugin') }
     }
     gradlePluginPortal()
+    maven { url 'https://repo.spring.io/release' }
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
   }
 
   resolutionStrategy {
