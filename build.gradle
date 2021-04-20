@@ -58,7 +58,11 @@ subprojects {
   apply plugin: 'pmd'
   apply plugin: 'com.github.spotbugs'
 
-  sourceCompatibility = targetCompatibility = JavaVersion.VERSION_11
+  java {
+    toolchain {
+      languageVersion = JavaLanguageVersion.of(11)
+    }
+  }
 
   jar {
     from "${rootDir}/LICENSE"
