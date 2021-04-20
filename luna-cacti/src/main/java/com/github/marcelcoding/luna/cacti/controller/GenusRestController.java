@@ -3,7 +3,8 @@ package com.github.marcelcoding.luna.cacti.controller;
 import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Genus;
 import com.github.marcelcoding.luna.cacti.service.GenusService;
-import java.util.Collection;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Set;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Genus")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cacti/genus")
@@ -24,7 +26,7 @@ public class GenusRestController {
   private final GenusService genusService;
 
   @GetMapping
-  public Collection<Genus> findAll() {
+  public Set<Genus> findAll() {
     return this.genusService.findAll();
   }
 
@@ -48,10 +50,10 @@ public class GenusRestController {
     @RequestBody @Valid final Genus genus
   ) {
     if (!this.genusService.exist(id)) {
-      throw new RuntimeException(new NotFoundException(id, "GENUS_NOT_FOUND"));
+      throw new NotFoundException(id, "GENUS_NOT_FOUND");
     }
 
-    genus.setId(id);
+//    genus.setId(id);
     return this.genusService.save(genus);
   }
 
@@ -64,11 +66,6 @@ public class GenusRestController {
   public void deleteById(
     @PathVariable("id") final UUID id
   ) {
-    try {
-      this.genusService.delete(id);
-    }
-    catch (NotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    this.genusService.delete(id);
   }
 }

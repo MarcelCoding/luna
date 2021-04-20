@@ -1,8 +1,9 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
 import com.github.marcelcoding.luna.cacti.NotFoundException;
-import com.github.marcelcoding.luna.cacti.api.Form;
-import com.github.marcelcoding.luna.cacti.service.FormService;
+import com.github.marcelcoding.luna.cacti.api.Cactus;
+import com.github.marcelcoding.luna.cacti.api.CactusSmall;
+import com.github.marcelcoding.luna.cacti.service.CactusService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Set;
 import java.util.UUID;
@@ -17,39 +18,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "Form")
+@Tag(name = "Cactus")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/cacti/form")
-public class FormRestController {
+@RequestMapping("/cacti/cactus")
+public class CactusRestController {
 
-  private final FormService formService;
+  private final CactusService cactusService;
 
   @GetMapping
-  public Set<Form> findAll() {
-    return this.formService.findAll();
+  public Set<CactusSmall> findAll() {
+    return this.cactusService.findAll();
+  }
+
+  @GetMapping("{id}")
+  public Cactus findById(@PathVariable("id") final UUID id) {
+    return this.cactusService.findById(id)
+      .orElseThrow(() -> new NotFoundException(id, "CACTUS_NOT_FOUND"));
   }
 
   @PostMapping
-  public Form post(@RequestBody @Valid final Form form) {
-    return this.formService.save(form);
+  public Cactus post(@RequestBody @Valid final Cactus cactus) {
+    return this.cactusService.save(cactus);
   }
 
   @PutMapping("{id}")
-  public Form put(
+  public Cactus put(
     @PathVariable("id") final UUID id,
-    @RequestBody @Valid final Form form
+    @RequestBody @Valid final Cactus cactus
   ) {
-    if (!this.formService.exist(id)) {
-      throw new NotFoundException(id, "FORM_NOT_FOUND");
+    if (!this.cactusService.exist(id)) {
+      throw new NotFoundException(id, "CACTUS_NOT_FOUND");
     }
 
-//    form.setId(id);
-    return this.formService.save(form);
+//    cactus.setId(id);
+    return this.cactusService.save(cactus);
   }
 
   @DeleteMapping("{id}")
   public void deleteById(@PathVariable("id") final UUID id) {
-    this.formService.delete(id);
+    this.cactusService.delete(id);
   }
 }

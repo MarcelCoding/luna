@@ -27,7 +27,7 @@ public final class SpecieService {
   public Set<Specie> findAll() {
     return this.specieRepository.findAll()
       .stream()
-      .map(Specie::new)
+      .map(SpecieModel::toDto)
       .collect(Collectors.toSet());
   }
 
@@ -35,7 +35,7 @@ public final class SpecieService {
     try {
       return this.specieRepository.findAll(sort)
         .stream()
-        .map(Specie::new)
+        .map(SpecieModel::toDto)
         .collect(Collectors.toList());
     }
     catch (PropertyReferenceException e) {
@@ -59,7 +59,7 @@ public final class SpecieService {
       genusModel.get()
     );
 
-    return new Specie(this.specieRepository.save(model));
+    return this.specieRepository.save(model).toDto();
   }
 
   public void delete(final UUID id) throws NotFoundException {

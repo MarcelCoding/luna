@@ -1,25 +1,29 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" factoryName="Spring Boot" name="Bootstrap"
-    type="SpringBootApplicationConfigurationType">
+  <configuration default="false" name="Bootstrap" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="luna.luna-main.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.github.marcelcoding.luna.Bootstrap" />
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="SHORTEN_COMMAND_LINE" value="NONE" />
     <additionalParameters>
       <param>
-        <option name="enabled" value="true"/>
-        <option name="name" value="SQL_USER"/>
-        <option name="value" value="root"/>
+        <option name="enabled" value="true" />
+        <option name="name" value="SQL_USER" />
+        <option name="value" value="root" />
       </param>
       <param>
-        <option name="enabled" value="true"/>
-        <option name="name" value="SQL_PASS"/>
-        <option name="value" value="root"/>
+        <option name="enabled" value="true" />
+        <option name="name" value="SQL_PASS" />
+        <option name="value" value="root" />
+      </param>
+      <param>
+        <option name="enabled" value="true" />
+        <option name="name" value="SQL_HOST" />
+        <option name="value" value="192.168.178.28" />
       </param>
     </additionalParameters>
     <method v="2">
-      <option enabled="true" externalProjectPath="$PROJECT_DIR$" name="Gradle.BeforeRunTask"
-        scriptParameters="" tasks="compileJava processResources" vmOptions=""/>
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="compileJava processResources" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
     </method>
-    <module name="luna.luna-main.main"/>
-    <option name="ALTERNATIVE_JRE_PATH"/>
-    <option name="SPRING_BOOT_MAIN_CLASS" value="com.github.marcelcoding.luna.Bootstrap"/>
-    <option name="ACTIVE_PROFILES" value="dev"/>
   </configuration>
 </component>

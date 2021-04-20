@@ -23,7 +23,7 @@ public final class GenusService {
   public Set<Genus> findAll() {
     return this.genusRepository.findAll()
       .stream()
-      .map(Genus::new)
+      .map(GenusModel::toDto)
       .collect(Collectors.toSet());
   }
 
@@ -31,7 +31,7 @@ public final class GenusService {
     try {
       return this.genusRepository.findAll(sort)
         .stream()
-        .map(Genus::new)
+        .map(GenusModel::toDto)
         .collect(Collectors.toList());
     }
     catch (PropertyReferenceException e) {
@@ -46,8 +46,14 @@ public final class GenusService {
   public Genus save(final Genus genus) {
     final GenusModel model = new GenusModel(genus);
 
-    return new Genus(this.genusRepository.save(model));
+    return this.genusRepository.save(model).toDto();
   }
+
+//  public Genus patch(final Genus genus) {
+//    final GenusModel model = new GenusModel(genus);
+//
+//    return this.genusRepository.
+//  }
 
   public void delete(final UUID id) throws NotFoundException {
     if (!this.genusRepository.existsById(id)) {

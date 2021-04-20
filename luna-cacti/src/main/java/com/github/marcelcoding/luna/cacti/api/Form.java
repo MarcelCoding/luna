@@ -1,32 +1,28 @@
 package com.github.marcelcoding.luna.cacti.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.marcelcoding.luna.cacti.model.FormModel;
 import java.util.UUID;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public final class Form {
 
-  private UUID id;
+  private final UUID id;
   @NotBlank
-  private String name;
+  private final String name;
   @NotNull
-  private UUID specieId;
+  private final UUID specieId;
 
   public Form(
     @JsonProperty("name") final String name,
     @JsonProperty("specieId") final UUID specieId
   ) {
+    this.id = null;
     this.name = name;
     this.specieId = specieId;
-  }
-
-  public Form(final FormModel model) {
-    this.id = model.getId();
-    this.name = model.getName();
-    this.specieId = model.getSpecie().getId();
   }
 }

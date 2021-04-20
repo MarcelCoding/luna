@@ -9,17 +9,17 @@ plugins {
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter'
 
-  runtimeOnly project(':luna-dwd')
+//  runtimeOnly project(':luna-dwd')
 //  runtimeOnly project(':luna-dvb')
   runtimeOnly project(':luna-cacti')
-
-  implementation 'org.springframework.boot:spring-boot-starter-json'
-  implementation 'org.springframework.boot:spring-boot-starter-validation'
 
   implementation 'org.postgresql:postgresql'
 //   runtimeOnly 'org.liquibase:liquibase-core'
 
-//  runtimeOnly 'io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.4.Final:linux-x86_64'
+  implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.6'
+//  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+  runtimeOnly 'io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.5.Final:linux-x86_64'
   runtimeOnly 'io.netty:netty-tcnative-boringssl-static'
 
   developmentOnly 'org.springframework.boot:spring-boot-devtools'

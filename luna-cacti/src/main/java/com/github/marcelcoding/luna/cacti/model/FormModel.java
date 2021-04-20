@@ -9,13 +9,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.getnova.framework.core.ToDto;
 import net.getnova.framework.jpa.model.TableModelAutoId;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @Table(name = "cacti_form")
-public class FormModel extends TableModelAutoId {
+public class FormModel extends TableModelAutoId implements ToDto<Form> {
 
   @Column(name = "name", nullable = false, updatable = true, length = 128)
   private String name;
@@ -31,5 +32,14 @@ public class FormModel extends TableModelAutoId {
 
     this.name = form.getName();
     this.specie = specieModel;
+  }
+
+  @Override
+  public Form toDto() {
+    return new Form(
+      this.getId(),
+      this.name,
+      this.specie.getId()
+    );
   }
 }

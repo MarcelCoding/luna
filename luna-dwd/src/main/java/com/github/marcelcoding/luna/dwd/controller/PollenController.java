@@ -4,6 +4,7 @@ import com.github.marcelcoding.luna.dwd.dto.Polle;
 import com.github.marcelcoding.luna.dwd.dto.PollenData;
 import com.github.marcelcoding.luna.dwd.dto.PollenRegion;
 import com.github.marcelcoding.luna.dwd.service.PollenService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Tag(name = "Pollen")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("dwd/pollen")

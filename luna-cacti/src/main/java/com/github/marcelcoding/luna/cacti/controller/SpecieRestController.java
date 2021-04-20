@@ -3,7 +3,8 @@ package com.github.marcelcoding.luna.cacti.controller;
 import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Specie;
 import com.github.marcelcoding.luna.cacti.service.SpecieService;
-import java.util.Collection;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Set;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Speice")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cacti/specie")
@@ -24,7 +26,7 @@ public class SpecieRestController {
   private final SpecieService specieService;
 
   @GetMapping
-  public Collection<Specie> findAll() {
+  public Set<Specie> findAll() {
     return this.specieService.findAll();
   }
 
@@ -32,12 +34,7 @@ public class SpecieRestController {
   public Specie post(
     @RequestBody @Valid final Specie specie
   ) {
-    try {
-      return this.specieService.save(specie);
-    }
-    catch (NotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    return this.specieService.save(specie);
   }
 
   @PutMapping("{id}")
@@ -46,27 +43,17 @@ public class SpecieRestController {
     @RequestBody @Valid final Specie specie
   ) {
     if (!this.specieService.exist(id)) {
-      throw new RuntimeException(new NotFoundException(id, "SPECIE_NOT_FOUND"));
+      throw new NotFoundException(id, "SPECIE_NOT_FOUND");
     }
 
-    specie.setId(id);
-    try {
-      return this.specieService.save(specie);
-    }
-    catch (NotFoundException e) {
-      throw new RuntimeException(e);
-    }
+//    specie.setId(id);
+    return this.specieService.save(specie);
   }
 
   @DeleteMapping("{id}")
   public void deleteById(
     @PathVariable("id") final UUID id
   ) {
-    try {
-      this.specieService.delete(id);
-    }
-    catch (NotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    this.specieService.delete(id);
   }
 }

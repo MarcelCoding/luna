@@ -4,6 +4,7 @@ import com.github.marcelcoding.luna.dwd.dto.CurrentWeatherResponse;
 import com.github.marcelcoding.luna.dwd.dto.Source;
 import com.github.marcelcoding.luna.dwd.dto.WeatherResponse;
 import com.github.marcelcoding.luna.dwd.service.BrightSkyService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.time.OffsetDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Tag(name = "Weather")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("dwd/weather")

@@ -27,7 +27,7 @@ public final class FormService {
   public Set<Form> findAll() {
     return this.formRepository.findAll()
       .stream()
-      .map(Form::new)
+      .map(FormModel::toDto)
       .collect(Collectors.toSet());
   }
 
@@ -35,7 +35,7 @@ public final class FormService {
     try {
       return this.formRepository.findAll(sort)
         .stream()
-        .map(Form::new)
+        .map(FormModel::toDto)
         .collect(Collectors.toList());
     }
     catch (PropertyReferenceException e) {
@@ -59,7 +59,7 @@ public final class FormService {
       specieModel.get()
     );
 
-    return new Form(this.formRepository.save(model));
+    return this.formRepository.save(model).toDto();
   }
 
   public void delete(final UUID id) throws NotFoundException {
