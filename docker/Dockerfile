@@ -1,4 +1,4 @@
-ARG JAVA_VERSION=15
+ARG JAVA_VERSION=16
 ARG JVM_IMPL=hotspot
 
 FROM adoptopenjdk:${JAVA_VERSION}-jdk-${JVM_IMPL} AS builder
