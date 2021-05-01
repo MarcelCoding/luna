@@ -46,8 +46,7 @@ public class SpecieRestController {
       throw new NotFoundException(id, "SPECIE_NOT_FOUND");
     }
 
-//    specie.setId(id);
-    return this.specieService.save(specie);
+    return this.specieService.save(id, specie);
   }
 
   @DeleteMapping("{id}")

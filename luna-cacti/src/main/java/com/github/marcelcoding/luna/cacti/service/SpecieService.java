@@ -3,12 +3,10 @@ package com.github.marcelcoding.luna.cacti.service;
 import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.PropertyNotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Specie;
-import com.github.marcelcoding.luna.cacti.model.GenusModel;
+import com.github.marcelcoding.luna.cacti.converter.SpecieConverter;
 import com.github.marcelcoding.luna.cacti.model.SpecieModel;
-import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
 import com.github.marcelcoding.luna.cacti.repository.SpecieRepository;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,13 +19,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public final class SpecieService {
 
-  private final GenusRepository genusRepository;
   private final SpecieRepository specieRepository;
+  private final SpecieConverter specieConverter;
 
   public Set<Specie> findAll() {
     return this.specieRepository.findAll()
       .stream()
-      .map(SpecieModel::toDto)
+      .map(this.specieConverter::toDto)
       .collect(Collectors.toSet());
   }
 
@@ -35,8 +33,8 @@ public final class SpecieService {
     try {
       return this.specieRepository.findAll(sort)
         .stream()
-        .map(SpecieModel::toDto)
-        .collect(Collectors.toList());
+        .map(this.specieConverter::toDto)
+        .toList();
     }
     catch (PropertyReferenceException e) {
       throw new PropertyNotFoundException(e);
@@ -48,18 +46,20 @@ public final class SpecieService {
   }
 
   public Specie save(final Specie specie) throws NotFoundException {
-    final Optional<GenusModel> genusModel = this.genusRepository.findById(specie.getGenusId());
-
-    if (genusModel.isEmpty()) {
-      throw new NotFoundException(specie.getGenusId(), "GENUS_NOT_FOUND");
-    }
-
-    final SpecieModel model = new SpecieModel(
-      specie,
-      genusModel.get()
+    return this.specieConverter.toDto(
+      this.specieRepository.save(
+        this.specieConverter.toModel(specie)
+      )
     );
+  }
 
-    return this.specieRepository.save(model).toDto();
+  public Specie save(final UUID id, final Specie specie) throws NotFoundException {
+    final SpecieModel model = this.specieRepository.findById(id)
+      .orElseThrow(() -> new NotFoundException(id, "SPECIE_NOT_FOUND"));
+
+    this.specieConverter.override(model, specie);
+
+    return this.specieConverter.toDto(this.specieRepository.save(model));
   }
 
   public void delete(final UUID id) throws NotFoundException {

@@ -53,8 +53,7 @@ public class GenusRestController {
       throw new NotFoundException(id, "GENUS_NOT_FOUND");
     }
 
-//    genus.setId(id);
-    return this.genusService.save(genus);
+    return this.genusService.save(id, genus);
   }
 
 //  @PatchEndpoint

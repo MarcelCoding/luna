@@ -51,8 +51,7 @@ public class CactusRestController {
       throw new NotFoundException(id, "CACTUS_NOT_FOUND");
     }
 
-//    cactus.setId(id);
-    return this.cactusService.save(cactus);
+    return this.cactusService.save(id, cactus);
   }
 
   @DeleteMapping("{id}")

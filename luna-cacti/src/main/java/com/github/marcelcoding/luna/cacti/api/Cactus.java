@@ -22,8 +22,8 @@ public final class Cactus {
   private final String fieldNumber;
   private final String flowerColor;
   private final String synonymes;
-  private final Acquisition acquisition;
   private final State state;
+  private final Acquisition acquisition;
   private final CareGroup careGroup;
 
   public Cactus(
@@ -34,8 +34,8 @@ public final class Cactus {
     @JsonProperty("fieldNumber") final String fieldNumber,
     @JsonProperty("flowerColor") final String flowerColor,
     @JsonProperty("synonymes") final String synonymes,
-    @JsonProperty("acquisition") final Acquisition acquisition,
     @JsonProperty("state") final State state,
+    @JsonProperty("acquisition") final Acquisition acquisition,
     @JsonProperty("careGroup") final CareGroup careGroup
   ) {
     this.id = null;
@@ -46,8 +46,8 @@ public final class Cactus {
     this.fieldNumber = fieldNumber;
     this.flowerColor = flowerColor;
     this.synonymes = synonymes;
-    this.acquisition = acquisition;
     this.state = state;
+    this.acquisition = acquisition;
     this.careGroup = careGroup;
   }
 
@@ -66,6 +66,30 @@ public final class Cactus {
         .map(State::getNoLongerInPossessionTimestamp)
         .orElseGet(OffsetDateTime::now)
     );
+  }
+
+  @Data
+  public static final class State {
+
+    private final OffsetDateTime noLongerInPossessionTimestamp;
+    private final String noLongerInPossessionReason;
+    private final String vitality;
+
+    public State() {
+      this.noLongerInPossessionTimestamp = null;
+      this.noLongerInPossessionReason = null;
+      this.vitality = null;
+    }
+
+    public State(
+      @JsonProperty("noLongerInPossessionTimestamp") final OffsetDateTime noLongerInPossessionTimestamp,
+      @JsonProperty("noLongerInPossessionReason") final String noLongerInPossessionReason,
+      @JsonProperty("vitality") final String vitality
+    ) {
+      this.noLongerInPossessionTimestamp = noLongerInPossessionTimestamp;
+      this.noLongerInPossessionReason = noLongerInPossessionReason;
+      this.vitality = vitality;
+    }
   }
 
   @Data
@@ -93,30 +117,6 @@ public final class Cactus {
       this.age = age;
       this.place = place;
       this.plantType = plantType;
-    }
-  }
-
-  @Data
-  public static final class State {
-
-    private final OffsetDateTime noLongerInPossessionTimestamp;
-    private final String noLongerInPossessionReason;
-    private final String vitality;
-
-    public State() {
-      this.noLongerInPossessionTimestamp = null;
-      this.noLongerInPossessionReason = null;
-      this.vitality = null;
-    }
-
-    public State(
-      @JsonProperty("noLongerInPossessionTimestamp") final OffsetDateTime noLongerInPossessionTimestamp,
-      @JsonProperty("noLongerInPossessionReason") final String noLongerInPossessionReason,
-      @JsonProperty("vitality") final String vitality
-    ) {
-      this.noLongerInPossessionTimestamp = noLongerInPossessionTimestamp;
-      this.noLongerInPossessionReason = noLongerInPossessionReason;
-      this.vitality = vitality;
     }
   }
 }

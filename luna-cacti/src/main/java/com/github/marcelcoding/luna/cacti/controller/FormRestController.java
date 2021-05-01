@@ -44,8 +44,7 @@ public class FormRestController {
       throw new NotFoundException(id, "FORM_NOT_FOUND");
     }
 
-//    form.setId(id);
-    return this.formService.save(form);
+    return this.formService.save(id, form);
   }
 
   @DeleteMapping("{id}")

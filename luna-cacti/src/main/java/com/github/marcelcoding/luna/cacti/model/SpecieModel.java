@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.model;
 
-import com.github.marcelcoding.luna.cacti.api.Specie;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,14 +8,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.getnova.framework.core.ToDto;
+import lombok.Setter;
 import net.getnova.framework.jpa.model.TableModelAutoId;
 
 @Entity
+@Setter
 @Getter
 @NoArgsConstructor
 @Table(name = "cacti_specie")
-public class SpecieModel extends TableModelAutoId implements ToDto<Specie> {
+public class SpecieModel extends TableModelAutoId {
 
   @Column(name = "name", nullable = false, updatable = true, length = 128)
   private String name;
@@ -25,21 +25,8 @@ public class SpecieModel extends TableModelAutoId implements ToDto<Specie> {
   @JoinColumn(name = "genus_id", nullable = false, updatable = false)
   private GenusModel genus;
 
-  public SpecieModel(final Specie specie, final GenusModel genusModel) {
-    super(specie.getId());
-
-    assert specie.getGenusId() == genusModel.getId();
-
-    this.name = specie.getName();
-    this.genus = genusModel;
-  }
-
-  @Override
-  public Specie toDto() {
-    return new Specie(
-      this.getId(),
-      this.name,
-      this.genus.getId()
-    );
+  public SpecieModel(final String name, final GenusModel genus) {
+    this.name = name;
+    this.genus = genus;
   }
 }

@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.model;
 
-import com.github.marcelcoding.luna.cacti.api.Cactus;
 import com.github.marcelcoding.luna.cacti.api.Cactus.Acquisition;
 import com.github.marcelcoding.luna.cacti.api.Cactus.State;
 import com.github.marcelcoding.luna.cacti.api.CareGroup;
@@ -8,6 +7,7 @@ import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import java.util.UUID;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -20,14 +20,14 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.getnova.framework.core.ToDto;
 import net.getnova.framework.jpa.model.TableModelAutoId;
 
+@Setter
 @Getter
 @Entity
 @NoArgsConstructor
 @Table(name = "cacti_cactus")
-public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
+public class CactusModel extends TableModelAutoId {
 
   @Column(name = "number", nullable = false, updatable = true, length = 128, unique = true)
   private String number;
@@ -54,114 +54,75 @@ public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
   private String synonyms;
 
   @Embedded
-  private AcquisitionModel acquisition;
+  private StateModel state;
 
   @Embedded
-  private StateModel state;
+  private AcquisitionModel acquisition;
 
   @Embedded
   private CareGroupModel careGroup;
 
   public CactusModel(
-    final Cactus cactus,
-    final GenusModel genusModel,
-    final SpecieModel specieModel,
-    final FormModel formModel,
-    final CareGroup careGroup
+    final UUID id,
+    final String number,
+    final GenusModel genus,
+    final SpecieModel specie,
+    final FormModel form,
+    final String fieldNumber,
+    final String flowerColor,
+    final String synonyms,
+    final StateModel state,
+    final AcquisitionModel acquisition,
+    final CareGroupModel careGroup
   ) {
-    super(cactus.getId());
-
-    if (formModel != null) {
-      assert cactus.getFormId() == formModel.getId();
-      this.form = formModel;
-
-      if (specieModel != null) {
-        assert cactus.getSpecieId() == specieModel.getId();
-        this.specie = specieModel;
-      }
-      else {
-        this.specie = this.form.getSpecie();
-      }
-
-      if (genusModel != null) {
-        assert cactus.getGenusId() == genusModel.getId();
-        this.genus = genusModel;
-      }
-      else {
-        this.genus = this.specie.getGenus();
-      }
-    }
-    else if (specieModel != null) {
-      assert cactus.getSpecieId() == specieModel.getId();
-      this.specie = specieModel;
-
-      if (genusModel != null) {
-        assert cactus.getGenusId() == genusModel.getId();
-        this.genus = genusModel;
-      }
-      else {
-        this.genus = this.specie.getGenus();
-      }
-    }
-    else if (genusModel != null) {
-      assert cactus.getGenusId() == genusModel.getId();
-      this.genus = genusModel;
-    }
-
-    this.number = cactus.getNumber();
-
-    this.fieldNumber = cactus.getFieldNumber();
-    this.synonyms = cactus.getSynonymes();
-
-    this.acquisition = cactus.getAcquisition() == null ? null : new AcquisitionModel(cactus.getAcquisition());
-    this.state = cactus.getState() == null ? null : new StateModel(cactus.getState());
-
-    this.flowerColor = cactus.getFlowerColor();
-    this.careGroup = cactus.getCareGroup() == null ? null : new CareGroupModel(cactus.getCareGroup(), careGroup);
-  }
-
-  @Override
-  public Cactus toDto() {
-    return new Cactus(
-      this.getId(),
-      this.number,
-
-      this.genus == null ? null : this.genus.getId(),
-      this.specie == null ? null : this.specie.getId(),
-      this.form == null ? null : this.form.getId(),
-
-      this.fieldNumber,
-      this.flowerColor,
-      this.synonyms,
-
-      this.acquisition == null ? new Acquisition() : this.acquisition.toDto(),
-      this.state == null ? new State() : this.state.toDto(),
-
-      this.careGroup == null ? new CareGroup() : this.careGroup.toDto()
-    );
-//    this.id = model.getId();
-//    this.number = model.getNumber();
-//
-//    this.genusId = model.getGenus() == null ? null : model.getGenus().getId();
-//    this.specieId = model.getSpecie() == null ? null : model.getSpecie().getId();
-//    this.formId = model.getForm() == null ? null : model.getForm().getId();
-//
-//    this.fieldNumber = model.getFieldNumber();
-//    this.synonymes = model.getSynonyms();
-//
-//    this.acquisition = model.getAcquisition() == null ? new Acquisition() : new Acquisition(model.getAcquisition());
-//    this.state = model.getState() == null ? new State() : new State(model.getState());
-//
-//    this.flowerColor = model.getFlowerColor();
-//    this.careGroup =
-//      model.getCareGroup() == null ? new CareGroup() : new CareGroup(model.getCareGroup()).merge(careGroup);
+    super(id);
+    this.number = number;
+    this.genus = genus;
+    this.specie = specie;
+    this.form = form;
+    this.fieldNumber = fieldNumber;
+    this.flowerColor = flowerColor;
+    this.synonyms = synonyms;
+    this.state = state;
+    this.acquisition = acquisition;
+    this.careGroup = careGroup;
   }
 
   @Getter
   @Setter
   @Embeddable
   @NoArgsConstructor
-  public static class AcquisitionModel implements ToDto<Acquisition> {
+  public static class StateModel {
+
+    @Column(name = "state_no_longer_in_possession_timestamp", nullable = true, updatable = true)
+    private OffsetDateTime noLongerInPossessionTimestamp;
+
+    @Column(name = "state_no_longer_in_possession_reason", nullable = true, updatable = true)
+    private String noLongerInPossessionReason;
+
+    @Column(name = "state_vitality", nullable = true, updatable = true, length = 128)
+    private String vitality;
+
+    public StateModel(final State state) {
+      this.noLongerInPossessionTimestamp = state.getNoLongerInPossessionTimestamp();
+      this.noLongerInPossessionReason = state.getNoLongerInPossessionReason();
+      this.vitality = state.getVitality();
+    }
+
+    public State toDto() {
+      return new State(
+        this.noLongerInPossessionTimestamp,
+        this.noLongerInPossessionReason,
+        this.vitality
+      );
+    }
+  }
+
+  @Getter
+  @Setter
+  @Embeddable
+  @NoArgsConstructor
+  public static class AcquisitionModel {
 
     @Column(name = "acquisition_timestamp", nullable = true, updatable = true)
     private OffsetDateTime timestamp;
@@ -182,7 +143,6 @@ public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
       this.plantType = acquisition.getPlantType();
     }
 
-    @Override
     public Acquisition toDto() {
       return new Acquisition(
         this.timestamp,
@@ -197,38 +157,7 @@ public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
   @Setter
   @Embeddable
   @NoArgsConstructor
-  public static class StateModel implements ToDto<State> {
-
-    @Column(name = "state_no_longer_in_possession_timestamp", nullable = true, updatable = true)
-    private OffsetDateTime noLongerInPossessionTimestamp;
-
-    @Column(name = "state_no_longer_in_possession_reason", nullable = true, updatable = true)
-    private String noLongerInPossessionReason;
-
-    @Column(name = "state_vitality", nullable = true, updatable = true, length = 128)
-    private String vitality;
-
-    public StateModel(final State state) {
-      this.noLongerInPossessionTimestamp = state.getNoLongerInPossessionTimestamp();
-      this.noLongerInPossessionReason = state.getNoLongerInPossessionReason();
-      this.vitality = state.getVitality();
-    }
-
-    @Override
-    public State toDto() {
-      return new State(
-        this.noLongerInPossessionTimestamp,
-        this.noLongerInPossessionReason,
-        this.vitality
-      );
-    }
-  }
-
-  @Getter
-  @Setter
-  @Embeddable
-  @NoArgsConstructor
-  public static class CareGroupModel implements ToDto<CareGroup> {
+  public static class CareGroupModel {
 
     @Column(name = "care_group_id", nullable = true, updatable = true)
     private String id;
@@ -255,6 +184,15 @@ public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
     @AttributeOverride(name = "other", column = @Column(name = "care_group_rest_time_other", nullable = true, updatable = true, length = 1024))
     private TimeModel restTime;
 
+    public CareGroupModel(final CareGroup careGroup) {
+      this.id = careGroup.getId();
+      this.home = careGroup.getHome();
+      this.soil = careGroup.getSoil();
+
+      this.growTime = careGroup.getGrowTime() == null ? null : new TimeModel(careGroup.getGrowTime());
+      this.restTime = careGroup.getRestTime() == null ? null : new TimeModel(careGroup.getRestTime());
+    }
+
     public CareGroupModel(final CareGroup cactus, final CareGroup careGroup) {
       this.id = careGroup.getId();
       this.home = Optional.ofNullable(cactus.getHome()).map(String::strip).orElseGet(careGroup::getHome);
@@ -275,7 +213,6 @@ public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
       }
     }
 
-    @Override
     public CareGroup toDto() {
       return new CareGroup(
         this.id,
@@ -291,7 +228,7 @@ public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
     @Setter
     @Embeddable
     @NoArgsConstructor
-    public static class TimeModel implements ToDto<Time> {
+    public static class TimeModel {
 
       private String light;
       private String air;
@@ -335,7 +272,6 @@ public class CactusModel extends TableModelAutoId implements ToDto<Cactus> {
         }
       }
 
-      @Override
       public Time toDto() {
         return new Time(
           this.light,

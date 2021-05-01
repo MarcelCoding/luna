@@ -4,16 +4,10 @@ import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.PropertyNotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Cactus;
 import com.github.marcelcoding.luna.cacti.api.CactusSmall;
-import com.github.marcelcoding.luna.cacti.api.CareGroup;
+import com.github.marcelcoding.luna.cacti.converter.CactusConverter;
 import com.github.marcelcoding.luna.cacti.model.CactusModel;
-import com.github.marcelcoding.luna.cacti.model.FormModel;
-import com.github.marcelcoding.luna.cacti.model.GenusModel;
-import com.github.marcelcoding.luna.cacti.model.SpecieModel;
 import com.github.marcelcoding.luna.cacti.repository.CactusRepository;
 import com.github.marcelcoding.luna.cacti.repository.CactusSmallRepository;
-import com.github.marcelcoding.luna.cacti.repository.FormRepository;
-import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
-import com.github.marcelcoding.luna.cacti.repository.SpecieRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -28,12 +22,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CactusService {
 
-  private final GenusRepository genusRepository;
-  private final SpecieRepository specieRepository;
-  private final FormRepository formRepository;
-  private final CareGroupService careGroupService;
   private final CactusSmallRepository cactusSmallRepository;
   private final CactusRepository cactusRepository;
+  private final CactusConverter cactusConverter;
 
   public Set<CactusSmall> findAll() {
     return this.cactusSmallRepository.findAll()
@@ -42,15 +33,12 @@ public class CactusService {
       .collect(Collectors.toSet());
   }
 
-  public List<Cactus> findAll(final Sort sort) throws PropertyNotFoundException {
+  public List<CactusSmall> findAll(final Sort sort) throws PropertyNotFoundException {
     try {
-      return this.cactusRepository.findAll(sort)
+      return this.cactusSmallRepository.findAll(sort)
         .stream()
-        .map(CactusModel::toDto)  // new Cactus(model, Optional.ofNullable(model.getCareGroup())
-        //        .map(CareGroupModel::getId)
-        //        .map(id -> this.careGroupService.findById(id).orElseThrow())
-        //        .orElse(null))
-        .collect(Collectors.toList());
+        .map(CactusSmall::new)
+        .toList();
     }
     catch (PropertyReferenceException e) {
       throw new PropertyNotFoundException(e);
@@ -59,47 +47,28 @@ public class CactusService {
 
   public Optional<Cactus> findById(final UUID id) {
     return this.cactusRepository.findById(id)
-      .map(CactusModel::toDto); //  new Cactus(model, Optional.ofNullable(model.getCareGroup())
-    //      .map(CareGroupModel::getId)
-    //      .map(careGroupId -> this.careGroupService.findById(careGroupId).orElseThrow())
-    //      .orElse(null))
+      .map(this.cactusConverter::toDto);
   }
-
-//  public Optional<Cactus> findByNumber(final String number) {
-//    return this.cactusRepository.findByNumber(number).map(Cactus::new);
-//  }
 
   public boolean exist(final UUID id) {
     return this.cactusRepository.existsById(id);
   }
 
   public Cactus save(final Cactus cactus) throws NotFoundException {
-    final Optional<GenusModel> genusModel = Optional.ofNullable(cactus.getGenusId())
-      .map(genusId -> this.genusRepository.findById(genusId)
-        .orElseThrow(() -> new NotFoundException(genusId, "GENUS_NOT_FOUND")));
-
-    final Optional<SpecieModel> specieModel = Optional.ofNullable(cactus.getSpecieId())
-      .map(specieId -> this.specieRepository.findById(specieId)
-        .orElseThrow(() -> new NotFoundException(specieId, "SPECIE_NOT_FOUND")));
-
-    final Optional<FormModel> formModel = Optional.ofNullable(cactus.getFormId())
-      .map(formId -> this.formRepository.findById(formId)
-        .orElseThrow(() -> new NotFoundException(formId, "FORM_NOT_FOUND")));
-
-    final Optional<CareGroup> careGroup = Optional.ofNullable(cactus.getCareGroup())
-      .map(CareGroup::getId)
-      .map(careGroupId -> this.careGroupService.findById(careGroupId)
-        .orElseThrow(() -> new NotFoundException(careGroupId, "CARE_GROUP_NOT_FOUND")));
-
-    final CactusModel model = new CactusModel(
-      cactus,
-      genusModel.orElse(null),
-      specieModel.orElse(null),
-      formModel.orElse(null),
-      careGroup.orElse(null)
+    return this.cactusConverter.toDto(
+      this.cactusRepository.save(
+        this.cactusConverter.toModel(cactus)
+      )
     );
+  }
 
-    return this.cactusRepository.save(model).toDto(); // , careGroup.orElse(null));
+  public Cactus save(final UUID id, final Cactus cactus) throws NotFoundException {
+    final CactusModel model = this.cactusRepository.findById(id)
+      .orElseThrow(() -> new NotFoundException(id, "CACTUS_NOT_FOUND"));
+
+    this.cactusConverter.override(model, cactus);
+
+    return this.cactusConverter.toDto(this.cactusRepository.save(model));
   }
 
   public void delete(final UUID id) throws NotFoundException {
