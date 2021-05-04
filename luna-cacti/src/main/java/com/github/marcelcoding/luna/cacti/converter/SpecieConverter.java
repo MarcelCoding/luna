@@ -5,14 +5,13 @@ import com.github.marcelcoding.luna.cacti.api.Specie;
 import com.github.marcelcoding.luna.cacti.model.GenusModel;
 import com.github.marcelcoding.luna.cacti.model.SpecieModel;
 import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SpecieConverter implements Converter<UUID, SpecieModel, Specie> {
+public class SpecieConverter implements Converter<SpecieModel, Specie> {
 
   private final GenusRepository genusRepository;
 

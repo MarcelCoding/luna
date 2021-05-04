@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FormConverter implements Converter<UUID, FormModel, Form> {
+public class FormConverter implements Converter<FormModel, Form> {
 
   private final SpecieRepository specieRepository;
 

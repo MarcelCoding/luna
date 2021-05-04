@@ -16,7 +16,6 @@ import com.github.marcelcoding.luna.cacti.repository.FormRepository;
 import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
 import com.github.marcelcoding.luna.cacti.repository.SpecieRepository;
 import com.github.marcelcoding.luna.cacti.service.CareGroupService;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;
@@ -24,7 +23,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CactusConverter implements Converter<UUID, CactusModel, Cactus> {
+public class CactusConverter implements Converter<CactusModel, Cactus> {
 
   private final GenusRepository genusRepository;
   private final SpecieRepository specieRepository;

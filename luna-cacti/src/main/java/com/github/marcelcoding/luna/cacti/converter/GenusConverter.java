@@ -7,7 +7,7 @@ import net.getnova.framework.core.Converter;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GenusConverter implements Converter<UUID, GenusModel, Genus> {
+public class GenusConverter implements Converter<GenusModel, Genus> {
 
   @Override
   public GenusModel toModel(final Genus dto) {

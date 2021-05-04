@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CactusHistoryEntryConverter implements Converter<UUID, CactusHistoryEntryModel, CactusHistoryEntry> {
+public class CactusHistoryEntryConverter implements Converter<CactusHistoryEntryModel, CactusHistoryEntry> {
 
   private final CactusRepository cactusRepository;
 
