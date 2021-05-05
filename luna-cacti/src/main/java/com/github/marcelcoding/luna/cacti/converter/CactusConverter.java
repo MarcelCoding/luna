@@ -29,6 +29,7 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
   private final SpecieRepository specieRepository;
   private final FormRepository formRepository;
   private final CareGroupService careGroupService;
+  private final CactusCareGroupConverter careGroupConverter;
 
   @Override
   public CactusModel toModel(final Cactus dto) {
@@ -110,8 +111,7 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
       model.getState() == null ? new State() : model.getState().toDto(),
       model.getAcquisition() == null ? new Acquisition() : model.getAcquisition().toDto(),
 
-      // TODO: merge care group
-      model.getCareGroup() == null ? new CareGroup() : model.getCareGroup().toDto()
+      model.getCareGroup() == null ? null : this.careGroupConverter.toDto(model.getCareGroup())
     );
   }
 

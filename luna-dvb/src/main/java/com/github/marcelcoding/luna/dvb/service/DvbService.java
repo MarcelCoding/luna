@@ -92,7 +92,6 @@ public class DvbService {
   public Flux<RouteChange> findRouteChanges() {
     return this.client.get("/rc", JsonNode.class)
       .flatMapIterable(tree -> {
-        System.out.println(tree);
         return tree.<ArrayNode>withArray("Lines");
       })
       .map(RouteChange::of);

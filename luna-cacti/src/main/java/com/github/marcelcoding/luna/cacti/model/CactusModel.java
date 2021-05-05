@@ -6,7 +6,6 @@ import com.github.marcelcoding.luna.cacti.api.CareGroup;
 import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.Optional;
 import java.util.UUID;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -195,33 +194,32 @@ public class CactusModel extends TableModelAutoId {
 
     public CareGroupModel(final CareGroup cactus, final CareGroup careGroup) {
       this.id = careGroup.getId();
-      this.home = Optional.ofNullable(cactus.getHome()).map(String::strip).orElseGet(careGroup::getHome);
-      this.soil = Optional.ofNullable(cactus.getSoil()).map(String::strip).orElseGet(careGroup::getSoil);
+      this.home = check(cactus.getHome(), careGroup.getHome());
+      this.soil = check(cactus.getSoil(), careGroup.getSoil());
 
-      if (cactus.getGrowTime() == null) {
-        this.growTime = new TimeModel(careGroup.getGrowTime());
-      }
-      else {
+      if (cactus.getGrowTime() != null) {
         this.growTime = new TimeModel(cactus.getGrowTime(), careGroup.getGrowTime());
       }
 
-      if (cactus.getRestTime() == null) {
-        this.restTime = new TimeModel(careGroup.getRestTime());
-      }
-      else {
+      if (cactus.getRestTime() != null) {
         this.restTime = new TimeModel(cactus.getRestTime(), careGroup.getRestTime());
       }
     }
 
-    public CareGroup toDto() {
-      return new CareGroup(
-        this.id,
-        "name??",
-        this.home,
-        this.soil,
-        this.growTime == null ? new Time() : this.growTime.toDto(),
-        this.restTime == null ? new Time() : this.restTime.toDto()
-      );
+    // TODO: clean up
+    private String check(String s1, final String s2) {
+      if (s1 == null) {
+        return s2;
+      }
+      else {
+        s1 = s1.strip();
+        if (s1.equals(s2)) {
+          return null;
+        }
+        else {
+          return s1;
+        }
+      }
     }
 
     @Getter
@@ -245,41 +243,27 @@ public class CactusModel extends TableModelAutoId {
       }
 
       public TimeModel(final Time time, final Time otherTime) {
-        final Optional<String> light = Optional.ofNullable(time.getLight()).map(String::strip);
-        final Optional<String> air = Optional.ofNullable(time.getAir()).map(String::strip);
-        final Optional<String> temperature = Optional.ofNullable(time.getTemperature()).map(String::strip);
-        final Optional<String> humidity = Optional.ofNullable(time.getHumidity()).map(String::strip);
-        final Optional<String> other = Optional.ofNullable(time.getOther()).map(String::strip);
-
-        if (light.equals(Optional.ofNullable(otherTime.getLight()))) {
-          this.light = null;
-        }
-
-        if (air.equals(Optional.ofNullable(otherTime.getAir()))) {
-          this.air = null;
-        }
-
-        if (temperature.equals(Optional.ofNullable(otherTime.getTemperature()))) {
-          this.temperature = null;
-        }
-
-        if (humidity.equals(Optional.ofNullable(otherTime.getHumidity()))) {
-          this.humidity = null;
-        }
-
-        if (other.equals(Optional.ofNullable(otherTime.getOther()))) {
-          this.other = null;
-        }
+        this.light = check(time.getLight(), otherTime.getLight());
+        this.air = check(time.getAir(), otherTime.getAir());
+        this.temperature = check(time.getTemperature(), otherTime.getTemperature());
+        this.humidity = check(time.getHumidity(), otherTime.getHumidity());
+        this.other = check(time.getOther(), otherTime.getOther());
       }
 
-      public Time toDto() {
-        return new Time(
-          this.light,
-          this.air,
-          this.temperature,
-          this.humidity,
-          this.other
-        );
+      // TODO: clean up
+      private String check(String s1, final String s2) {
+        if (s1 == null) {
+          return s2;
+        }
+        else {
+          s1 = s1.strip();
+          if (s1.equals(s2)) {
+            return null;
+          }
+          else {
+            return s1;
+          }
+        }
       }
     }
   }
