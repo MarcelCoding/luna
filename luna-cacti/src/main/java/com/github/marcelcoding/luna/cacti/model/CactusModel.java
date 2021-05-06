@@ -6,9 +6,11 @@ import com.github.marcelcoding.luna.cacti.api.CareGroup;
 import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.util.Set;
 import java.util.UUID;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -48,6 +50,10 @@ public class CactusModel extends TableModelAutoId {
 
   @Column(name = "flower_color", nullable = true, updatable = true, length = 128)
   private String flowerColor;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "images", nullable = true, updatable = true)
+  private Set<String> images;
 
   @Column(name = "synonyms", nullable = true, updatable = true, length = 1024)
   private String synonyms;

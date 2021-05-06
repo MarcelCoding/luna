@@ -106,6 +106,7 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
 
       model.getFieldNumber(),
       model.getFlowerColor(),
+      model.getImages(),
       model.getSynonyms(),
 
       model.getState() == null ? new State() : model.getState().toDto(),

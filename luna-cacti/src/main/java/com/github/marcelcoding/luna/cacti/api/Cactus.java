@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public final class Cactus {
   private final UUID formId;
   private final String fieldNumber;
   private final String flowerColor;
+  private final Set<String> images;
   private final String synonymes;
   private final State state;
   private final Acquisition acquisition;
@@ -33,6 +35,7 @@ public final class Cactus {
     @JsonProperty("formId") final UUID formId,
     @JsonProperty("fieldNumber") final String fieldNumber,
     @JsonProperty("flowerColor") final String flowerColor,
+    @JsonProperty("images") final Set<String> images,
     @JsonProperty("synonymes") final String synonymes,
     @JsonProperty("state") final State state,
     @JsonProperty("acquisition") final Acquisition acquisition,
@@ -45,6 +48,7 @@ public final class Cactus {
     this.formId = formId;
     this.fieldNumber = fieldNumber;
     this.flowerColor = flowerColor;
+    this.images = images;
     this.synonymes = synonymes;
     this.state = state;
     this.acquisition = acquisition;
