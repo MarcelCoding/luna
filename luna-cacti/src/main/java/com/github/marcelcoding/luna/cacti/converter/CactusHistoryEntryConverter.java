@@ -3,7 +3,6 @@ package com.github.marcelcoding.luna.cacti.converter;
 import com.github.marcelcoding.luna.cacti.api.CactusHistoryEntry;
 import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel;
 import com.github.marcelcoding.luna.cacti.repository.CactusRepository;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;
