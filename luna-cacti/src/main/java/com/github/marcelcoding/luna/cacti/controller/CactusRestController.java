@@ -6,11 +6,15 @@ import com.github.marcelcoding.luna.cacti.api.CactusSmall;
 import com.github.marcelcoding.luna.cacti.service.CactusImageService;
 import com.github.marcelcoding.luna.cacti.service.CactusService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
 import java.util.Set;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,11 +63,24 @@ public class CactusRestController {
   }
 
   @GetMapping(value = "{id}/image/{filename:.+}", produces = "image/*")
-  public Resource getImage(
+  public ResponseEntity<Resource> getImage(
+    @RequestHeader final HttpHeaders headers,
     @PathVariable("id") final UUID id,
     @PathVariable("filename") final String filename
-  ) {
-    return this.cactusImageService.resolveFile(id, filename);
+  ) throws IOException {
+    final Resource resource = this.cactusImageService.resolveFile(id, filename);
+
+    final long ifModifiedSince = headers.getIfModifiedSince();
+    final long lastModified = resource.lastModified();
+
+    if (ifModifiedSince < lastModified) {
+      final HttpHeaders newHeaders = new HttpHeaders();
+      newHeaders.setLastModified(lastModified);
+
+      return new ResponseEntity<>(resource, newHeaders, HttpStatus.OK);
+    }
+
+    return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
   }
 
   @DeleteMapping("{id}/image/{filename:.+}")
