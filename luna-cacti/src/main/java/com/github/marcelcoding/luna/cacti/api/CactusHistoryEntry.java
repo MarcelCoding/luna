@@ -1,6 +1,7 @@
 package com.github.marcelcoding.luna.cacti.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
@@ -8,15 +9,15 @@ import lombok.Data;
 @Data
 public final class CactusHistoryEntry {
 
-  private final OffsetDateTime timestamp;
+  private final LocalDate date;
   @NotBlank
   private final String content;
 
   public CactusHistoryEntry(
-    @JsonProperty("timestamp") final OffsetDateTime timestamp,
+    @JsonProperty("date") final LocalDate date,
     @JsonProperty("content") final String content
   ) {
-    this.timestamp = timestamp;
+    this.date = date;
     this.content = content;
   }
 }

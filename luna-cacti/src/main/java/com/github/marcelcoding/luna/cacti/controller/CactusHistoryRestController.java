@@ -1,11 +1,10 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.CactusHistoryEntry;
 import com.github.marcelcoding.luna.cacti.service.CactusHistoryService;
 import com.github.marcelcoding.luna.cacti.service.CactusService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -38,32 +37,23 @@ public class CactusHistoryRestController {
     @PathVariable("cactusId") final UUID cactusId,
     @RequestBody @Valid final CactusHistoryEntry historyEntry
   ) {
-    return this.cactusHistoryService.save(cactusId, historyEntry);
+    return this.cactusHistoryService.create(cactusId, historyEntry);
   }
 
-  @PutMapping("{cactusId}/history/{timestamp}")
+  @PutMapping("{cactusId}/history/{date}")
   public CactusHistoryEntry put(
     @PathVariable("cactusId") final UUID cactusId,
-    @PathVariable("timestamp") final OffsetDateTime timestamp,
+    @PathVariable("date") final LocalDate date,
     @RequestBody @Valid final CactusHistoryEntry historyEntry
   ) {
-    if (!this.cactusService.exist(cactusId)) {
-      throw new NotFoundException(cactusId, "CACTUS_HISTORY_ENTRY_NOT_FOUND");
-    }
-
-    if (!this.cactusHistoryService.exist(cactusId, timestamp)) {
-      throw new NotFoundException(cactusId + "__" + timestamp, "CACTUS_HISTORY_ENTRY_NOT_FOUND");
-    }
-
-//    historyEntry.setTimestamp(timestamp);
-    return this.cactusHistoryService.save(cactusId, historyEntry);
+    return this.cactusHistoryService.edit(cactusId, date, historyEntry);
   }
 
-  @DeleteMapping("{cactusId}/history/{timestamp}")
+  @DeleteMapping("{cactusId}/history/{date}")
   public void deleteById(
     @PathVariable("cactusId") final UUID cactusId,
-    @PathVariable("timestamp") final OffsetDateTime timestamp
+    @PathVariable("date") final LocalDate date
   ) {
-    this.cactusHistoryService.delete(cactusId, timestamp);
+    this.cactusHistoryService.delete(cactusId, date);
   }
 }

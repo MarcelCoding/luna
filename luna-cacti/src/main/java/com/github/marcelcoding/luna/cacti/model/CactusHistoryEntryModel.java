@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.cacti.model;
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -25,7 +25,7 @@ import lombok.Setter;
 public class CactusHistoryEntryModel {
 
   @EmbeddedId
-  private Id id;
+  private IdModel id;
 
   @Column(name = "content", nullable = false, updatable = true, length = 2048)
   private String content;
@@ -34,13 +34,13 @@ public class CactusHistoryEntryModel {
   @Embeddable
   @NoArgsConstructor
   @AllArgsConstructor
-  public static final class Id implements Serializable {
+  public static final class IdModel implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cactus_id", nullable = false, updatable = false)
-    private CactusModel cactus;
+    private CactusSmallModel cactus;
 
-    @Column(name = "timestamp", nullable = false, updatable = true)
-    private OffsetDateTime timestamp;
+    @Column(name = "date", nullable = false, updatable = true)
+    private LocalDate date;
   }
 }

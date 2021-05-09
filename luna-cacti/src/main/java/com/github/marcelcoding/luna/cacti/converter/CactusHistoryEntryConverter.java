@@ -2,44 +2,37 @@ package com.github.marcelcoding.luna.cacti.converter;
 
 import com.github.marcelcoding.luna.cacti.api.CactusHistoryEntry;
 import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel;
-import com.github.marcelcoding.luna.cacti.repository.CactusRepository;
-import lombok.RequiredArgsConstructor;
+import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel.IdModel;
 import net.getnova.framework.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class CactusHistoryEntryConverter implements Converter<CactusHistoryEntryModel, CactusHistoryEntry> {
-
-  private final CactusRepository cactusRepository;
 
   @Override
   public CactusHistoryEntryModel toModel(final CactusHistoryEntry dto) {
-//    final CactusModel cactus = this.cactusRepository.findById(dto)
-//      .orElseThrow(() -> new NotFoundException(id, "CACTUS_NOT_FOUND"));
-//
-//    return new CactusHistoryEntryModel(
-//      new Id(
-//        cactus,
-//        dto.getTimestamp()
-//      ),
-//      dto.getContent()
-//    );
-    throw new NotImplementedException();
+    return new CactusHistoryEntryModel(
+      new IdModel(
+        null,
+        dto.getDate()
+      ),
+      dto.getContent()
+    );
   }
 
   @Override
   public CactusHistoryEntry toDto(final CactusHistoryEntryModel model) {
     return new CactusHistoryEntry(
-      model.getId().getTimestamp(),
+      model.getId().getDate(),
       model.getContent()
     );
   }
 
   @Override
   public void override(final CactusHistoryEntryModel model, final CactusHistoryEntry dto) {
-    throw new NotImplementedException();
+    model.getId().setDate(dto.getDate());
+    model.setContent(dto.getContent());
   }
 
   @Override
