@@ -147,6 +147,9 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
+    
+    permissions:
+      packages: write
 
     strategy:
       matrix:
