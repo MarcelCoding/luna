@@ -39,20 +39,20 @@ jobs:
       - name: Lint with Gradle
         run: ./gradlew checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon --refresh-dependencies
 
-#      - name: Annotate Checkstyle Issues
-#        uses: jwgmeligmeyling/checkstyle-github-action@master
-#        with:
-#          path: '**/build/reports/checkstyle/*.xml'
-#
-#      - name: Annotate SpotBugs Issues
-#        uses: jwgmeligmeyling/spotbugs-github-action@master
-#        with:
-#          path: '**/build/reports/spotbugs/*.xml'
-#
-#      - name: Annotate PMD Issues
-#        uses: jwgmeligmeyling/pmd-github-action@master
-#        with:
-#          path: '**/build/reports/pmd/*.xml'
+  #      - name: Annotate Checkstyle Issues
+  #        uses: jwgmeligmeyling/checkstyle-github-action@master
+  #        with:
+  #          path: '**/build/reports/checkstyle/*.xml'
+  #
+  #      - name: Annotate SpotBugs Issues
+  #        uses: jwgmeligmeyling/spotbugs-github-action@master
+  #        with:
+  #          path: '**/build/reports/spotbugs/*.xml'
+  #
+  #      - name: Annotate PMD Issues
+  #        uses: jwgmeligmeyling/pmd-github-action@master
+  #        with:
+  #          path: '**/build/reports/pmd/*.xml'
 
   nohttp:
     runs-on: ubuntu-latest
@@ -86,6 +86,7 @@ jobs:
     strategy:
       matrix:
         java-version: [ 16 ]
+        java-distro: [ hotspot, openj9 ]
 
     steps:
       - uses: actions/checkout@v2
@@ -103,7 +104,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version }}
-          distribution: ${{ env.JAVA_DISTRO }}
+          distribution: adopt-${{ matrix.java-distro }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
