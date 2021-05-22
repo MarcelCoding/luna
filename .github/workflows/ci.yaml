@@ -85,7 +85,7 @@ jobs:
 
     strategy:
       matrix:
-        java-version: [ 11, 16 ]
+        java-version: [ 16 ]
 
     steps:
       - uses: actions/checkout@v2
@@ -147,7 +147,7 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
-    
+
     permissions:
       packages: write
 
