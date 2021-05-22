@@ -69,7 +69,7 @@ subprojects {
     }
   }
 
-  jar {
+  tasks.withType(Jar) {
     from "${rootDir}/LICENSE"
     manifest.attributes([
       'Specification-Title'     : project.name,
