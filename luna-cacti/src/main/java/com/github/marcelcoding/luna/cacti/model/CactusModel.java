@@ -212,7 +212,8 @@ public class CactusModel extends TableModelAutoId {
       }
     }
 
-    // TODO: clean up
+    // TODO clean up
+    @SuppressWarnings("checkstyle:FinalParameters")
     private String check(String s1, final String s2) {
       if (s1 == null) {
         return s2;
@@ -256,7 +257,8 @@ public class CactusModel extends TableModelAutoId {
         this.other = check(time.getOther(), otherTime.getOther());
       }
 
-      // TODO: clean up
+      // TODO clean up
+      @SuppressWarnings("checkstyle:FinalParameters")
       private String check(String s1, final String s2) {
         if (s1 == null) {
           return s2;
