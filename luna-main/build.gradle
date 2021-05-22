@@ -9,6 +9,8 @@ plugins {
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter'
 
+  implementation("net.getnova.framework:nova-core:${novaVersion}") { changing true }
+
 //  runtimeOnly project(':luna-dwd')
 //  runtimeOnly project(':luna-dvb')
   runtimeOnly project(':luna-cacti')

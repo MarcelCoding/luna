@@ -2,8 +2,9 @@ package com.github.marcelcoding.luna;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import org.springframework.boot.SpringApplication;
+import net.getnova.framework.core.NovaBanner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -11,7 +12,9 @@ import org.springframework.context.annotation.Bean;
 public class Bootstrap {
 
   public static void main(final String[] args) {
-    SpringApplication.run(Bootstrap.class, args);
+    new SpringApplicationBuilder(Bootstrap.class)
+      .banner(new NovaBanner())
+      .run(args);
   }
 
   @Bean
