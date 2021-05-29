@@ -51,7 +51,12 @@ public class CactusImageService {
           }
         }
 
-        return file.transferTo(parent.resolve(file.filename()));
+        Path path = parent.resolve(file.filename());
+        while (Files.exists(path)) {
+          path = parent.resolve(file.filename() + "_" + Math.round(Math.random() * 1000));
+        }
+
+        return file.transferTo(path);
       })
       .then();
   }
