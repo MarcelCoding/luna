@@ -19,7 +19,7 @@ dependencies {
 //   runtimeOnly 'org.liquibase:liquibase-core'
 
   implementation "org.springdoc:springdoc-openapi-webflux-ui:${springDocOpenApi}"
-//  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 //  runtimeOnly 'io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.5.Final:linux-x86_64'
 //  runtimeOnly 'io.netty:netty-tcnative-boringssl-static'
