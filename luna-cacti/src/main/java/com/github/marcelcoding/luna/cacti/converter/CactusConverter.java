@@ -77,7 +77,6 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
     }
 
     return new CactusModel(
-      dto.getId(),
       dto.getNumber(),
 
       genus,
@@ -86,6 +85,7 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
 
       dto.getFieldNumber(),
       dto.getFlowerColor(),
+      dto.getImages(),
       dto.getSynonymes(),
 
       dto.getState() == null ? null : new StateModel(dto.getState()),

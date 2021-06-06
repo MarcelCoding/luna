@@ -18,6 +18,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @Getter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "cacti_cactus")
 public class CactusModel extends TableModelAutoId {
 
@@ -66,32 +68,6 @@ public class CactusModel extends TableModelAutoId {
 
   @Embedded
   private CareGroupModel careGroup;
-
-  public CactusModel(
-    final UUID id,
-    final String number,
-    final GenusModel genus,
-    final SpecieModel specie,
-    final FormModel form,
-    final String fieldNumber,
-    final String flowerColor,
-    final String synonyms,
-    final StateModel state,
-    final AcquisitionModel acquisition,
-    final CareGroupModel careGroup
-  ) {
-    super(id);
-    this.number = number;
-    this.genus = genus;
-    this.specie = specie;
-    this.form = form;
-    this.fieldNumber = fieldNumber;
-    this.flowerColor = flowerColor;
-    this.synonyms = synonyms;
-    this.state = state;
-    this.acquisition = acquisition;
-    this.careGroup = careGroup;
-  }
 
   @Getter
   @Setter

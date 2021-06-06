@@ -1,10 +1,7 @@
-package com.github.marcelcoding.luna.cacti.model;
+package com.github.marcelcoding.luna.weather.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,13 +14,12 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cacti_specie")
-public class SpecieModel extends TableModelAutoId {
+@Table(name = "weather_sensor")
+public class SensorModel extends TableModelAutoId {
 
   @Column(name = "name", nullable = false, updatable = true, length = 128)
   private String name;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "genus_id", nullable = false, updatable = false)
-  private GenusModel genus;
+  @Column(name = "unit", nullable = false, updatable = true, length = 8)
+  private String unit;
 }
