@@ -1,4 +1,4 @@
-package com.github.marcelcoding.luna.dwd;
+package com.github.marcelcoding.luna.weather;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,6 +18,8 @@ public final class DwdUtils {
     if (data == null) {
       return null;
     }
+
+    System.out.println(data);
 
     return ZonedDateTime.of(
       LocalDate.parse(data.substring(0, 10)),

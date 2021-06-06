@@ -1,4 +1,4 @@
-package com.github.marcelcoding.luna.dwd.service;
+package com.github.marcelcoding.luna.weather.service;
 
 import lombok.Getter;
 import org.springframework.stereotype.Service;

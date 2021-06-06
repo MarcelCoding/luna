@@ -22,6 +22,6 @@ rootProject.name = 'luna'
 include(
   'luna-cacti',
   'luna-dvb',
-  'luna-dwd',
+  'luna-weather',
   'luna-main'
 )

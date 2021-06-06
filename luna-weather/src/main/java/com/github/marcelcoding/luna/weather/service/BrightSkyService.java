@@ -1,10 +1,10 @@
-package com.github.marcelcoding.luna.dwd.service;
+package com.github.marcelcoding.luna.weather.service;
 
-import com.github.marcelcoding.luna.dwd.Utils;
-import com.github.marcelcoding.luna.dwd.dto.CurrentWeatherResponse;
-import com.github.marcelcoding.luna.dwd.dto.Source;
-import com.github.marcelcoding.luna.dwd.dto.SourcesResponse;
-import com.github.marcelcoding.luna.dwd.dto.WeatherResponse;
+import com.github.marcelcoding.luna.weather.Utils;
+import com.github.marcelcoding.luna.weather.dto.CurrentWeatherResponse;
+import com.github.marcelcoding.luna.weather.dto.Source;
+import com.github.marcelcoding.luna.weather.dto.SourcesResponse;
+import com.github.marcelcoding.luna.weather.dto.WeatherResponse;
 import io.netty.handler.codec.http.QueryStringEncoder;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;

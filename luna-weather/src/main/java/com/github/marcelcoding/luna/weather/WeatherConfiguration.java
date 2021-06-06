@@ -1,17 +1,17 @@
-package com.github.marcelcoding.luna.dwd;
+package com.github.marcelcoding.luna.weather;
 
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DwdConfiguration {
+public class WeatherConfiguration {
 
   @Bean
   GroupedOpenApi dwdApi() {
     return GroupedOpenApi.builder()
-      .group("luna-dwd")
-      .pathsToMatch("/dwd/**")
+      .group("luna-weather")
+      .pathsToMatch("/weather/**")
       .build();
   }
 }

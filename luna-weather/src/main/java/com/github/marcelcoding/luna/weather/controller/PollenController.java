@@ -1,9 +1,9 @@
-package com.github.marcelcoding.luna.dwd.controller;
+package com.github.marcelcoding.luna.weather.controller;
 
-import com.github.marcelcoding.luna.dwd.dto.Polle;
-import com.github.marcelcoding.luna.dwd.dto.PollenData;
-import com.github.marcelcoding.luna.dwd.dto.PollenRegion;
-import com.github.marcelcoding.luna.dwd.service.PollenService;
+import com.github.marcelcoding.luna.weather.dto.Polle;
+import com.github.marcelcoding.luna.weather.dto.PollenData;
+import com.github.marcelcoding.luna.weather.dto.PollenRegion;
+import com.github.marcelcoding.luna.weather.service.PollenService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Map;
 import java.util.Optional;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 @Tag(name = "Pollen")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("dwd/pollen")
+@RequestMapping("weather/pollen")
 public class PollenController {
 
   private final PollenService pollenService;

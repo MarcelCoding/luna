@@ -1,9 +1,9 @@
-package com.github.marcelcoding.luna.dwd.controller;
+package com.github.marcelcoding.luna.weather.controller;
 
-import com.github.marcelcoding.luna.dwd.dto.CurrentWeatherResponse;
-import com.github.marcelcoding.luna.dwd.dto.Source;
-import com.github.marcelcoding.luna.dwd.dto.WeatherResponse;
-import com.github.marcelcoding.luna.dwd.service.BrightSkyService;
+import com.github.marcelcoding.luna.weather.dto.CurrentWeatherResponse;
+import com.github.marcelcoding.luna.weather.dto.Source;
+import com.github.marcelcoding.luna.weather.dto.WeatherResponse;
+import com.github.marcelcoding.luna.weather.service.BrightSkyService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.time.OffsetDateTime;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 @Tag(name = "Weather")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("dwd/weather")
+@RequestMapping("weather/weather")
 public class WeatherController {
 
   // ?lat=51.0274574F&lon=13.6454864F

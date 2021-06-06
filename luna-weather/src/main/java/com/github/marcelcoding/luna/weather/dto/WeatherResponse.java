@@ -1,17 +1,18 @@
-package com.github.marcelcoding.luna.dwd.dto;
+package com.github.marcelcoding.luna.weather.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import java.util.Set;
 import lombok.Data;
 
 @Data
-public class CurrentWeatherResponse {
+public class WeatherResponse {
 
-  private final CurrentWeather weather;
+  private final List<Weather> weather;
   private final Set<Source> sources;
 
-  public CurrentWeatherResponse(
-    @JsonProperty("weather") final CurrentWeather weather,
+  public WeatherResponse(
+    @JsonProperty("weather") final List<Weather> weather,
     @JsonProperty("sources") final Set<Source> sources
   ) {
     this.weather = weather;

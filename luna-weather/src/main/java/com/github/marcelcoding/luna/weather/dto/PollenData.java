@@ -1,8 +1,8 @@
-package com.github.marcelcoding.luna.dwd.dto;
+package com.github.marcelcoding.luna.weather.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.marcelcoding.luna.dwd.DwdUtils;
+import com.github.marcelcoding.luna.weather.DwdUtils;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
