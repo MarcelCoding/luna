@@ -7,7 +7,6 @@ import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
