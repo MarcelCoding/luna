@@ -4,7 +4,7 @@ buildscript {
     springBootVersion = '2.5.1'
     autoServiceVersion = '1.0-rc7'
     freefairVersion = '5.3.3.3'
-    springDocOpenApi = '1.5.6'
+    springDocOpenApi = '1.5.9'
   }
 }
 
@@ -60,8 +60,8 @@ subprojects {
   apply plugin: 'com.github.spotbugs'
   apply plugin: 'io.spring.dependency-management'
 
-  sourceCompatibility = JavaVersion.VERSION_16
-  targetCompatibility = JavaVersion.VERSION_16
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
 
   dependencyManagement {
     imports {
