@@ -1,4 +1,4 @@
-package com.github.marcelcoding.luna.weather.service;
+package com.github.marcelcoding.luna.weather.service.impl;
 
 import com.github.marcelcoding.luna.weather.Utils;
 import com.github.marcelcoding.luna.weather.dto.PollenData;

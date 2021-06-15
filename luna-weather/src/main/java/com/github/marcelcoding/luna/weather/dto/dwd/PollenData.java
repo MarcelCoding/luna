@@ -1,4 +1,4 @@
-package com.github.marcelcoding.luna.weather.dto;
+package com.github.marcelcoding.luna.weather.dto.dwd;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
