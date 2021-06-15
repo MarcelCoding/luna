@@ -4,14 +4,14 @@ buildscript {
     springBootVersion = '2.5.1'
     autoServiceVersion = '1.0-rc7'
     freefairVersion = '5.3.3.3'
-    springDocOpenApi = '1.5.6'
+    springDocVersion = '1.5.6'
   }
 }
 
 plugins {
   id 'base'
   id 'io.spring.nohttp' version '0.0.8'
-  id 'com.palantir.graal' version '0.7.2' apply false
+//  id 'com.palantir.graal' version '0.7.2' apply false
   id 'com.github.spotbugs' version '4.7.1' apply false
   id 'io.freefair.lombok' version "${freefairVersion}" // apply, because javadoc
   id 'io.freefair.git-version' version "${freefairVersion}"

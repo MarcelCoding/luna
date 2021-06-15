@@ -11,7 +11,7 @@ dependencies {
 
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
   implementation 'org.springframework.boot:spring-boot-starter-validation'
-  implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocOpenApi}"
+  implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocVersion}"
 
   annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
   annotationProcessor 'org.springframework:spring-context-indexer'
