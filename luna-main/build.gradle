@@ -2,7 +2,7 @@ plugins {
 //  id 'com.palantir.graal'
   id 'org.springframework.boot'
   id 'com.github.johnrengelman.shadow'
-//  id 'org.springframework.experimental.aot'
+  id 'org.springframework.experimental.aot'
 }
 
 dependencies {
@@ -11,15 +11,15 @@ dependencies {
   implementation("de.m4rc3l.nova:nova-core:${novaVersion}") { changing true }
 
   runtimeOnly project(':luna-cacti')
-  runtimeOnly project(':luna-dvb')
-  runtimeOnly project(':luna-weather')
+  // runtimeOnly project(':luna-dvb')
+  // runtimeOnly project(':luna-weather')
 
   runtimeOnly 'org.postgresql:postgresql'
 //   runtimeOnly 'org.liquibase:liquibase-core'
 
   annotationProcessor "com.github.therapi:therapi-runtime-javadoc-scribe:${therapiRuntimeJavadocVersion}"
   implementation "org.springdoc:springdoc-openapi-webflux-ui:${springDocVersion}"
-//  implementation "org.springdoc:springdoc-openapi-native:${springDocVersion}"
+  implementation "org.springdoc:springdoc-openapi-native:${springDocVersion}"
   implementation "org.springdoc:springdoc-openapi-javadoc:${springDocVersion}"
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
@@ -30,7 +30,7 @@ dependencies {
 //  runtimeOnly 'io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.8.Final:linux-x86_64'
 //  runtimeOnly 'io.netty:netty-tcnative-boringssl-static'
 
-  developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//  developmentOnly 'org.springframework.boot:spring-boot-devtools'
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   annotationProcessor 'org.springframework:spring-context-indexer'
   // testImplementation 'org.springframework.boot:spring-boot-starter-test'
