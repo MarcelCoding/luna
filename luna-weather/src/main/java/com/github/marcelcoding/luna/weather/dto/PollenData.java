@@ -12,11 +12,8 @@ import lombok.Data;
 public class PollenData {
 
   private final String name;
-  private final OffsetDateTime lastUpdate;
-
-  // legend
-
   private final String sender;
+  private final OffsetDateTime lastUpdate;
   private final OffsetDateTime nextUpdate;
 
   @JsonIgnore
@@ -24,8 +21,8 @@ public class PollenData {
 
   public PollenData(
     @JsonProperty("name") final String name,
-    @JsonProperty("last_update") final String lastUpdate,
     @JsonProperty("sender") final String sender,
+    @JsonProperty("last_update") final String lastUpdate,
     @JsonProperty("next_update") final String nextUpdate,
     @JsonProperty("content") final Set<PollenRegion> regions
   ) {

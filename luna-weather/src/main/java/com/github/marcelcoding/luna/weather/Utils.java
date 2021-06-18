@@ -1,7 +1,6 @@
 package com.github.marcelcoding.luna.weather;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import reactor.core.publisher.Mono;
 
@@ -13,15 +12,8 @@ public final class Utils {
   }
 
   public static <T> Mono<T> handleError(final ClientResponse response, final Class<T> clazz) {
-    if (response.statusCode().equals(HttpStatus.OK)) {
-      return response.bodyToMono(clazz);
-    }
-    else if (response.statusCode().is4xxClientError()) {
-      response.createException().subscribe(e -> log.error("Client Error", e));
-      return Mono.empty();
-    }
-    else {
-      return response.createException().flatMap(Mono::error);
-    }
+    return response.statusCode().is2xxSuccessful()
+      ? response.bodyToMono(clazz)
+      : response.createException().flatMap(Mono::error);
   }
 }
