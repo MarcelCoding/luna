@@ -1,8 +1,9 @@
-package com.github.marcelcoding.luna.weather.controller;
+package com.github.marcelcoding.luna.weather.controller.impl;
 
-import com.github.marcelcoding.luna.weather.dto.Polle;
-import com.github.marcelcoding.luna.weather.dto.PollenData;
-import com.github.marcelcoding.luna.weather.dto.PollenRegion;
+import com.github.marcelcoding.luna.weather.controller.PollenController;
+import com.github.marcelcoding.luna.weather.dto.dwd.Polle;
+import com.github.marcelcoding.luna.weather.dto.dwd.PollenData;
+import com.github.marcelcoding.luna.weather.dto.dwd.PollenRegion;
 import com.github.marcelcoding.luna.weather.service.PollenService;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;

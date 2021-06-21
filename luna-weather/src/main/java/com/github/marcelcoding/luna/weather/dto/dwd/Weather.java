@@ -24,7 +24,7 @@ public class Weather {
   private final float windSpeed;
   private final float windGustDirection;
   private final float windGustSpeed;
-  private final JsonNode fallbackSourceIds;
+  // private final JsonNode fallbackSourceIds;
 
   public Weather(
     @JsonProperty("timestamp") final OffsetDateTime timestamp,
@@ -42,8 +42,8 @@ public class Weather {
     @JsonProperty("wind_direction") final float windDirection,
     @JsonProperty("wind_speed") final float windSpeed,
     @JsonProperty("wind_gust_direction") final float windGustDirection,
-    @JsonProperty("wind_gust_speed") final float windGustSpeed,
-    @JsonProperty("fallback_source_ids") final JsonNode fallbackSourceIds
+    @JsonProperty("wind_gust_speed") final float windGustSpeed
+    // @JsonProperty("fallback_source_ids") final JsonNode fallbackSourceIds
   ) {
     this.timestamp = timestamp;
     this.sourceId = sourceId;
@@ -61,7 +61,7 @@ public class Weather {
     this.windSpeed = windSpeed;
     this.windGustDirection = windGustDirection;
     this.windGustSpeed = windGustSpeed;
-    this.fallbackSourceIds = fallbackSourceIds;
+    // this.fallbackSourceIds = fallbackSourceIds;
   }
 
   public enum Condition {

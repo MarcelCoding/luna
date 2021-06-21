@@ -1,6 +1,7 @@
 package com.github.marcelcoding.luna.weather.controller;
 
 import com.github.marcelcoding.luna.weather.dto.Sensor;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Set;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Tag(name = "Sensor")
 @RequestMapping("/weather/sensor")
 public interface SensorController {
 

@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.weather.service.impl;
 
 import com.github.marcelcoding.luna.weather.Utils;
-import com.github.marcelcoding.luna.weather.dto.PollenData;
+import com.github.marcelcoding.luna.weather.dto.dwd.PollenData;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -12,7 +12,7 @@ public class DwdService {
   private static final String BASE_URL = "https://opendata.dwd.de/";
   private static final String POLLEN_URI = "/climate_environment/health/alerts/s31fg.json";
 
-  private WebClient client;
+  private final WebClient client;
 
   public DwdService() {
     this.client = WebClient.create(BASE_URL);

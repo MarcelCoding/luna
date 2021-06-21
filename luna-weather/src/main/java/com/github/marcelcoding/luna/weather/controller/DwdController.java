@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Tag(name = "Weather")
+@Tag(name = "DWD")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("weather/dwd")
