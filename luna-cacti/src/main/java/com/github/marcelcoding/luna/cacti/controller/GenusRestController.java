@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Genus;
 import com.github.marcelcoding.luna.cacti.service.GenusService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -8,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,7 +50,7 @@ public class GenusRestController {
     @RequestBody @Valid final Genus genus
   ) {
     if (!this.genusService.exist(id)) {
-      throw new NotFoundException(id, "GENUS_NOT_FOUND");
+      throw new NotFoundException("GENUS_NOT_FOUND");
     }
 
     return this.genusService.save(id, genus);

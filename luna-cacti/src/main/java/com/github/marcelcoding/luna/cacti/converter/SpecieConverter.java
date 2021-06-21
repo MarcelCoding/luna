@@ -1,12 +1,12 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Specie;
 import com.github.marcelcoding.luna.cacti.model.GenusModel;
 import com.github.marcelcoding.luna.cacti.model.SpecieModel;
 import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +18,7 @@ public class SpecieConverter implements Converter<SpecieModel, Specie> {
   @Override
   public SpecieModel toModel(final Specie dto) {
     final GenusModel genus = this.genusRepository.findById(dto.getGenusId())
-      .orElseThrow(() -> new NotFoundException(dto.getGenusId(), "GENUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("GENUS_NOT_FOUND"));
 
     return new SpecieModel(
       dto.getName(),
@@ -38,7 +38,7 @@ public class SpecieConverter implements Converter<SpecieModel, Specie> {
   @Override
   public void override(final SpecieModel model, final Specie dto) {
     final GenusModel genus = this.genusRepository.findById(dto.getGenusId())
-      .orElseThrow(() -> new NotFoundException(dto.getGenusId(), "GENUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("GENUS_NOT_FOUND"));
 
     model.setName(dto.getName());
     model.setGenus(genus);
@@ -52,7 +52,7 @@ public class SpecieConverter implements Converter<SpecieModel, Specie> {
 
     if (dto.getGenusId() != null) {
       final GenusModel genus = this.genusRepository.findById(dto.getGenusId())
-        .orElseThrow(() -> new NotFoundException(dto.getGenusId(), "GENUS_NOT_FOUND"));
+        .orElseThrow(() -> new NotFoundException("GENUS_NOT_FOUND"));
 
       model.setGenus(genus);
     }

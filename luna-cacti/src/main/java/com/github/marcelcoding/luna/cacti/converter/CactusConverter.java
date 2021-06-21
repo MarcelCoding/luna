@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Cactus;
 import com.github.marcelcoding.luna.cacti.api.Cactus.Acquisition;
 import com.github.marcelcoding.luna.cacti.api.Cactus.State;
@@ -18,6 +17,7 @@ import com.github.marcelcoding.luna.cacti.repository.SpecieRepository;
 import com.github.marcelcoding.luna.cacti.service.CareGroupService;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
+import net.getnova.framework.core.NotFoundException;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
 
@@ -39,21 +39,21 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
 
     if (dto.getFormId() != null) {
       form = this.formRepository.findById(dto.getFormId())
-        .orElseThrow(() -> new NotFoundException(dto.getFormId(), "FORM_NOT_FOUND"));
+        .orElseThrow(() -> new NotFoundException("FORM_NOT_FOUND"));
       specie = form.getSpecie();
       genus = specie.getGenus();
     }
     else if (dto.getSpecieId() != null) {
       form = null;
       specie = this.specieRepository.findById(dto.getSpecieId())
-        .orElseThrow(() -> new NotFoundException(dto.getSpecieId(), "SPECIE_NOT_FOUND"));
+        .orElseThrow(() -> new NotFoundException("SPECIE_NOT_FOUND"));
       genus = specie.getGenus();
     }
     else if (dto.getGenusId() != null) {
       form = null;
       specie = null;
       genus = this.genusRepository.findById(dto.getGenusId())
-        .orElseThrow(() -> new NotFoundException(dto.getGenusId(), "GENUS_NOT_FOUND"));
+        .orElseThrow(() -> new NotFoundException("GENUS_NOT_FOUND"));
     }
     else {
       form = null;
@@ -71,7 +71,7 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
     }
     else {
       final CareGroup local = this.careGroupService.findById(dto.getCareGroup().getId())
-        .orElseThrow(() -> new NotFoundException(dto.getCareGroup().getId(), "CARE_GROUP_NOT_FOUND"));
+        .orElseThrow(() -> new NotFoundException("CARE_GROUP_NOT_FOUND"));
 
       careGroup = new CareGroupModel(dto.getCareGroup(), local);
     }
@@ -122,21 +122,21 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
 
     if (dto.getFormId() != null) {
       model.setForm(this.formRepository.findById(dto.getFormId())
-        .orElseThrow(() -> new NotFoundException(dto.getFormId(), "FORM_NOT_FOUND")));
+        .orElseThrow(() -> new NotFoundException("FORM_NOT_FOUND")));
       model.setSpecie(model.getForm().getSpecie());
       model.setGenus(model.getSpecie().getGenus());
     }
     else if (dto.getSpecieId() != null) {
       model.setForm(null);
       model.setSpecie(this.specieRepository.findById(dto.getSpecieId())
-        .orElseThrow(() -> new NotFoundException(dto.getSpecieId(), "SPECIE_NOT_FOUND")));
+        .orElseThrow(() -> new NotFoundException("SPECIE_NOT_FOUND")));
       model.setGenus(model.getSpecie().getGenus());
     }
     else if (dto.getGenusId() != null) {
       model.setForm(null);
       model.setSpecie(null);
       model.setGenus(this.genusRepository.findById(dto.getGenusId())
-        .orElseThrow(() -> new NotFoundException(dto.getGenusId(), "GENUS_NOT_FOUND")));
+        .orElseThrow(() -> new NotFoundException("GENUS_NOT_FOUND")));
     }
     else {
       model.setForm(null);
@@ -159,7 +159,7 @@ public class CactusConverter implements Converter<CactusModel, Cactus> {
     }
     else {
       final CareGroup local = this.careGroupService.findById(dto.getCareGroup().getId())
-        .orElseThrow(() -> new NotFoundException(dto.getCareGroup().getId(), "CARE_GROUP_NOT_FOUND"));
+        .orElseThrow(() -> new NotFoundException("CARE_GROUP_NOT_FOUND"));
 
       model.setCareGroup(new CareGroupModel(dto.getCareGroup(), local));
     }

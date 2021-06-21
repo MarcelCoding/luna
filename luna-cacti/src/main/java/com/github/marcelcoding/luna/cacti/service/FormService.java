@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.PropertyNotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Form;
 import com.github.marcelcoding.luna.cacti.converter.FormConverter;
@@ -11,6 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,7 @@ public final class FormService {
 
   public Form save(final UUID id, final Form form) throws NotFoundException {
     final FormModel model = this.formRepository.findById(id)
-      .orElseThrow(() -> new NotFoundException(id, "FORM_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("FORM_NOT_FOUND"));
 
     this.formConverter.override(model, form);
 
@@ -64,7 +64,7 @@ public final class FormService {
 
   public void delete(final UUID id) throws NotFoundException {
     if (!this.formRepository.existsById(id)) {
-      throw new NotFoundException(id, "FORM_NOT_FOUND");
+      throw new NotFoundException("FORM_NOT_FOUND");
     }
 
     this.formRepository.deleteById(id);

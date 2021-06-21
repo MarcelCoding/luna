@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.PropertyNotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Genus;
 import com.github.marcelcoding.luna.cacti.converter.GenusConverter;
@@ -11,6 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,7 @@ public final class GenusService {
 
   public Genus save(final UUID id, final Genus genus) {
     final GenusModel model = this.genusRepository.findById(id)
-      .orElseThrow(() -> new NotFoundException(id, "GENUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("GENUS_NOT_FOUND"));
 
     this.genusConverter.override(model, genus);
 
@@ -70,7 +70,7 @@ public final class GenusService {
 
   public void delete(final UUID id) throws NotFoundException {
     if (!this.genusRepository.existsById(id)) {
-      throw new NotFoundException(id, "GENUS_NOT_FOUND");
+      throw new NotFoundException("GENUS_NOT_FOUND");
     }
 
     this.genusRepository.deleteById(id);

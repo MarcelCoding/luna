@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Specie;
 import com.github.marcelcoding.luna.cacti.service.SpecieService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -8,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +43,7 @@ public class SpecieRestController {
     @RequestBody @Valid final Specie specie
   ) {
     if (!this.specieService.exist(id)) {
-      throw new NotFoundException(id, "SPECIE_NOT_FOUND");
+      throw new NotFoundException("SPECIE_NOT_FOUND");
     }
 
     return this.specieService.save(id, specie);

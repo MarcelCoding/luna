@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.PropertyNotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Cactus;
 import com.github.marcelcoding.luna.cacti.api.CactusSmall;
@@ -14,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
@@ -64,7 +64,7 @@ public class CactusService {
 
   public Cactus save(final UUID id, final Cactus cactus) throws NotFoundException {
     final CactusModel model = this.cactusRepository.findById(id)
-      .orElseThrow(() -> new NotFoundException(id, "CACTUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 
     this.cactusConverter.override(model, cactus);
 
@@ -73,7 +73,7 @@ public class CactusService {
 
   public void delete(final UUID id) throws NotFoundException {
     if (!this.cactusRepository.existsById(id)) {
-      throw new NotFoundException(id, "CACTUS_NOT_FOUND");
+      throw new NotFoundException("CACTUS_NOT_FOUND");
     }
 
     this.cactusRepository.deleteById(id);

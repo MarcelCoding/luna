@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Cactus;
 import com.github.marcelcoding.luna.cacti.api.CactusSmall;
 import com.github.marcelcoding.luna.cacti.service.CactusImageService;
@@ -11,6 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,7 +46,7 @@ public class CactusRestController {
   @GetMapping("{id}")
   public Cactus findById(@PathVariable("id") final UUID id) {
     return this.cactusService.findById(id)
-      .orElseThrow(() -> new NotFoundException(id, "CACTUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
   }
 
   @PostMapping
@@ -97,7 +97,7 @@ public class CactusRestController {
     @RequestBody @Valid final Cactus cactus
   ) {
     if (!this.cactusService.exist(id)) {
-      throw new NotFoundException(id, "CACTUS_NOT_FOUND");
+      throw new NotFoundException("CACTUS_NOT_FOUND");
     }
 
     return this.cactusService.save(id, cactus);

@@ -1,12 +1,12 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.Form;
 import com.github.marcelcoding.luna.cacti.model.FormModel;
 import com.github.marcelcoding.luna.cacti.model.SpecieModel;
 import com.github.marcelcoding.luna.cacti.repository.SpecieRepository;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +18,7 @@ public class FormConverter implements Converter<FormModel, Form> {
   @Override
   public FormModel toModel(final Form dto) {
     final SpecieModel specie = this.specieRepository.findById(dto.getSpecieId())
-      .orElseThrow(() -> new NotFoundException(dto.getSpecieId(), "SPECIE_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("SPECIE_NOT_FOUND"));
 
     return new FormModel(
       dto.getName(),
@@ -38,7 +38,7 @@ public class FormConverter implements Converter<FormModel, Form> {
   @Override
   public void override(final FormModel model, final Form dto) {
     final SpecieModel specie = this.specieRepository.findById(dto.getSpecieId())
-      .orElseThrow(() -> new NotFoundException(dto.getSpecieId(), "SPECIE_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("SPECIE_NOT_FOUND"));
 
     model.setName(dto.getName());
     model.setSpecie(specie);
@@ -52,7 +52,7 @@ public class FormConverter implements Converter<FormModel, Form> {
 
     if (dto.getSpecieId() != null) {
       final SpecieModel specie = this.specieRepository.findById(dto.getSpecieId())
-        .orElseThrow(() -> new NotFoundException(dto.getSpecieId(), "SPECIE_NOT_FOUND"));
+        .orElseThrow(() -> new NotFoundException("SPECIE_NOT_FOUND"));
 
       model.setSpecie(specie);
     }

@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.api.CactusHistoryEntry;
 import com.github.marcelcoding.luna.cacti.converter.CactusHistoryEntryConverter;
 import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel;
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,7 +32,7 @@ public class CactusHistoryService {
 
   public boolean exist(final UUID cactusId, final LocalDate date) {
     final CactusSmallModel cactusModel = this.cactusRepository.findById(cactusId)
-      .orElseThrow(() -> new NotFoundException(cactusId, "CACTUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 
     return this.cactusHistoryRepository.existsById(new IdModel(cactusModel, date));
   }
@@ -42,7 +42,7 @@ public class CactusHistoryService {
     final CactusHistoryEntry historyEntry
   ) {
     final CactusSmallModel cactusModel = this.cactusRepository.findById(cactusId)
-      .orElseThrow(() -> new NotFoundException(cactusId, "CACTUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 
     final CactusHistoryEntryModel model = this.cactusHistoryEntryConverter.toModel(historyEntry);
 
@@ -60,12 +60,12 @@ public class CactusHistoryService {
     final CactusHistoryEntry historyEntry
   ) {
     final CactusSmallModel cactusModel = this.cactusRepository.findById(cactusId)
-      .orElseThrow(() -> new NotFoundException(cactusId, "CACTUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 
     final IdModel id = new IdModel(cactusModel, date);
 
     if (!this.cactusHistoryRepository.existsById(id)) {
-      throw new NotFoundException(cactusId + "__" + date, "CACTUS_HISTORY_ENTRY_NOT_FOUND");
+      throw new NotFoundException("CACTUS_HISTORY_ENTRY_NOT_FOUND");
     }
 
     this.cactusHistoryRepository.deleteById(id);
@@ -81,12 +81,12 @@ public class CactusHistoryService {
 
   public void delete(final UUID cactusId, final LocalDate date) {
     final CactusSmallModel cactusModel = this.cactusRepository.findById(cactusId)
-      .orElseThrow(() -> new NotFoundException(cactusId, "CACTUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 
     final IdModel id = new IdModel(cactusModel, date);
 
     if (!this.cactusHistoryRepository.existsById(id)) {
-      throw new NotFoundException(cactusId + "__" + date, "CACTUS_HISTORY_ENTRY_NOT_FOUND");
+      throw new NotFoundException("CACTUS_HISTORY_ENTRY_NOT_FOUND");
     }
 
     this.cactusHistoryRepository.deleteById(id);

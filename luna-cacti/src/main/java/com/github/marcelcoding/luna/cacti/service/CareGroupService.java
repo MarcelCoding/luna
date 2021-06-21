@@ -49,7 +49,7 @@ public final class CareGroupService {
         new Time("sonnig", "freier Stand", null, null, null),
         new Time(null, "trockender Stand", "kälteverträglich, bei geeignetem Substrat bis -25°C", null,
           "Überdauern den Winter unter einer Schneeecke sehr gut, gefährlich sind Kahlfröste nach vorhergegangener nasser Wärmeperiode,"
-            + "abdecken mit Reisig oder Brettern, auch überwintern in trockenem Frühbeetkasten mit Sonnenschutz")
+          + "abdecken mit Reisig oder Brettern, auch überwintern in trockenem Frühbeetkasten mit Sonnenschutz")
       ),
 
       new CareGroup(

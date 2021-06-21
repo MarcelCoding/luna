@@ -1,6 +1,5 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.NotFoundException;
 import com.github.marcelcoding.luna.cacti.model.CactusModel;
 import com.github.marcelcoding.luna.cacti.repository.CactusRepository;
 import java.io.File;
@@ -10,6 +9,7 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class CactusImageService {
 
   public Mono<Void> handleUpload(final UUID cactusId, final Flux<FilePart> files) {
     final CactusModel cactus = this.cactusRepository.findById(cactusId)
-      .orElseThrow(() -> new NotFoundException(cactusId, "CACTUS_NOT_FOUND"));
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 
     if (cactus.getImages() == null) {
       cactus.setImages(new HashSet<>());
@@ -67,10 +67,10 @@ public class CactusImageService {
     }
 
     if (!this.cactusRepository.findById(cactusId)
-      .orElseThrow(() -> new NotFoundException(cactusId, "CACTUS_NOT_FOUND"))
+      .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"))
       .getImages()
       .contains(filename)) {
-      throw new NotFoundException(filename, "FILE_NOT_FOUND");
+      throw new NotFoundException("FILE_NOT_FOUND");
     }
 
     return new FileSystemResource(UPLOADS_DIR.resolve(cactusId.toString() + File.separatorChar + filename));
@@ -82,10 +82,10 @@ public class CactusImageService {
     }
 
     if (!this.cactusRepository.findById(cactusId)
-      .orElseThrow(() -> Exceptions.propagate(new NotFoundException(cactusId, "CACTUS_NOT_FOUND")))
+      .orElseThrow(() -> Exceptions.propagate(new NotFoundException("CACTUS_NOT_FOUND")))
       .getImages()
       .contains(filename)) {
-      return Mono.error(new NotFoundException(filename, "FILE_NOT_FOUND"));
+      return Mono.error(new NotFoundException("FILE_NOT_FOUND"));
     }
 
     // https://projectreactor.io/docs/core/snapshot/reference/#faq.wrap-blocking

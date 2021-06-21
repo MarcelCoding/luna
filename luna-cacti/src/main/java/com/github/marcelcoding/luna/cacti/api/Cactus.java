@@ -57,8 +57,8 @@ public final class Cactus {
 
   public Duration getAge() {
     if (this.acquisition == null
-      || this.acquisition.getTimestamp() == null
-      || this.acquisition.getAge() == null) {
+        || this.acquisition.getTimestamp() == null
+        || this.acquisition.getAge() == null) {
       return null;
     }
 
