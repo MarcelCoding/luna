@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
 
 @Data
@@ -12,7 +13,12 @@ public final class CactusHistoryEntry {
 
   private static final Whitelist WHITELIST = Whitelist.relaxed()
     .addEnforcedAttribute("a", "target", "_blank")
-    .addEnforcedAttribute("a", "rel", "nofollow noopener noreferrer");
+    .addEnforcedAttribute("a", "rel", "nofollow noopener noreferrer")
+    .addTags("span")
+    .addAttributes("span", "style");
+
+  private static final OutputSettings OUTPUT_SETTINGS = new OutputSettings()
+    .prettyPrint(false);
 
   private final LocalDate date;
   @NotBlank
@@ -23,6 +29,6 @@ public final class CactusHistoryEntry {
     @JsonProperty("content") final String content
   ) {
     this.date = date;
-    this.content = Jsoup.clean(content, WHITELIST);
+    this.content = Jsoup.clean(content, "", WHITELIST, OUTPUT_SETTINGS);
   }
 }
