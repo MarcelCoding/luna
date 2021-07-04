@@ -7,9 +7,9 @@ import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
 import net.getnova.framework.core.NotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class SpecieConverter implements Converter<SpecieModel, Specie> {
 

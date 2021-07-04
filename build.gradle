@@ -127,4 +127,9 @@ subprojects {
   test {
     useJUnitPlatform()
   }
+
+  jar {
+    preserveFileTimestamps false
+    reproducibleFileOrder true
+  }
 }

@@ -1,9 +1,5 @@
 package com.github.marcelcoding.luna.cacti.model;
 
-import com.github.marcelcoding.luna.cacti.api.Cactus.Acquisition;
-import com.github.marcelcoding.luna.cacti.api.Cactus.State;
-import com.github.marcelcoding.luna.cacti.api.CareGroup;
-import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Set;
@@ -72,6 +68,7 @@ public class CactusModel extends TableModelAutoId {
   @Setter
   @Embeddable
   @NoArgsConstructor
+  @AllArgsConstructor
   public static class StateModel {
 
     @Column(name = "state_no_longer_in_possession_timestamp", nullable = true, updatable = true)
@@ -82,26 +79,13 @@ public class CactusModel extends TableModelAutoId {
 
     @Column(name = "state_vitality", nullable = true, updatable = true, length = 128)
     private String vitality;
-
-    public StateModel(final State state) {
-      this.noLongerInPossessionTimestamp = state.getNoLongerInPossessionTimestamp();
-      this.noLongerInPossessionReason = state.getNoLongerInPossessionReason();
-      this.vitality = state.getVitality();
-    }
-
-    public State toDto() {
-      return new State(
-        this.noLongerInPossessionTimestamp,
-        this.noLongerInPossessionReason,
-        this.vitality
-      );
-    }
   }
 
   @Getter
   @Setter
   @Embeddable
   @NoArgsConstructor
+  @AllArgsConstructor
   public static class AcquisitionModel {
 
     @Column(name = "acquisition_timestamp", nullable = true, updatable = true)
@@ -115,28 +99,13 @@ public class CactusModel extends TableModelAutoId {
 
     @Column(name = "acquisition_plant_type", nullable = true, updatable = true, length = 512)
     private String plantType;
-
-    public AcquisitionModel(final Acquisition acquisition) {
-      this.timestamp = acquisition.getTimestamp();
-      this.age = acquisition.getAge();
-      this.place = acquisition.getPlace();
-      this.plantType = acquisition.getPlantType();
-    }
-
-    public Acquisition toDto() {
-      return new Acquisition(
-        this.timestamp,
-        this.age,
-        this.place,
-        this.plantType
-      );
-    }
   }
 
   @Getter
   @Setter
   @Embeddable
   @NoArgsConstructor
+  @AllArgsConstructor
   public static class CareGroupModel {
 
     @Column(name = "care_group_id", nullable = true, updatable = true)
@@ -164,50 +133,11 @@ public class CactusModel extends TableModelAutoId {
     @AttributeOverride(name = "other", column = @Column(name = "care_group_rest_time_other", nullable = true, updatable = true, length = 1024))
     private TimeModel restTime;
 
-    public CareGroupModel(final CareGroup careGroup) {
-      this.id = careGroup.getId();
-      this.home = careGroup.getHome();
-      this.soil = careGroup.getSoil();
-
-      this.growTime = careGroup.getGrowTime() == null ? null : new TimeModel(careGroup.getGrowTime());
-      this.restTime = careGroup.getRestTime() == null ? null : new TimeModel(careGroup.getRestTime());
-    }
-
-    public CareGroupModel(final CareGroup cactus, final CareGroup careGroup) {
-      this.id = careGroup.getId();
-      this.home = check(cactus.getHome(), careGroup.getHome());
-      this.soil = check(cactus.getSoil(), careGroup.getSoil());
-
-      if (cactus.getGrowTime() != null) {
-        this.growTime = new TimeModel(cactus.getGrowTime(), careGroup.getGrowTime());
-      }
-
-      if (cactus.getRestTime() != null) {
-        this.restTime = new TimeModel(cactus.getRestTime(), careGroup.getRestTime());
-      }
-    }
-
-    // TODO clean up
-    @SuppressWarnings("checkstyle:FinalParameters")
-    private String check(String s1, final String s2) {
-      if (s1 == null) {
-        return s2;
-      }
-      else {
-        s1 = s1.strip();
-        if (s1.equals(s2)) {
-          return null;
-        }
-        else {
-          return s1;
-        }
-      }
-    }
-
     @Getter
     @Setter
     @Embeddable
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class TimeModel {
 
       private String light;
@@ -215,39 +145,6 @@ public class CactusModel extends TableModelAutoId {
       private String temperature;
       private String humidity;
       private String other;
-
-      public TimeModel(final Time time) {
-        this.light = time.getLight();
-        this.air = time.getAir();
-        this.temperature = time.getTemperature();
-        this.humidity = time.getHumidity();
-        this.other = time.getOther();
-      }
-
-      public TimeModel(final Time time, final Time otherTime) {
-        this.light = check(time.getLight(), otherTime.getLight());
-        this.air = check(time.getAir(), otherTime.getAir());
-        this.temperature = check(time.getTemperature(), otherTime.getTemperature());
-        this.humidity = check(time.getHumidity(), otherTime.getHumidity());
-        this.other = check(time.getOther(), otherTime.getOther());
-      }
-
-      // TODO clean up
-      @SuppressWarnings("checkstyle:FinalParameters")
-      private String check(String s1, final String s2) {
-        if (s1 == null) {
-          return s2;
-        }
-        else {
-          s1 = s1.strip();
-          if (s1.equals(s2)) {
-            return null;
-          }
-          else {
-            return s1;
-          }
-        }
-      }
     }
   }
 }

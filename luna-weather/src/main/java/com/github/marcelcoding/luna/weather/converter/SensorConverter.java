@@ -19,7 +19,9 @@ public class SensorConverter implements Converter<SensorModel, Sensor> {
   public SensorModel toModel(final Sensor dto) {
     return new SensorModel(
       dto.getName(),
+      dto.getDescription(),
       dto.getUnit(),
+      dto.getIllustration(),
       dto.getGroup() == null
         ? null
         : this.sensorGroupRepository.findById(dto.getGroup())
@@ -32,7 +34,9 @@ public class SensorConverter implements Converter<SensorModel, Sensor> {
     return new Sensor(
       model.getId(),
       model.getName(),
+      model.getDescription(),
       model.getUnit(),
+      model.getIllustration(),
       model.getGroup() == null ? null : model.getGroup().getId()
     );
   }
@@ -40,7 +44,9 @@ public class SensorConverter implements Converter<SensorModel, Sensor> {
   @Override
   public void override(final SensorModel model, final Sensor dto) {
     model.setName(dto.getName());
+    model.setDescription(dto.getDescription());
     model.setUnit(dto.getUnit());
+    model.setIllustration(dto.getIllustration());
     model.setGroup(
       dto.getGroup() == null
         ? null

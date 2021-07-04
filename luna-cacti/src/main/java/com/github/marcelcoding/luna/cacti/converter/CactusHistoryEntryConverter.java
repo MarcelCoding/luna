@@ -5,9 +5,9 @@ import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel;
 import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel.IdModel;
 import net.getnova.framework.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class CactusHistoryEntryConverter implements Converter<CactusHistoryEntryModel, CactusHistoryEntry> {
 
   @Override

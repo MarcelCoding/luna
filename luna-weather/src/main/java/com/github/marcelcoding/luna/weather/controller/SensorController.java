@@ -2,30 +2,12 @@ package com.github.marcelcoding.luna.weather.controller;
 
 import com.github.marcelcoding.luna.weather.dto.Sensor;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Set;
 import java.util.UUID;
-import javax.validation.Valid;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import net.getnova.framework.core.CrudController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Tag(name = "Sensor")
 @RequestMapping("/weather/sensor")
-public interface SensorController {
+public interface SensorController extends CrudController<Sensor, UUID> {
 
-  @GetMapping
-  Set<Sensor> findAll();
-
-  @PostMapping
-  Sensor post(@RequestBody @Valid Sensor sensor);
-
-  @PutMapping("{sensorId}")
-  Sensor put(@PathVariable UUID sensorId, @RequestBody @Valid Sensor sensor);
-
-  @DeleteMapping("{sensorId}")
-  void delete(@PathVariable UUID sensorId);
 }

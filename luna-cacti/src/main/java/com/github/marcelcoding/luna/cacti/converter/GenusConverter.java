@@ -3,9 +3,9 @@ package com.github.marcelcoding.luna.cacti.converter;
 import com.github.marcelcoding.luna.cacti.api.Genus;
 import com.github.marcelcoding.luna.cacti.model.GenusModel;
 import net.getnova.framework.core.Converter;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class GenusConverter implements Converter<GenusModel, Genus> {
 
   @Override

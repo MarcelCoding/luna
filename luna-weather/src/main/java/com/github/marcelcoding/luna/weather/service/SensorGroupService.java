@@ -1,18 +1,9 @@
 package com.github.marcelcoding.luna.weather.service;
 
 import com.github.marcelcoding.luna.weather.dto.SensorGroup;
-import java.util.Set;
 import java.util.UUID;
+import net.getnova.framework.core.CrudService;
 
-public interface SensorGroupService {
+public interface SensorGroupService extends CrudService<SensorGroup, UUID> {
 
-  Set<SensorGroup> findAll();
-
-  boolean exist(UUID id);
-
-  SensorGroup save(SensorGroup group);
-
-  SensorGroup save(UUID id, SensorGroup group);
-
-  void delete(UUID id);
 }

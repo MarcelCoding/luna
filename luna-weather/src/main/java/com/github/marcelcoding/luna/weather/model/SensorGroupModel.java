@@ -19,4 +19,7 @@ public class SensorGroupModel extends TableModelAutoId {
 
   @Column(name = "name", nullable = false, updatable = true, length = 128)
   private String name;
+
+  @Column(name = "description", nullable = false, updatable = true, length = 512)
+  private String description;
 }

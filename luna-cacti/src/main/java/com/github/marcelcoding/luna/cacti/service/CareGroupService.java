@@ -5,9 +5,9 @@ import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import net.getnova.framework.core.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -124,8 +124,14 @@ public final class CareGroupService {
     return this.careGroups.values();
   }
 
-  public Optional<CareGroup> findById(final String id) {
-    return Optional.ofNullable(this.careGroups.get(id));
+  public CareGroup findById(final String id) {
+    final CareGroup careGroup = this.careGroups.get(id);
+
+    if (careGroup == null) {
+      throw new NotFoundException("CARE_GROUP");
+    }
+
+    return careGroup;
   }
 
   public boolean exist(final String id) {

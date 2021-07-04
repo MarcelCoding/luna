@@ -79,12 +79,6 @@ public final class Cactus {
     private final String noLongerInPossessionReason;
     private final String vitality;
 
-    public State() {
-      this.noLongerInPossessionTimestamp = null;
-      this.noLongerInPossessionReason = null;
-      this.vitality = null;
-    }
-
     public State(
       @JsonProperty("noLongerInPossessionTimestamp") final OffsetDateTime noLongerInPossessionTimestamp,
       @JsonProperty("noLongerInPossessionReason") final String noLongerInPossessionReason,
@@ -103,13 +97,6 @@ public final class Cactus {
     private final Duration age;
     private final String place;
     private final String plantType;
-
-    public Acquisition() {
-      this.timestamp = null;
-      this.age = null;
-      this.place = null;
-      this.plantType = null;
-    }
 
     public Acquisition(
       @JsonProperty("timestamp") final OffsetDateTime timestamp,

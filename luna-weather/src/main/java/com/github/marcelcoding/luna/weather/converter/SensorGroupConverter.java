@@ -14,7 +14,8 @@ public class SensorGroupConverter implements Converter<SensorGroupModel, SensorG
   @Override
   public SensorGroupModel toModel(final SensorGroup dto) {
     return new SensorGroupModel(
-      dto.getName()
+      dto.getName(),
+      dto.getDescription()
     );
   }
 
@@ -22,13 +23,15 @@ public class SensorGroupConverter implements Converter<SensorGroupModel, SensorG
   public SensorGroup toDto(final SensorGroupModel model) {
     return new SensorGroup(
       model.getId(),
-      model.getName()
+      model.getName(),
+      model.getDescription()
     );
   }
 
   @Override
   public void override(final SensorGroupModel model, final SensorGroup dto) {
     model.setName(dto.getName());
+    model.setDescription(dto.getDescription());
   }
 
   @Override

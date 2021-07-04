@@ -11,11 +11,14 @@ public class SensorGroup {
 
   private final UUID id;
   private final String name;
+  private final String description;
 
   public SensorGroup(
-    @JsonProperty("name") final String name
+    @JsonProperty("name") final String name,
+    @JsonProperty("description") final String description
   ) {
     this.id = null;
     this.name = name;
+    this.description = description;
   }
 }

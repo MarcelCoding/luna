@@ -1,26 +1,42 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
+import com.github.marcelcoding.luna.cacti.CareGroupUtils;
 import com.github.marcelcoding.luna.cacti.api.CareGroup;
-import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import com.github.marcelcoding.luna.cacti.model.CactusModel.CareGroupModel;
-import com.github.marcelcoding.luna.cacti.model.CactusModel.CareGroupModel.TimeModel;
 import com.github.marcelcoding.luna.cacti.service.CareGroupService;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.core.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CactusCareGroupConverter implements Converter<CareGroupModel, CareGroup> {
+public class CactusCareGroupConverter {
 
   private final CareGroupService careGroupService;
+  private final CactusCareGroupTimeConverter timeConverter;
 
-  @Override
   public CareGroupModel toModel(final CareGroup dto) {
-    return null;
+    return new CareGroupModel(
+      dto.getId(),
+      dto.getHome(),
+      dto.getSoil(),
+
+      dto.getGrowTime() == null ? null : this.timeConverter.toModel(dto.getGrowTime()),
+      dto.getRestTime() == null ? null : this.timeConverter.toModel(dto.getRestTime())
+    );
   }
 
-  @Override
+  public CareGroupModel toModel(final CareGroup orig, final CareGroup dto) {
+    return new CareGroupModel(
+      orig.getId(),
+      CareGroupUtils.getValue(orig.getId(), dto.getHome()),
+      CareGroupUtils.getValue(orig.getSoil(), dto.getHome()),
+
+      dto.getGrowTime() == null ? null : this.timeConverter.toModel(orig.getGrowTime(), dto.getGrowTime()),
+      dto.getRestTime() == null ? null : this.timeConverter.toModel(orig.getRestTime(), dto.getRestTime())
+    );
+  }
+
+  @SuppressWarnings("checkstyle:TodoComment")
   public CareGroup toDto(final CareGroupModel model) {
     if (model.getId() == null) {
       return new CareGroup(
@@ -28,51 +44,23 @@ public class CactusCareGroupConverter implements Converter<CareGroupModel, CareG
         null,
         model.getHome(),
         model.getSoil(),
-        model.getGrowTime() == null ? null : this.toDto(model.getGrowTime()),
-        model.getRestTime() == null ? null : this.toDto(model.getRestTime())
+        model.getGrowTime() == null ? null : this.timeConverter.toDto(model.getGrowTime()),
+        model.getRestTime() == null ? null : this.timeConverter.toDto(model.getRestTime())
       );
     }
 
-    final CareGroup careGroup = this.careGroupService.findById(model.getId())
-      .orElseThrow(IllegalStateException::new);
+    // TODO: NotFoundException - CARE_GROUP??
+    final CareGroup careGroup = this.careGroupService.findById(model.getId());
 
     return new CareGroup(
       careGroup.getId(),
       careGroup.getName(),
       model.getHome() == null ? careGroup.getHome() : model.getHome(),
       model.getSoil() == null ? careGroup.getSoil() : model.getSoil(),
-      model.getGrowTime() == null ? careGroup.getGrowTime() : this.toDto(careGroup.getGrowTime(), model.getGrowTime()),
-      model.getRestTime() == null ? careGroup.getRestTime() : this.toDto(careGroup.getRestTime(), model.getRestTime())
-    );
-  }
-
-  @Override
-  public void override(final CareGroupModel model, final CareGroup dto) {
-
-  }
-
-  @Override
-  public void merge(final CareGroupModel model, final CareGroup dto) {
-
-  }
-
-  private Time toDto(final TimeModel model) {
-    return new Time(
-      model.getLight(),
-      model.getAir(),
-      model.getTemperature(),
-      model.getHumidity(),
-      model.getOther()
-    );
-  }
-
-  private Time toDto(final Time time, final TimeModel model) {
-    return new Time(
-      model.getLight() == null ? time.getLight() : model.getLight(),
-      model.getAir() == null ? time.getAir() : model.getAir(),
-      model.getTemperature() == null ? time.getTemperature() : model.getTemperature(),
-      model.getHumidity() == null ? time.getHumidity() : model.getHumidity(),
-      model.getOther() == null ? time.getOther() : model.getOther()
+      model.getGrowTime() == null ? careGroup.getGrowTime()
+        : this.timeConverter.toDto(model.getGrowTime(), careGroup.getGrowTime()),
+      model.getRestTime() == null ? careGroup.getRestTime()
+        : this.timeConverter.toDto(model.getRestTime(), careGroup.getRestTime())
     );
   }
 }
