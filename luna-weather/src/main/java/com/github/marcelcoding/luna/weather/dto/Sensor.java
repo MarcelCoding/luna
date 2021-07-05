@@ -14,21 +14,21 @@ public class Sensor {
   private final String description;
   private final String unit;
   private final Illustration illustration;
-  private final UUID group;
+  private final UUID groupId;
 
   public Sensor(
     @JsonProperty("name") final String name,
     @JsonProperty("description") final String description,
     @JsonProperty("unit") final String unit,
     @JsonProperty("illustration") final Illustration illustration,
-    @JsonProperty("group") final UUID group
+    @JsonProperty("groupId") final UUID groupId
   ) {
     this.id = null;
     this.name = name;
     this.description = description;
     this.unit = unit;
     this.illustration = illustration;
-    this.group = group;
+    this.groupId = groupId;
   }
 
   public enum Illustration {

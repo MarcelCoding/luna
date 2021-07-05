@@ -22,9 +22,9 @@ public class SensorConverter implements Converter<SensorModel, Sensor> {
       dto.getDescription(),
       dto.getUnit(),
       dto.getIllustration(),
-      dto.getGroup() == null
+        dto.getGroupId() == null
         ? null
-        : this.sensorGroupRepository.findById(dto.getGroup())
+        : this.sensorGroupRepository.findById(dto.getGroupId())
           .orElseThrow(() -> new NotFoundException("SENSOR_GROUP"))
     );
   }
@@ -48,9 +48,9 @@ public class SensorConverter implements Converter<SensorModel, Sensor> {
     model.setUnit(dto.getUnit());
     model.setIllustration(dto.getIllustration());
     model.setGroup(
-      dto.getGroup() == null
+        dto.getGroupId() == null
         ? null
-        : this.sensorGroupRepository.findById(dto.getGroup())
+        : this.sensorGroupRepository.findById(dto.getGroupId())
           .orElseThrow(() -> new NotFoundException("SENSOR_GROUP"))
     );
   }
