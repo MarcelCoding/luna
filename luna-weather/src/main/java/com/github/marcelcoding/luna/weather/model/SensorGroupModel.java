@@ -14,7 +14,7 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "weather_sensor")
+@Table(name = "weather_sensor_group")
 public class SensorGroupModel extends TableModelAutoId {
 
   @Column(name = "name", nullable = false, updatable = true, length = 128)
