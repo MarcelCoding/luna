@@ -7,7 +7,7 @@ import com.github.marcelcoding.luna.cacti.service.CactusImageService;
 import com.github.marcelcoding.luna.cacti.service.CactusService;
 import java.io.IOException;
 import java.util.UUID;
-import net.getnova.framework.core.AbstractSmallCrudController;
+import net.getnova.framework.core.controller.AbstractSmallCrudController;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

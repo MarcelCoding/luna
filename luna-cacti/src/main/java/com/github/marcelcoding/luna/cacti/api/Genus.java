@@ -2,16 +2,16 @@ package com.github.marcelcoding.luna.cacti.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
-import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.getnova.framework.core.Validatable;
+import net.getnova.framework.core.exception.ValidationException;
 
 @Data
 @AllArgsConstructor
-public final class Genus {
+public final class Genus implements Validatable {
 
   private final UUID id;
-  @NotBlank
   private final String name;
 
   public Genus(
@@ -19,5 +19,12 @@ public final class Genus {
   ) {
     this.id = null;
     this.name = name;
+  }
+
+  @Override
+  public void validate() throws ValidationException {
+    if (this.name == null || this.name.isBlank()) {
+      throw new ValidationException("name", "NO_BLANK");
+    }
   }
 }

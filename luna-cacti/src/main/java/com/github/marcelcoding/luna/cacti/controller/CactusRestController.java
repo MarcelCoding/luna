@@ -5,7 +5,7 @@ import com.github.marcelcoding.luna.cacti.api.CactusSmall;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.UUID;
-import net.getnova.framework.core.SmallCrudController;
+import net.getnova.framework.core.controller.SmallCrudController;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

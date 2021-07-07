@@ -6,7 +6,7 @@ import com.github.marcelcoding.luna.cacti.model.GenusModel;
 import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
 import com.github.marcelcoding.luna.cacti.service.GenusService;
 import java.util.UUID;
-import net.getnova.framework.core.AbstractCommonIdCrudService;
+import net.getnova.framework.core.service.AbstractCommonIdCrudService;
 import org.springframework.stereotype.Service;
 
 @Service

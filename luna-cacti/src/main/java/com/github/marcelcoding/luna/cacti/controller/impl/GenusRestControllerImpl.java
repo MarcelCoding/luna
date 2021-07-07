@@ -4,7 +4,7 @@ import com.github.marcelcoding.luna.cacti.api.Genus;
 import com.github.marcelcoding.luna.cacti.controller.GenusRestController;
 import com.github.marcelcoding.luna.cacti.service.GenusService;
 import java.util.UUID;
-import net.getnova.framework.core.AbstractCrudController;
+import net.getnova.framework.core.controller.AbstractCrudController;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

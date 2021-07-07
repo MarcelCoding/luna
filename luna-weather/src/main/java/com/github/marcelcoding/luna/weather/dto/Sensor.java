@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.getnova.framework.core.Validatable;
+import net.getnova.framework.core.exception.ValidationException;
 
 @Data
 @AllArgsConstructor
-public class Sensor {
+public class Sensor implements Validatable {
 
   private final UUID id;
   private final String name;
@@ -29,6 +31,21 @@ public class Sensor {
     this.unit = unit;
     this.illustration = illustration;
     this.groupId = groupId;
+  }
+
+  @Override
+  public void validate() throws ValidationException {
+    if (this.name == null || this.name.isBlank()) {
+      throw new ValidationException("name", "NOT_BLANK");
+    }
+
+    if (this.unit == null || this.unit.isBlank()) {
+      throw new ValidationException("unit", "NOT_BLANK");
+    }
+
+    if (this.illustration == null) {
+      throw new ValidationException("illustration", "NOT_BLANK");
+    }
   }
 
   public enum Illustration {

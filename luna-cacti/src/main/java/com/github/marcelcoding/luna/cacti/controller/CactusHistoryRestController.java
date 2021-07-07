@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +34,7 @@ public class CactusHistoryRestController {
   @PostMapping("{cactusId}/history")
   public CactusHistoryEntry post(
     @PathVariable("cactusId") final UUID cactusId,
-    @RequestBody @Valid final CactusHistoryEntry historyEntry
+    @RequestBody final CactusHistoryEntry historyEntry
   ) {
     return this.cactusHistoryService.create(cactusId, historyEntry);
   }
@@ -44,7 +43,7 @@ public class CactusHistoryRestController {
   public CactusHistoryEntry put(
     @PathVariable("cactusId") final UUID cactusId,
     @PathVariable("date") final LocalDate date,
-    @RequestBody @Valid final CactusHistoryEntry historyEntry
+    @RequestBody final CactusHistoryEntry historyEntry
   ) {
     return this.cactusHistoryService.edit(cactusId, date, historyEntry);
   }

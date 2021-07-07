@@ -14,7 +14,7 @@ import com.github.marcelcoding.luna.cacti.service.CareGroupService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
-import net.getnova.framework.core.NotFoundException;
+import net.getnova.framework.core.exception.NotFoundException;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Component;
 

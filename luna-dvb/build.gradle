@@ -7,8 +7,6 @@ dependencies {
 
   implementation("net.getnova.framework:nova-api-rest:${novaVersion}") { changing true }
 
-//  implementation 'org.springframework.boot:spring-boot-starter-validation'
-
   annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
   annotationProcessor 'org.springframework:spring-context-indexer'
 

@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.getnova.framework.core.NotFoundException;
+import net.getnova.framework.core.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -6,7 +6,7 @@ import com.github.marcelcoding.luna.cacti.model.FormModel;
 import com.github.marcelcoding.luna.cacti.repository.FormRepository;
 import com.github.marcelcoding.luna.cacti.service.FormService;
 import java.util.UUID;
-import net.getnova.framework.core.AbstractCommonIdCrudService;
+import net.getnova.framework.core.service.AbstractCommonIdCrudService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -6,7 +6,7 @@ import com.github.marcelcoding.luna.cacti.model.SpecieModel;
 import com.github.marcelcoding.luna.cacti.repository.GenusRepository;
 import lombok.RequiredArgsConstructor;
 import net.getnova.framework.core.Converter;
-import net.getnova.framework.core.NotFoundException;
+import net.getnova.framework.core.exception.NotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component

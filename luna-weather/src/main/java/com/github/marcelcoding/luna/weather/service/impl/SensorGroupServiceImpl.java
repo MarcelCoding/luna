@@ -6,7 +6,7 @@ import com.github.marcelcoding.luna.weather.model.SensorGroupModel;
 import com.github.marcelcoding.luna.weather.repository.SensorGroupRepository;
 import com.github.marcelcoding.luna.weather.service.SensorGroupService;
 import java.util.UUID;
-import net.getnova.framework.core.AbstractCommonIdCrudService;
+import net.getnova.framework.core.service.AbstractCommonIdCrudService;
 import org.springframework.stereotype.Service;
 
 @Service

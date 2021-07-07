@@ -10,7 +10,7 @@ import com.github.marcelcoding.luna.cacti.repository.CactusRepository;
 import com.github.marcelcoding.luna.cacti.repository.CactusSmallRepository;
 import com.github.marcelcoding.luna.cacti.service.CactusService;
 import java.util.UUID;
-import net.getnova.framework.core.AbstractSmallCommonIdCrudService;
+import net.getnova.framework.core.service.AbstractSmallCommonIdCrudService;
 import org.springframework.stereotype.Service;
 
 @Service

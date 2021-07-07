@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.core.NotFoundException;
+import net.getnova.framework.core.Validatable;
+import net.getnova.framework.core.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,6 +42,8 @@ public class CactusHistoryService {
     final UUID cactusId,
     final CactusHistoryEntry historyEntry
   ) {
+    Validatable.validate(historyEntry);
+
     final CactusSmallModel cactusModel = this.cactusRepository.findById(cactusId)
       .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 
@@ -59,6 +62,8 @@ public class CactusHistoryService {
     final LocalDate date,
     final CactusHistoryEntry historyEntry
   ) {
+    Validatable.validate(historyEntry);
+
     final CactusSmallModel cactusModel = this.cactusRepository.findById(cactusId)
       .orElseThrow(() -> new NotFoundException("CACTUS_NOT_FOUND"));
 

@@ -2,14 +2,15 @@ package com.github.marcelcoding.luna.cacti.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
-import javax.validation.constraints.NotBlank;
 import lombok.Data;
+import net.getnova.framework.core.Validatable;
+import net.getnova.framework.core.exception.ValidationException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
 
 @Data
-public final class CactusHistoryEntry {
+public final class CactusHistoryEntry implements Validatable {
 
   private static final Whitelist WHITELIST = Whitelist.relaxed()
     .addEnforcedAttribute("a", "target", "_blank")
@@ -21,7 +22,6 @@ public final class CactusHistoryEntry {
     .prettyPrint(false);
 
   private final LocalDate date;
-  @NotBlank
   private final String content;
 
   public CactusHistoryEntry(
@@ -30,5 +30,12 @@ public final class CactusHistoryEntry {
   ) {
     this.date = date;
     this.content = Jsoup.clean(content, "", WHITELIST, OUTPUT_SETTINGS);
+  }
+
+  @Override
+  public void validate() throws ValidationException {
+    if (this.content == null || this.content.isBlank()) {
+      throw new ValidationException("content", "NO_BLANK");
+    }
   }
 }

@@ -6,16 +6,16 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.getnova.framework.core.Validatable;
+import net.getnova.framework.core.exception.ValidationException;
 
 @Data
 @AllArgsConstructor
-public final class Cactus {
+public final class Cactus implements Validatable {
 
   private final UUID id;
-  @NotBlank
   private final String number;
   private final UUID genusId;
   private final UUID specieId;
@@ -53,6 +53,13 @@ public final class Cactus {
     this.state = state;
     this.acquisition = acquisition;
     this.careGroup = careGroup;
+  }
+
+  @Override
+  public void validate() throws ValidationException {
+    if (this.number == null || this.number.isBlank()) {
+      throw new ValidationException("number", "NO_BLANK");
+    }
   }
 
   public Duration getAge() {
