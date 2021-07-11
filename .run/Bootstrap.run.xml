@@ -16,11 +16,6 @@
         <option name="name" value="SQL_PASS" />
         <option name="value" value="root" />
       </param>
-      <param>
-        <option name="enabled" value="true" />
-        <option name="name" value="SQL_HOST" />
-        <option name="value" value="192.168.178.28" />
-      </param>
     </additionalParameters>
     <method v="2">
       <option name="Gradle.BeforeRunTask" enabled="true" tasks="compileJava processResources" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />

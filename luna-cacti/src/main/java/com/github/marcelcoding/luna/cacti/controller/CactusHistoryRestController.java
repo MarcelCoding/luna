@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +27,13 @@ public class CactusHistoryRestController {
   private final CactusService cactusService;
   private final CactusHistoryService cactusHistoryService;
 
+  @Transactional(readOnly = true)
   @GetMapping("{cactusId}/history")
   public List<CactusHistoryEntry> findById(@PathVariable("cactusId") final UUID cactusId) {
     return this.cactusHistoryService.findHistory(cactusId);
   }
 
+  @Transactional
   @PostMapping("{cactusId}/history")
   public CactusHistoryEntry post(
     @PathVariable("cactusId") final UUID cactusId,
@@ -39,6 +42,7 @@ public class CactusHistoryRestController {
     return this.cactusHistoryService.create(cactusId, historyEntry);
   }
 
+  @Transactional
   @PutMapping("{cactusId}/history/{date}")
   public CactusHistoryEntry put(
     @PathVariable("cactusId") final UUID cactusId,
@@ -48,6 +52,7 @@ public class CactusHistoryRestController {
     return this.cactusHistoryService.edit(cactusId, date, historyEntry);
   }
 
+  @Transactional
   @DeleteMapping("{cactusId}/history/{date}")
   public void deleteById(
     @PathVariable("cactusId") final UUID cactusId,

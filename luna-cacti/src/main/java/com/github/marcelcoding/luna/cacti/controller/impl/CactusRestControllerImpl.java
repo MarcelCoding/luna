@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -33,11 +34,13 @@ public class CactusRestControllerImpl
   }
 
   @Override
+  @Transactional
   public Mono<Void> postImage(final UUID id, final Flux<FilePart> files) {
     return this.imageService.handleUpload(id, files);
   }
 
   @Override
+  @Transactional(readOnly = true)
   public ResponseEntity<Resource> getImage(final HttpHeaders headers, final UUID id, final String filename)
     throws IOException {
     final Resource resource = this.imageService.resolveFile(id, filename);
@@ -56,6 +59,7 @@ public class CactusRestControllerImpl
   }
 
   @Override
+  @Transactional
   public Mono<Void> deleteImage(final UUID id, final String filename) {
     return this.imageService.deleteFile(id, filename);
   }
