@@ -27,7 +27,7 @@ public class CactusHistoryEntryModel {
   @EmbeddedId
   private IdModel id;
 
-  @Column(name = "content", nullable = false, updatable = true, length = 2048)
+  @Column(name = "content", nullable = false, length = 2048)
   private String content;
 
   @Data
@@ -40,7 +40,7 @@ public class CactusHistoryEntryModel {
     @JoinColumn(name = "cactus_id", nullable = false, updatable = false)
     private CactusSmallModel cactus;
 
-    @Column(name = "date", nullable = false, updatable = true)
+    @Column(name = "date", nullable = false)
     private LocalDate date;
   }
 }

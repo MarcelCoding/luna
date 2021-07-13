@@ -1,9 +1,8 @@
 package com.github.marcelcoding.luna.dvb.dto;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.marcelcoding.luna.dvb.DvbUtils;
 import java.time.OffsetDateTime;
-import java.util.Optional;
 import lombok.Data;
 
 @Data
@@ -18,26 +17,24 @@ public class Departure {
   private final OffsetDateTime scheduledTime;
   private final int[] routeChanges;
 
-  public static Departure of(final JsonNode data) {
-    final JsonNode jsonRouteChanges = data.get("RouteChanges");
-    final int[] routeChange = new int[jsonRouteChanges.size()];
-
-    int i = 0;
-    for (final JsonNode jsonRouteChange : jsonRouteChanges) {
-      routeChange[i] = jsonRouteChange.asInt();
-      i++;
-    }
-
-    return new Departure(
-      data.get("Id").asText(),
-      data.get("LineName").asText(),
-      data.get("Direction").asText(),
-      Platform.of(data.get("Platform")),
-      data.get("Mot").asText(),
-      DvbUtils.getDate(Optional.ofNullable(data.get("RealTime")).map(JsonNode::asText).orElse(null)),
-      DvbUtils.getDate(data.get("ScheduledTime").asText()),
-      routeChange
-    );
+  public Departure(
+    @JsonProperty("Id") final String id,
+    @JsonProperty("LineName") final String line,
+    @JsonProperty("Direction") final String direction,
+    @JsonProperty("Platform") final Platform platform,
+    @JsonProperty("Mot") final String mot,
+    @JsonProperty("RealTime") final String realTime,
+    @JsonProperty("ScheduledTime") final String scheduledTime,
+    @JsonProperty("RouteChanges") final int[] routeChanges
+  ) {
+    this.id = id;
+    this.line = line;
+    this.direction = direction;
+    this.platform = platform;
+    this.mot = mot;
+    this.realTime = DvbUtils.getDate(realTime);
+    this.scheduledTime = DvbUtils.getDate(scheduledTime);
+    this.routeChanges = routeChanges;
   }
 
   @Data
@@ -46,11 +43,12 @@ public class Departure {
     private final String name;
     private final String type;
 
-    public static Platform of(final JsonNode data) {
-      return new Platform(
-        data.get("Name").asText(),
-        data.get("Type").asText()
-      );
+    Platform(
+      @JsonProperty("Name") final String name,
+      @JsonProperty("Type") final String type
+    ) {
+      this.name = name;
+      this.type = type;
     }
   }
 }

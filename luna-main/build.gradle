@@ -11,7 +11,7 @@ dependencies {
   implementation("net.getnova.framework:nova-core:${novaVersion}") { changing true }
 
   runtimeOnly project(':luna-cacti')
-//  runtimeOnly project(':luna-dvb')
+  runtimeOnly project(':luna-dvb')
   runtimeOnly project(':luna-weather')
 
   runtimeOnly 'org.postgresql:postgresql'

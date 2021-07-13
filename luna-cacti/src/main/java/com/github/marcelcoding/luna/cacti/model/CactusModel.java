@@ -27,32 +27,32 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @Table(name = "cacti_cactus")
 public class CactusModel extends TableModelAutoId {
 
-  @Column(name = "number", nullable = false, updatable = true, length = 128, unique = true)
+  @Column(name = "number", nullable = false, length = 128, unique = true)
   private String number;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "genus_id", nullable = true, updatable = true)
+  @JoinColumn(name = "genus_id")
   private GenusModel genus;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "specie_id", nullable = true, updatable = true)
+  @JoinColumn(name = "specie_id")
   private SpecieModel specie;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "form_id", nullable = true, updatable = true)
+  @JoinColumn(name = "form_id")
   private FormModel form;
 
-  @Column(name = "field_number", nullable = true, updatable = true, length = 128)
+  @Column(name = "field_number", length = 128)
   private String fieldNumber;
 
-  @Column(name = "flower_color", nullable = true, updatable = true, length = 128)
+  @Column(name = "flower_color", length = 128)
   private String flowerColor;
 
   @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "images", nullable = true, updatable = true)
+  @Column(name = "images")
   private Set<String> images;
 
-  @Column(name = "synonyms", nullable = true, updatable = true, length = 1024)
+  @Column(name = "synonyms", length = 1024)
   private String synonyms;
 
   @Embedded
@@ -71,13 +71,13 @@ public class CactusModel extends TableModelAutoId {
   @AllArgsConstructor
   public static class StateModel {
 
-    @Column(name = "state_no_longer_in_possession_timestamp", nullable = true, updatable = true)
+    @Column(name = "state_no_longer_in_possession_timestamp")
     private OffsetDateTime noLongerInPossessionTimestamp;
 
-    @Column(name = "state_no_longer_in_possession_reason", nullable = true, updatable = true)
+    @Column(name = "state_no_longer_in_possession_reason")
     private String noLongerInPossessionReason;
 
-    @Column(name = "state_vitality", nullable = true, updatable = true, length = 128)
+    @Column(name = "state_vitality", length = 128)
     private String vitality;
   }
 
@@ -88,16 +88,16 @@ public class CactusModel extends TableModelAutoId {
   @AllArgsConstructor
   public static class AcquisitionModel {
 
-    @Column(name = "acquisition_timestamp", nullable = true, updatable = true)
+    @Column(name = "acquisition_timestamp")
     private OffsetDateTime timestamp;
 
-    @Column(name = "acquisition_age", nullable = true, updatable = true)
+    @Column(name = "acquisition_age")
     private Duration age;
 
-    @Column(name = "acquisition_place", nullable = true, updatable = true, length = 512)
+    @Column(name = "acquisition_place", length = 512)
     private String place;
 
-    @Column(name = "acquisition_plant_type", nullable = true, updatable = true, length = 512)
+    @Column(name = "acquisition_plant_type", length = 512)
     private String plantType;
   }
 
@@ -108,29 +108,29 @@ public class CactusModel extends TableModelAutoId {
   @AllArgsConstructor
   public static class CareGroupModel {
 
-    @Column(name = "care_group_id", nullable = true, updatable = true)
+    @Column(name = "care_group_id")
     private String id;
 
-    @Column(name = "care_group_home", nullable = true, updatable = true, length = 512)
+    @Column(name = "care_group_home", length = 512)
     private String home;
 
-    @Column(name = "care_group_soil", nullable = true, updatable = true, length = 512)
+    @Column(name = "care_group_soil", length = 512)
     private String soil;
 
     @Embedded
-    @AttributeOverride(name = "light", column = @Column(name = "care_group_grow_time_light", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "air", column = @Column(name = "care_group_grow_time_air", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "temperature", column = @Column(name = "care_group_grow_time_temperature", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "humidity", column = @Column(name = "care_group_grow_time_humidity", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "other", column = @Column(name = "care_group_grow_time_other", nullable = true, updatable = true, length = 1024))
+    @AttributeOverride(name = "light", column = @Column(name = "care_group_grow_time_light", length = 512))
+    @AttributeOverride(name = "air", column = @Column(name = "care_group_grow_time_air", length = 512))
+    @AttributeOverride(name = "temperature", column = @Column(name = "care_group_grow_time_temperature", length = 512))
+    @AttributeOverride(name = "humidity", column = @Column(name = "care_group_grow_time_humidity", length = 512))
+    @AttributeOverride(name = "other", column = @Column(name = "care_group_grow_time_other", length = 1024))
     private TimeModel growTime;
 
     @Embedded
-    @AttributeOverride(name = "light", column = @Column(name = "care_group_rest_time_light", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "air", column = @Column(name = "care_group_rest_time_air", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "temperature", column = @Column(name = "care_group_rest_time_temperature", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "humidity", column = @Column(name = "care_group_rest_time_humidity", nullable = true, updatable = true, length = 512))
-    @AttributeOverride(name = "other", column = @Column(name = "care_group_rest_time_other", nullable = true, updatable = true, length = 1024))
+    @AttributeOverride(name = "light", column = @Column(name = "care_group_rest_time_light", length = 512))
+    @AttributeOverride(name = "air", column = @Column(name = "care_group_rest_time_air", length = 512))
+    @AttributeOverride(name = "temperature", column = @Column(name = "care_group_rest_time_temperature", length = 512))
+    @AttributeOverride(name = "humidity", column = @Column(name = "care_group_rest_time_humidity", length = 512))
+    @AttributeOverride(name = "other", column = @Column(name = "care_group_rest_time_other", length = 1024))
     private TimeModel restTime;
 
     @Getter

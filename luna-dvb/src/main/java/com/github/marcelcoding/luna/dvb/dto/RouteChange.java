@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.dvb.dto;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -8,9 +8,9 @@ public class RouteChange {
 
   private final String id;
 
-  public static RouteChange of(final JsonNode data) {
-    return new RouteChange(
-      String.valueOf(data.get("Id").textValue())
-    );
+  public RouteChange(
+    @JsonProperty("Id") final String id
+  ) {
+    this.id = id;
   }
 }

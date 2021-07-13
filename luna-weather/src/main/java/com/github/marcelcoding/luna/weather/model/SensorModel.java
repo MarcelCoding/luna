@@ -22,20 +22,20 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @Table(name = "weather_sensor")
 public class SensorModel extends TableModelAutoId {
 
-  @Column(name = "name", nullable = false, updatable = true, length = 128)
+  @Column(name = "name", nullable = false, length = 128)
   private String name;
 
-  @Column(name = "description", nullable = false, updatable = true, length = 512)
+  @Column(name = "description", nullable = false, length = 512)
   private String description;
 
-  @Column(name = "unit", nullable = false, updatable = true, length = 8)
+  @Column(name = "unit", nullable = false, length = 8)
   private String unit;
 
-  @Column(name = "illustration", nullable = false, updatable = true)
+  @Column(name = "illustration", nullable = false)
   @Enumerated(EnumType.STRING)
   private Illustration illustration;
 
   @ManyToOne
-  @JoinColumn(name = "group_id", nullable = true, updatable = true)
+  @JoinColumn(name = "group_id")
   private SensorGroupModel group;
 }

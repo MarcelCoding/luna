@@ -18,18 +18,18 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "cacti_cactus")
 public class CactusSmallModel extends TableModelAutoId {
 
-  @Column(name = "number", nullable = false, updatable = true, length = 128, unique = true)
+  @Column(name = "number", nullable = false, length = 128, unique = true)
   private String number;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "genus_id", nullable = true, updatable = true)
+  @JoinColumn(name = "genus_id")
   private GenusModel genus;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "specie_id", nullable = true, updatable = true)
+  @JoinColumn(name = "specie_id")
   private SpecieModel specie;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "form_id", nullable = true, updatable = true)
+  @JoinColumn(name = "form_id")
   private FormModel form;
 }

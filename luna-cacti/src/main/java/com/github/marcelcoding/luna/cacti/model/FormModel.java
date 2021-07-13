@@ -20,7 +20,7 @@ import net.getnova.framework.jpa.model.TableModelAutoId;
 @Table(name = "cacti_form")
 public class FormModel extends TableModelAutoId {
 
-  @Column(name = "name", nullable = false, updatable = true, length = 128)
+  @Column(name = "name", nullable = false, length = 128)
   private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
