@@ -24,11 +24,19 @@ RUN set -o errexit -o nounset \
  && chown --recursive ${LUNA_USER}:${LUNA_GROUP} ${DATA_DIR} \
  && chown --recursive ${LUNA_USER}:${LUNA_GROUP} /home/${LUNA_USER} \
  \
- &&  apt-get update \
+ && apt-get update \
  && apt-get install -y --no-install-recommends curl jq \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
+ \
+ && curl https://raw.githubusercontent.com/fabric8io-images/run-java-sh/master/fish-pepper/run-java-sh/fp-files/run-java.sh -so /run-java.sh \
+ && chmod +x /run-java.sh
 
 WORKDIR ${DATA_DIR}
+
+ENV JAVA_APP_DIR=${DATA_DIR}
+ENV JAVA_MAIN_CLASS=org.springframework.boot.loader.JarLauncher
+ENV JAVA_APP_NAME=luna
+ENV JAVA_CLASSPATH=/opt/luna
 
 USER ${LUNA_USER}:${LUNA_GROUP}
 VOLUME ${DATA_DIR}
@@ -41,7 +49,7 @@ COPY --from=extractor /src/spring-boot-loader/ /opt/luna
 COPY --from=extractor /src/snapshot-dependencies/ /opt/luna
 COPY --from=extractor /src/application/ /opt/luna
 
-ENTRYPOINT ["java", "-cp", "/opt/luna", "org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["/run-java.sh"]
 
 HEALTHCHECK --start-period=10s --interval=30s --timeout=3s --retries=3 \
             CMD curl --silent --fail --request GET "http://localhost:${MANAGEMENT_PORT}/actuator/health" \

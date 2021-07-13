@@ -14,13 +14,13 @@ dependencies {
 //  runtimeOnly project(':luna-dvb')
   runtimeOnly project(':luna-weather')
 
-  implementation 'org.postgresql:postgresql'
+  runtimeOnly 'org.postgresql:postgresql'
 //   runtimeOnly 'org.liquibase:liquibase-core'
 
   implementation "org.springdoc:springdoc-openapi-webflux-ui:${springDocVersion}"
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-//  runtimeOnly 'io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.5.Final:linux-x86_64'
+//  runtimeOnly 'io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.8.Final:linux-x86_64'
 //  runtimeOnly 'io.netty:netty-tcnative-boringssl-static'
 
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
