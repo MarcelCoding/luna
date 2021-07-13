@@ -1,6 +1,7 @@
 package com.github.marcelcoding.luna.weather.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,5 +51,27 @@ public class Sensor implements Validatable {
 
   public enum Illustration {
     @JsonProperty("LINE_CHART") LINE_CHART
+  }
+
+  @lombok.Data
+  public static final class Data implements Validatable {
+
+    private final OffsetDateTime timestamp;
+    private final double value;
+
+    public Data(
+      @JsonProperty("timestamp") final OffsetDateTime timestamp,
+      @JsonProperty("value") final double value
+    ) {
+      this.timestamp = timestamp;
+      this.value = value;
+    }
+
+    @Override
+    public void validate() throws ValidationException {
+      if (this.timestamp == null) {
+        throw new ValidationException("timestamp", "NOT_NULL");
+      }
+    }
   }
 }
