@@ -57,11 +57,11 @@ public class Sensor implements Validatable {
   public static final class Data implements Validatable {
 
     private final OffsetDateTime timestamp;
-    private final double value;
+    private final Double value;
 
     public Data(
       @JsonProperty("timestamp") final OffsetDateTime timestamp,
-      @JsonProperty("value") final double value
+      @JsonProperty("value") final Double value
     ) {
       this.timestamp = timestamp;
       this.value = value;
@@ -69,8 +69,12 @@ public class Sensor implements Validatable {
 
     @Override
     public void validate() throws ValidationException {
-      if (this.timestamp == null) {
-        throw new ValidationException("timestamp", "NOT_NULL");
+//      if (this.timestamp == null) {
+//        throw new ValidationException("timestamp", "NOT_NULL");
+//      }
+
+      if (this.value == null) {
+        throw new ValidationException("value", "NOT_NULL");
       }
     }
   }

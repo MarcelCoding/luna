@@ -8,7 +8,7 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
   implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocVersion}"
 
-  annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   annotationProcessor 'org.springframework:spring-context-indexer'
 
   testImplementation 'org.springframework.boot:spring-boot-starter-test'

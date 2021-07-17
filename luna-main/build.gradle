@@ -24,8 +24,8 @@ dependencies {
 //  runtimeOnly 'io.netty:netty-tcnative-boringssl-static'
 
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
-  annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-  annotationProcessor "org.springframework:spring-context-indexer"
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  annotationProcessor 'org.springframework:spring-context-indexer'
   // testImplementation 'org.springframework.boot:spring-boot-starter-test'
   // testImplementation 'io.projectreactor:reactor-test'
 }

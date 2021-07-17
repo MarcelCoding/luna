@@ -16,6 +16,21 @@
         <option name="name" value="SQL_PASS" />
         <option name="value" value="root" />
       </param>
+      <param>
+        <option name="enabled" value="true" />
+        <option name="name" value="INFLUX_BUCKET" />
+        <option name="value" value="root" />
+      </param>
+      <param>
+        <option name="enabled" value="true" />
+        <option name="name" value="INFLUX_ORG" />
+        <option name="value" value="root" />
+      </param>
+      <param>
+        <option name="enabled" value="true" />
+        <option name="name" value="INFLUX_TOKEN" />
+        <option name="value" value="root" />
+      </param>
     </additionalParameters>
     <method v="2">
       <option name="Gradle.BeforeRunTask" enabled="true" tasks="compileJava processResources" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
