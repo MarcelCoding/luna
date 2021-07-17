@@ -1,7 +1,6 @@
 package com.github.marcelcoding.luna.weather;
 
 import com.github.marcelcoding.luna.weather.repository.SensorGroupRepository;
-import net.getnova.framework.influx.InfluxClient;
 import net.getnova.framework.influx.InfluxProperties;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -20,10 +19,5 @@ public class WeatherConfiguration {
       .group("luna-weather")
       .pathsToMatch("/weather/**")
       .build();
-  }
-
-  @Bean
-  InfluxClient influxClient(final InfluxProperties properties) {
-    return new InfluxClient(properties);
   }
 }
