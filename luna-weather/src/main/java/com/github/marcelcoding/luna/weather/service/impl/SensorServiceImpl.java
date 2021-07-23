@@ -8,8 +8,6 @@ import com.github.marcelcoding.luna.weather.model.SensorModel;
 import com.github.marcelcoding.luna.weather.repository.SensorRepository;
 import com.github.marcelcoding.luna.weather.service.SensorService;
 import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,7 +30,7 @@ public class SensorServiceImpl
 
   private static final String DATA_QUERY = """
     from(bucket: "%s")
-      |> range(%s)
+      |> range(start: %s, stop: %s)
       |> filter(fn: (r) => r._measurement == "sensor" and r.sensor_id == "%s")
       |> drop(columns: ["sensor_id"])
       |> aggregateWindow(every: 1%s, fn: mean)
@@ -57,18 +55,14 @@ public class SensorServiceImpl
       throw new NotFoundException(this.name);
     }
 
-    final Instant timestamp = Optional.ofNullable(value.getTimestamp())
-      .map(OffsetDateTime::toInstant)
-      .orElseGet(Instant::now);
-
-    final Measurement<?> Measurement = new Measurement<>(
+    final Measurement<?> measurement = new Measurement<>(
       "sensor",
       Map.of("sensor_id", id.toString()),
       new DoubleField("value", value.getValue()),
-      timestamp
+      value.getTimestamp() == null ? Instant.now() : value.getTimestamp()
     );
 
-    return this.influxClient.write(Flux.just(Measurement), WritePrecision.MS);
+    return this.influxClient.write(Flux.just(measurement), WritePrecision.S);
   }
 
   @Override
@@ -81,7 +75,7 @@ public class SensorServiceImpl
     final Instant toDate = to.orElseGet(Instant::now);
 
     if (!from.isBefore(toDate)) {
-      throw new ValidationException("from", "must before \"to\"");
+      throw new ValidationException("from", "before \"to\"");
     }
 
     if (!this.exist(id)) {
@@ -90,29 +84,17 @@ public class SensorServiceImpl
 
     final String query = DATA_QUERY.formatted(
       this.influxClient.getBucket(), // bucket
-      this.createRange(from, to),    // range
+      from.getEpochSecond(),         // start
+      toDate.getEpochSecond(),       // range
       id,                            // sensor id
       resolution.getInfluxUnit()     // resolution
     );
 
     return this.influxClient.query(query, DoubleField.class)
       .map(measurement -> new Data(
-        measurement.getTimestamp().atOffset(ZoneOffset.UTC),
+        measurement.getTimestamp(),
         measurement.getField().getValue()
       ));
   }
 
-  private String createRange(final Instant from, final Optional<Instant> to) {
-    final StringBuilder result = new StringBuilder();
-
-    result.append("start: ")
-      .append(from.getEpochSecond());
-
-    to.ifPresent(instant ->
-      result.append(", stop: ")
-        .append(instant.getEpochSecond())
-    );
-
-    return result.toString();
-  }
 }

@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.weather.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,11 +56,11 @@ public class Sensor implements Validatable {
   @lombok.Data
   public static final class Data implements Validatable {
 
-    private final OffsetDateTime timestamp;
+    private final Instant timestamp;
     private final Double value;
 
     public Data(
-      @JsonProperty("timestamp") final OffsetDateTime timestamp,
+      @JsonProperty("timestamp") final Instant timestamp,
       @JsonProperty("value") final Double value
     ) {
       this.timestamp = timestamp;
