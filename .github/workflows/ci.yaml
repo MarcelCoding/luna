@@ -96,9 +96,9 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ matrix.java-distro }-${{ matrix.java-version }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: ${{ runner.os }}-gradle-${{ matrix.java-distro }}-${{ matrix.java-version }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-${{ matrix.java-distro }-${{ matrix.java-version }}-
+            ${{ runner.os }}-gradle-${{ matrix.java-distro }}-${{ matrix.java-version }}-
 
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v2
