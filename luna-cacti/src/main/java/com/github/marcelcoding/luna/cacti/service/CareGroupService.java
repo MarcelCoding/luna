@@ -3,10 +3,10 @@ package com.github.marcelcoding.luna.cacti.service;
 import com.github.marcelcoding.luna.cacti.api.CareGroup;
 import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import net.getnova.framework.core.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public final class CareGroupService {
   private final Map<String, CareGroup> careGroups;
 
   public CareGroupService() {
-    this.careGroups = List.of(
+    this.careGroups = Stream.of(
       new CareGroup(
         "1",
         "Pflegegruppe 1",
@@ -47,9 +47,9 @@ public final class CareGroupService {
         "kühles Klima",
         "kiesig-lehmig, pH 4.5 - 6",
         new Time("sonnig", "freier Stand", null, null, null),
-        new Time(null, "trockender Stand", "kälteverträglich, bei geeignetem Substrat bis -25°C", null,
+        new Time(null, "trockener Stand", "kälteverträglich, bei geeignetem Substrat bis -25°C", null,
           "Überdauern den Winter unter einer Schneeecke sehr gut, gefährlich sind Kahlfröste nach vorhergegangener nasser Wärmeperiode,"
-          + "abdecken mit Reisig oder Brettern, auch überwintern in trockenem Frühbeetkasten mit Sonnenschutz")
+          + "abdecken mit Reisig oder Brettern, auch überwintern in trockenem Frühbettkasten mit Sonnenschutz")
       ),
 
       new CareGroup(
@@ -57,7 +57,7 @@ public final class CareGroupService {
         "Pflegegruppe 4",
         "warme Steppe",
         "sandig-kiesig, humusarm, pH 5 - 6",
-        new Time("sonnig", "möglichtst freier Stand", "warmer Stand", "meist etwas nässeempfindlich", null),
+        new Time("sonnig", "möglichst freier Stand", "warmer Stand", "meist etwas nässeempfindlich", null),
         new Time(null, null, "min. 5°C", "trocken", null)
       ),
 
@@ -65,7 +65,7 @@ public final class CareGroupService {
         "5",
         "Pflegegruppe 5",
         "warme Trockengebiete",
-        "kiesig, rein mineralisch, pH 5.6 - 6.5, Pfropfung zu emppfehlen",
+        "kiesig, rein mineralisch, pH 5.6 - 6.5, Pfropfung zu empfehlen",
         new Time("vollsonnig", "warmer Stand", null, "nässeempfindlich, Wurzelhals trocken halten", null),
         new Time("möglichst hell", null, "min. 4°C", "trocken", null)
       ),
@@ -102,8 +102,8 @@ public final class CareGroupService {
         "7b",
         "Pflegegruppe 7b", "Steppen & Gebirge", "sandig-mineralisch mit etwas Humusgehalt, leicht sauer, pH 5 - 6.5",
         new Time("sonnig, Schutz vor Prallsonne (besonders bei Jungpflanzen)", "luftig, zeitweise ohne Glasbedeckung",
-          "genügend, bei Wärme nicht zu wenig Feuchtichkeit", null, null),
-        new Time("hell", null, "kühl, 8 - 12°C, Gebirgsarten auch darunter, andere nur Kurzfistig darunter",
+          "genügend, bei Wärme nicht zu wenig Feuchtigkeit", null, null),
+        new Time("hell", null, "kühl, 8 - 12°C, Gebirgsarten auch darunter, andere nur kurzfristig darunter",
           "ziemlich trocken, Jungpflanzen und Veredlungen brauchen zur Erhaltung der Faserwurzeln ständig ein geringes Quantum Feuchtigkeit von unten",
           null)
       ),
@@ -114,10 +114,10 @@ public final class CareGroupService {
         "mineralisch-kiesig, pH 5 - 6, Pfropfung zum Teil zu empfehlen",
         new Time("hell, im Sommer halb- bis vollsonnig, Herbst bis Frühjahr vollsonnig", "reichlich lüften",
           "ausreichend Wärme",
-          "ausreichnd Feuchtichkeit", null),
+          "ausreichend Feuchtigkeit", null),
         new Time("hell", "lufttrocken", "warm, nicht unter 10°C", null, null)
       )
-    ).stream().collect(Collectors.toUnmodifiableMap(CareGroup::getId, Function.identity()));
+    ).collect(Collectors.toUnmodifiableMap(CareGroup::getId, Function.identity()));
   }
 
   public Collection<CareGroup> findAll() {
