@@ -33,7 +33,7 @@ public class SensorServiceImpl
       |> range(start: %s, stop: %s)
       |> filter(fn: (r) => r._measurement == "sensor" and r.sensor_id == "%s")
       |> drop(columns: ["sensor_id"])
-      |> aggregateWindow(every: 1%s, fn: mean)
+      |> aggregateWindow(every: 1%s, fn: mean, createEmpty: false)
     """;
 
   private final InfluxClient influxClient;
@@ -96,5 +96,4 @@ public class SensorServiceImpl
         measurement.getField().getValue()
       ));
   }
-
 }
