@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.controller.impl;
 
-import com.github.marcelcoding.luna.cacti.api.Form;
+import com.github.marcelcoding.luna.cacti.dto.Form;
 import com.github.marcelcoding.luna.cacti.controller.FormRestController;
 import com.github.marcelcoding.luna.cacti.service.FormService;
 import java.util.UUID;

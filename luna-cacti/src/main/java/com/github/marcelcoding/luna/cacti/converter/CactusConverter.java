@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
-import com.github.marcelcoding.luna.cacti.api.Cactus;
-import com.github.marcelcoding.luna.cacti.api.CareGroup;
+import com.github.marcelcoding.luna.cacti.dto.Cactus;
+import com.github.marcelcoding.luna.cacti.dto.CareGroup;
 import com.github.marcelcoding.luna.cacti.model.CactusModel;
 import com.github.marcelcoding.luna.cacti.model.CactusModel.CareGroupModel;
 import com.github.marcelcoding.luna.cacti.model.FormModel;

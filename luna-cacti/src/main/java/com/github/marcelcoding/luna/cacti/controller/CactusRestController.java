@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.api.Cactus;
-import com.github.marcelcoding.luna.cacti.api.CactusSmall;
+import com.github.marcelcoding.luna.cacti.dto.Cactus;
+import com.github.marcelcoding.luna.cacti.dto.CactusSmall;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.UUID;

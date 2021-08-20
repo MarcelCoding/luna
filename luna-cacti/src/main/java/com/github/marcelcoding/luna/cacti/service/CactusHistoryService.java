@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.api.CactusHistoryEntry;
+import com.github.marcelcoding.luna.cacti.dto.CactusHistoryEntry;
 import com.github.marcelcoding.luna.cacti.converter.CactusHistoryEntryConverter;
 import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel;
 import com.github.marcelcoding.luna.cacti.model.CactusHistoryEntryModel.IdModel;

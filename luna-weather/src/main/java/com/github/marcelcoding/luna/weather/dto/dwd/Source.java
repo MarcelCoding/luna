@@ -1,5 +1,6 @@
 package com.github.marcelcoding.luna.weather.dto.dwd;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class Source {
   private final float height;
   private final float distance;
 
+  @JsonCreator
   public Source(
     @JsonProperty("id") final int id,
     // @JsonProperty("dwd_station_id") final String dwdStationId,

@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.service.impl;
 
-import com.github.marcelcoding.luna.cacti.api.Genus;
+import com.github.marcelcoding.luna.cacti.dto.Genus;
 import com.github.marcelcoding.luna.cacti.converter.GenusConverter;
 import com.github.marcelcoding.luna.cacti.model.GenusModel;
 import com.github.marcelcoding.luna.cacti.repository.GenusRepository;

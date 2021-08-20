@@ -1,5 +1,6 @@
 package com.github.marcelcoding.luna.weather.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ public class SensorGroup implements Validatable {
   private final String name;
   private final String description;
 
+  @JsonCreator
   public SensorGroup(
     @JsonProperty("name") final String name,
     @JsonProperty("description") final String description

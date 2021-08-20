@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.service.impl;
 
-import com.github.marcelcoding.luna.cacti.api.Form;
+import com.github.marcelcoding.luna.cacti.dto.Form;
 import com.github.marcelcoding.luna.cacti.converter.FormConverter;
 import com.github.marcelcoding.luna.cacti.model.FormModel;
 import com.github.marcelcoding.luna.cacti.repository.FormRepository;

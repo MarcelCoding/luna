@@ -1,5 +1,6 @@
 package com.github.marcelcoding.luna.weather.dto.dwd;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -15,6 +16,7 @@ public class PollenRegion {
   @JsonIgnore
   private final Map<String, Polle> pollen;
 
+  @JsonCreator
   public PollenRegion(
     @JsonProperty("region_id") final short id,
     @JsonProperty("region_name") final String name,

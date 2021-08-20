@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.api.CareGroup;
+import com.github.marcelcoding.luna.cacti.dto.CareGroup;
 import com.github.marcelcoding.luna.cacti.service.CareGroupService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collection;

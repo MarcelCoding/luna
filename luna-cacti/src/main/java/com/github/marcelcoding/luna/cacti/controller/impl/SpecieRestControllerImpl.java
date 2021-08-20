@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.controller.impl;
 
-import com.github.marcelcoding.luna.cacti.api.Specie;
+import com.github.marcelcoding.luna.cacti.dto.Specie;
 import com.github.marcelcoding.luna.cacti.controller.SpecieRestController;
 import com.github.marcelcoding.luna.cacti.service.SpecieService;
 import java.util.UUID;

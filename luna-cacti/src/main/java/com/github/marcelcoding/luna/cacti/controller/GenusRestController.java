@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.api.Genus;
+import com.github.marcelcoding.luna.cacti.dto.Genus;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.UUID;
 import net.getnova.framework.core.controller.CrudController;

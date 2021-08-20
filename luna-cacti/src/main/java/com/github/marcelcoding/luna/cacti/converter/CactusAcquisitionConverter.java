@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
-import com.github.marcelcoding.luna.cacti.api.Cactus.Acquisition;
+import com.github.marcelcoding.luna.cacti.dto.Cactus.Acquisition;
 import com.github.marcelcoding.luna.cacti.model.CactusModel.AcquisitionModel;
 import net.getnova.framework.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;

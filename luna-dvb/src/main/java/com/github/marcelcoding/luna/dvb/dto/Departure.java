@@ -1,5 +1,6 @@
 package com.github.marcelcoding.luna.dvb.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.marcelcoding.luna.dvb.DvbUtils;
 import java.time.OffsetDateTime;
@@ -17,6 +18,7 @@ public class Departure {
   private final OffsetDateTime scheduledTime;
   private final int[] routeChanges;
 
+  @JsonCreator
   public Departure(
     @JsonProperty("Id") final String id,
     @JsonProperty("LineName") final String line,

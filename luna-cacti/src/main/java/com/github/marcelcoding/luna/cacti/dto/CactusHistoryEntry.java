@@ -1,5 +1,6 @@
-package com.github.marcelcoding.luna.cacti.api;
+package com.github.marcelcoding.luna.cacti.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import lombok.Data;
@@ -24,6 +25,7 @@ public final class CactusHistoryEntry implements Validatable {
   private final LocalDate date;
   private final String content;
 
+  @JsonCreator
   public CactusHistoryEntry(
     @JsonProperty("date") final LocalDate date,
     @JsonProperty("content") final String content

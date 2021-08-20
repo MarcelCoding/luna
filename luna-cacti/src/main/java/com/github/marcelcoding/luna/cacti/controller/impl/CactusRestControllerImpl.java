@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.cacti.controller.impl;
 
-import com.github.marcelcoding.luna.cacti.api.Cactus;
-import com.github.marcelcoding.luna.cacti.api.CactusSmall;
+import com.github.marcelcoding.luna.cacti.dto.Cactus;
+import com.github.marcelcoding.luna.cacti.dto.CactusSmall;
 import com.github.marcelcoding.luna.cacti.controller.CactusRestController;
 import com.github.marcelcoding.luna.cacti.service.CactusImageService;
 import com.github.marcelcoding.luna.cacti.service.CactusService;

@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
-import com.github.marcelcoding.luna.cacti.api.Cactus.State;
+import com.github.marcelcoding.luna.cacti.dto.Cactus.State;
 import com.github.marcelcoding.luna.cacti.model.CactusModel.StateModel;
 import net.getnova.framework.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;

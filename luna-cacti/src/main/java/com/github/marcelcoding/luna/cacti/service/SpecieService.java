@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.api.Specie;
+import com.github.marcelcoding.luna.cacti.dto.Specie;
 import java.util.UUID;
 import net.getnova.framework.core.service.CrudService;
 

@@ -1,5 +1,6 @@
-package com.github.marcelcoding.luna.cacti.api;
+package com.github.marcelcoding.luna.cacti.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -28,6 +29,7 @@ public final class Cactus implements Validatable {
   private final Acquisition acquisition;
   private final CareGroup careGroup;
 
+  @JsonCreator
   public Cactus(
     @JsonProperty("number") final String number,
     @JsonProperty("genusId") final UUID genusId,

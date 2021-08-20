@@ -1,5 +1,6 @@
 package com.github.marcelcoding.luna.weather.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 import java.util.UUID;
@@ -59,6 +60,7 @@ public class Sensor implements Validatable {
     private final Instant timestamp;
     private final Double value;
 
+    @JsonCreator
     public Data(
       @JsonProperty("timestamp") final Instant timestamp,
       @JsonProperty("value") final Double value

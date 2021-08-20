@@ -1,5 +1,6 @@
-package com.github.marcelcoding.luna.cacti.api;
+package com.github.marcelcoding.luna.cacti.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ public final class CareGroup {
   private final Time growTime;
   private final Time restTime;
 
+  @JsonCreator
   public CareGroup(
     @JsonProperty("id") final String id,
     @JsonProperty("name") final String name,

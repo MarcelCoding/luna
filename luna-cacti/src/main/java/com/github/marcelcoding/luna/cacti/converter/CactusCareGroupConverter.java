@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
 import com.github.marcelcoding.luna.cacti.CareGroupUtils;
-import com.github.marcelcoding.luna.cacti.api.CareGroup;
+import com.github.marcelcoding.luna.cacti.dto.CareGroup;
 import com.github.marcelcoding.luna.cacti.model.CactusModel.CareGroupModel;
 import com.github.marcelcoding.luna.cacti.service.CareGroupService;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
 import com.github.marcelcoding.luna.cacti.CareGroupUtils;
-import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
+import com.github.marcelcoding.luna.cacti.dto.CareGroup.Time;
 import com.github.marcelcoding.luna.cacti.model.CactusModel.CareGroupModel.TimeModel;
 import org.springframework.stereotype.Component;
 

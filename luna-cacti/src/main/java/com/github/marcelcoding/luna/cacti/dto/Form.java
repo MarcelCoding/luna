@@ -1,5 +1,6 @@
-package com.github.marcelcoding.luna.cacti.api;
+package com.github.marcelcoding.luna.cacti.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ public final class Form implements Validatable {
   private final String name;
   private final UUID specieId;
 
+  @JsonCreator
   public Form(
     @JsonProperty("name") final String name,
     @JsonProperty("specieId") final UUID specieId

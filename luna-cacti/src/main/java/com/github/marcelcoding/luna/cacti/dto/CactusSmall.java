@@ -1,4 +1,4 @@
-package com.github.marcelcoding.luna.cacti.api;
+package com.github.marcelcoding.luna.cacti.dto;
 
 import java.util.UUID;
 import lombok.Data;

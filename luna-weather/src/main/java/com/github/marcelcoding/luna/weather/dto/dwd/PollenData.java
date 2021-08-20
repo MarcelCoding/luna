@@ -1,5 +1,6 @@
 package com.github.marcelcoding.luna.weather.dto.dwd;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.marcelcoding.luna.weather.DwdUtils;
@@ -19,6 +20,7 @@ public class PollenData {
   @JsonIgnore
   private final Set<PollenRegion> regions;
 
+  @JsonCreator
   public PollenData(
     @JsonProperty("name") final String name,
     @JsonProperty("sender") final String sender,

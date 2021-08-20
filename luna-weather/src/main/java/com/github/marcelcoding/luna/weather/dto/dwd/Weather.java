@@ -1,5 +1,6 @@
 package com.github.marcelcoding.luna.weather.dto.dwd;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Weather {
   private final float windGustSpeed;
   // private final JsonNode fallbackSourceIds;
 
+  @JsonCreator
   public Weather(
     @JsonProperty("timestamp") final OffsetDateTime timestamp,
     @JsonProperty("source_id") final int sourceId,

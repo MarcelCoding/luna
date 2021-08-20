@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.controller;
 
-import com.github.marcelcoding.luna.cacti.api.CactusHistoryEntry;
+import com.github.marcelcoding.luna.cacti.dto.CactusHistoryEntry;
 import com.github.marcelcoding.luna.cacti.service.CactusHistoryService;
 import com.github.marcelcoding.luna.cacti.service.CactusService;
 import io.swagger.v3.oas.annotations.tags.Tag;

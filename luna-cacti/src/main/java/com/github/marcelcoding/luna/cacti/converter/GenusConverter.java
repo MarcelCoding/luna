@@ -1,6 +1,6 @@
 package com.github.marcelcoding.luna.cacti.converter;
 
-import com.github.marcelcoding.luna.cacti.api.Genus;
+import com.github.marcelcoding.luna.cacti.dto.Genus;
 import com.github.marcelcoding.luna.cacti.model.GenusModel;
 import net.getnova.framework.core.Converter;
 import org.springframework.stereotype.Component;

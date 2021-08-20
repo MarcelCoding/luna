@@ -1,7 +1,7 @@
 package com.github.marcelcoding.luna.cacti.service;
 
-import com.github.marcelcoding.luna.cacti.api.CareGroup;
-import com.github.marcelcoding.luna.cacti.api.CareGroup.Time;
+import com.github.marcelcoding.luna.cacti.dto.CareGroup;
+import com.github.marcelcoding.luna.cacti.dto.CareGroup.Time;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Function;
