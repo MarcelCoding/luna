@@ -58,7 +58,7 @@ bootBuildImage {
 //graal {
 //  javaVersion '11'
 //  outputName 'luna'
-//  mainClass 'com.github.marcelcoding.luna.Bootstrap'
+//  mainClass 'de.m4rc3l.luna.Bootstrap'
 ////  mainClass 'org.springframework.boot.loader.JarLauncher'
 //
 //  option '-H:+StaticExecutableWithDynamicLibC'
