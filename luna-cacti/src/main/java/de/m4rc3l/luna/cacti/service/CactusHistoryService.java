@@ -1,7 +1,7 @@
 package de.m4rc3l.luna.cacti.service;
 
-import de.m4rc3l.luna.cacti.converter.CactusHistoryEntryConverter;
 import de.m4rc3l.luna.cacti.dto.CactusHistoryEntry;
+import de.m4rc3l.luna.cacti.converter.CactusHistoryEntryConverter;
 import de.m4rc3l.luna.cacti.model.CactusHistoryEntryModel;
 import de.m4rc3l.luna.cacti.model.CactusHistoryEntryModel.IdModel;
 import de.m4rc3l.luna.cacti.model.CactusSmallModel;
