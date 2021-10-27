@@ -7,8 +7,8 @@ on:
   pull_request:
 
 env:
-  JAVA_VERSION: 16
-  JAVA_DISTRO: adopt
+  JAVA_VERSION: 17
+  JAVA_DISTRO: temurin
   DOCKER_HUB_IMAGE_NAME: marcelcoding/luna
 
 jobs:
@@ -70,9 +70,10 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
           java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRO }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -85,8 +86,8 @@ jobs:
 
     strategy:
       matrix:
-        java-version: [ 16 ]
-        java-distro: [ hotspot, openj9 ]
+        java-version: [ 17 ]
+        java-distro: [ temurin, zulu ]
 
     steps:
       - uses: actions/checkout@v2
@@ -104,7 +105,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version }}
-          distribution: adopt-${{ matrix.java-distro }}
+          distribution: ${{ matrix.java-distro }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -138,7 +139,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew :luna-main:assemble --stacktrace --no-daemon --refresh-dependencies
+        run: ./gradlew :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon --refresh-dependencies
 
       - uses: actions/upload-artifact@v2
         with:
@@ -152,31 +153,31 @@ jobs:
     permissions:
       packages: write
 
-    strategy:
-      matrix:
-        jvm-impl: [ hotspot, openj9 ]
-        include:
-          - jvm-impl: hotspot
-            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
-          - jvm-impl: openj9
-            platforms: linux/amd64 #,linux/arm64/v8
+    #    strategy:
+    #      matrix:
+    #        jvm-impl: [ hotspot, openj9 ]
+    #        include:
+    #          - jvm-impl: hotspot
+    #            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+    #          - jvm-impl: openj9
+    #            platforms: linux/amd64 #,linux/arm64/v8
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Docker meta
-        id: docker_meta
-        uses: marcelcoding/ghaction-docker-meta@v1
+        id: meta
+        uses: docker/metadata-action@v3
         with:
           tag-edge: true
           images: |
             ${{ env.DOCKER_HUB_IMAGE_NAME }}
             ghcr.io/${{ github.repository }}
-          tag-semver: |
-            {{version}}
-            {{major}}.{{minor}}
-          flavor: ${{ matrix.jvm-impl }}
-          main-flavor: ${{ matrix.jvm-impl == 'hotspot' }}
+          tags: |
+            type=edge
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
 
       - uses: docker/setup-qemu-action@v1
         if: matrix.platforms != 'linux/amd64'
@@ -215,13 +216,13 @@ jobs:
         with:
           context: .
           file: ./docker/Dockerfile.github-actions
-          platforms: ${{ matrix.platforms }}
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8 #${{ matrix.platforms }}
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            JAVA_VERSION=${{ env.JAVA_VERSION }}
-            JVM_IMPL=${{ matrix.jvm-impl }}
+            JVM_VERSION=${{ env.JAVA_VERSION }}
+          # JVM_IMPL=${{ matrix.jvm-impl }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
