@@ -169,7 +169,6 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          tag-edge: true
           images: |
             ${{ env.DOCKER_HUB_IMAGE_NAME }}
             ghcr.io/${{ github.repository }}
