@@ -8,12 +8,12 @@ import net.getnova.framework.core.Validatable;
 import net.getnova.framework.core.exception.ValidationException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
-import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Safelist;
 
 @Data
 public final class CactusHistoryEntry implements Validatable {
 
-  private static final Whitelist WHITELIST = Whitelist.relaxed()
+  private static final Safelist WHITELIST = Safelist.relaxed()
     .addEnforcedAttribute("a", "target", "_blank")
     .addEnforcedAttribute("a", "rel", "nofollow noopener noreferrer")
     .addTags("span")
