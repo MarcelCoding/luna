@@ -15,6 +15,8 @@ RUN set -o errexit -o nounset \
      --print-module-deps \
      ./luna.jar > jre-deps.info \
  && jlink \
+    # https://stackoverflow.com/questions/61301818/java-failed-to-exec-spawn-helper-error-since-moving-to-java-14-on-linux
+     -Djdk.lang.Process.launchMechanism=vfork \
      --add-modules $(cat jre-deps.info) \
      --strip-debug \
      --no-man-pages \
