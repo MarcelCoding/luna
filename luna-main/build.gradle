@@ -20,6 +20,10 @@ dependencies {
   implementation "org.springdoc:springdoc-openapi-webflux-ui:${springDocVersion}"
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+  implementation platform('io.sentry:sentry-bom:5.3.0')
+  implementation 'io.sentry:sentry-spring-boot-starter'
+  implementation 'io.sentry:sentry-logback'
+
 //  runtimeOnly 'io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.8.Final:linux-x86_64'
 //  runtimeOnly 'io.netty:netty-tcnative-boringssl-static'
 
