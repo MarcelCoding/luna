@@ -58,7 +58,7 @@ public class SensorServiceImpl
     final Measurement<?> measurement = new Measurement<>(
       "sensor",
       Map.of("sensor_id", id.toString()),
-      new DoubleField("value", value.getValue()),
+      new DoubleField("value", Math.round(value.getValue() * 1000) / 1000D),
       value.getTimestamp() == null ? Instant.now() : value.getTimestamp()
     );
 
@@ -93,7 +93,7 @@ public class SensorServiceImpl
     return this.influxClient.query(query, DoubleField.class)
       .map(measurement -> new Data(
         measurement.getTimestamp(),
-        measurement.getField().getValue()
+        Math.round(measurement.getField().getValue() * 10) / 10D
       ));
   }
 }
