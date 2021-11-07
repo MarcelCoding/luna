@@ -8,6 +8,7 @@ import java.util.UUID;
 import net.getnova.framework.core.controller.SmallCrudController;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +31,7 @@ public interface CactusRestController extends SmallCrudController<Cactus, Cactus
     @RequestPart("files") Flux<FilePart> files
   );
 
-  @GetMapping(value = "{id}/image/{filename:.+}", produces = "image/*")
+  @GetMapping(value = "{id}/image/{filename:.+}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
   ResponseEntity<Resource> getImage(
     @RequestHeader HttpHeaders headers,
     @PathVariable("id") UUID id,
