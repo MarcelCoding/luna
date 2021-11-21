@@ -13,7 +13,7 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
   implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocVersion}"
 
-  implementation 'org.jsoup:jsoup:1.14.2'
+  implementation 'org.jsoup:jsoup:1.14.3'
 
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   annotationProcessor 'org.springframework:spring-context-indexer'
