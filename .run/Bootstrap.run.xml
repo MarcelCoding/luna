@@ -7,24 +7,22 @@
     <option name="SHORTEN_COMMAND_LINE" value="NONE" />
     <additionalParameters>
       <param>
-        <option name="enabled" value="true" />
         <option name="name" value="SQL_USER" />
         <option name="value" value="root" />
       </param>
       <param>
-        <option name="enabled" value="true" />
         <option name="name" value="SQL_PASS" />
         <option name="value" value="root" />
       </param>
       <param>
         <option name="enabled" value="true" />
         <option name="name" value="INFLUX_BUCKET" />
-        <option name="value" value="root" />
+        <option name="value" value="dev" />
       </param>
       <param>
         <option name="enabled" value="true" />
         <option name="name" value="INFLUX_ORG" />
-        <option name="value" value="root" />
+        <option name="value" value="dev" />
       </param>
       <param>
         <option name="enabled" value="true" />
