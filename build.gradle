@@ -12,7 +12,7 @@ plugins {
   id 'base'
   id 'io.spring.nohttp' version '0.0.10'
 //  id 'com.palantir.graal' version '0.7.2' apply false
-  id 'com.github.spotbugs' version '4.7.10' apply false
+  id 'com.github.spotbugs' version '4.8.0' apply false
   id 'io.freefair.lombok' version "${freefairVersion}" // apply, because javadoc
   id 'org.hibernate.orm' version '5.5.7.Final' apply false
   id 'io.freefair.git-version' version "${freefairVersion}"
