@@ -18,7 +18,7 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "cacti_cactus")
 public class CactusSmallModel extends TableModelAutoId {
 
-  @Column(name = "number", nullable = false, length = 128, unique = true)
+  @Column(name = "number")
   private String number;
 
   @ManyToOne(fetch = FetchType.EAGER)
