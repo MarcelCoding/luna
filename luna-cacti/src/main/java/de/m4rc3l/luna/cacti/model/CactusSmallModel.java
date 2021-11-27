@@ -32,4 +32,7 @@ public class CactusSmallModel extends TableModelAutoId {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "form_id")
   private FormModel form;
+
+  @Column(name = "field_number")
+  private String fieldNumber;
 }

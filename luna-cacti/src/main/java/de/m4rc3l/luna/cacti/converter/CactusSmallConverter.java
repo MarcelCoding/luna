@@ -16,7 +16,8 @@ public class CactusSmallConverter extends AbstractSmallConverter<CactusSmallMode
 
       model.getGenus() == null ? null : model.getGenus().getId(),
       model.getSpecie() == null ? null : model.getSpecie().getId(),
-      model.getForm() == null ? null : model.getForm().getId()
+      model.getForm() == null ? null : model.getForm().getId(),
+      model.getFieldNumber()
     );
   }
 }

@@ -13,4 +13,5 @@ public final class CactusSmall {
   private final UUID genusId;
   private final UUID specieId;
   private final UUID formId;
+  private final String fieldNumber;
 }
