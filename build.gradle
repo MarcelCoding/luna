@@ -24,7 +24,7 @@ plugins {
 //io.freefair.maven-optional
 }
 
-if (version.toString().endsWith('SNAPSHOT') || version.toString().isBlank()) {
+if (version.toString().endsWith('SNAPSHOT') || version.toString().isBlank() || version == null) {
   version = 'edge'
 } else if (version.toString().startsWith('v')) {
   version = version.toString().substring(1)
