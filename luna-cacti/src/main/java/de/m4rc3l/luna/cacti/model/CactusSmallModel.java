@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.getnova.framework.jpa.model.TableModelAutoId;
+import de.m4rc3l.nova.jpa.model.TableModelAutoId;
 import org.hibernate.annotations.Immutable;
 
 @Getter

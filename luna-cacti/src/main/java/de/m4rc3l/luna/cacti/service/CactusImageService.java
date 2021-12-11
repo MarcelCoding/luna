@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.core.exception.NotFoundException;
+import de.m4rc3l.nova.core.exception.NotFoundException;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;

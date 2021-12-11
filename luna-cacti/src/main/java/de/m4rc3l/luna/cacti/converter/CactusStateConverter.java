@@ -2,7 +2,7 @@ package de.m4rc3l.luna.cacti.converter;
 
 import de.m4rc3l.luna.cacti.dto.Cactus.State;
 import de.m4rc3l.luna.cacti.model.CactusModel.StateModel;
-import net.getnova.framework.core.Converter;
+import de.m4rc3l.nova.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Component;
 

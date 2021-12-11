@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.core.exception.NotFoundException;
-import net.getnova.framework.core.utils.ValidationUtils;
+import de.m4rc3l.nova.core.exception.NotFoundException;
+import de.m4rc3l.nova.core.utils.ValidationUtils;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import net.getnova.framework.core.exception.NotFoundException;
+import de.m4rc3l.nova.core.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

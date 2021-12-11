@@ -3,7 +3,7 @@ package de.m4rc3l.luna.weather.converter;
 import de.m4rc3l.luna.weather.dto.SensorGroup;
 import de.m4rc3l.luna.weather.model.SensorGroupModel;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.core.Converter;
+import de.m4rc3l.nova.core.Converter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Component;
 

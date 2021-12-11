@@ -6,7 +6,7 @@ import de.m4rc3l.luna.cacti.model.FormModel;
 import de.m4rc3l.luna.cacti.repository.FormRepository;
 import de.m4rc3l.luna.cacti.service.FormService;
 import java.util.UUID;
-import net.getnova.framework.core.service.AbstractCommonIdCrudService;
+import de.m4rc3l.nova.core.service.AbstractCommonIdCrudService;
 import org.springframework.stereotype.Service;
 
 @Service

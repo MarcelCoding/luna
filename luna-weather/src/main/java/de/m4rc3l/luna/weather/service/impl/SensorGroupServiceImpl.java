@@ -6,7 +6,7 @@ import de.m4rc3l.luna.weather.model.SensorGroupModel;
 import de.m4rc3l.luna.weather.repository.SensorGroupRepository;
 import de.m4rc3l.luna.weather.service.SensorGroupService;
 import java.util.UUID;
-import net.getnova.framework.core.service.AbstractCommonIdCrudService;
+import de.m4rc3l.nova.core.service.AbstractCommonIdCrudService;
 import org.springframework.stereotype.Service;
 
 @Service

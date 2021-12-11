@@ -37,13 +37,13 @@ allprojects {
   repositories {
     mavenCentral {
       content {
-        excludeGroup('net.getnova.framework')
+        excludeGroup('de.m4rc3l.nova')
       }
     }
     maven {
       url 'https://mvn.m4rc3l.de'
       content {
-        includeGroup('net.getnova.framework')
+        includeGroup('de.m4rc3l.nova')
       }
     }
     maven { url 'https://repo.spring.io/release' }

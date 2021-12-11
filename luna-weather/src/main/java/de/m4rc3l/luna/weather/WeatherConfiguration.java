@@ -1,7 +1,7 @@
 package de.m4rc3l.luna.weather;
 
 import de.m4rc3l.luna.weather.repository.SensorGroupRepository;
-import net.getnova.framework.influx.InfluxProperties;
+import de.m4rc3l.nova.influx.InfluxProperties;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

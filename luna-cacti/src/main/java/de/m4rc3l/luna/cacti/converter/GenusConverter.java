@@ -2,7 +2,7 @@ package de.m4rc3l.luna.cacti.converter;
 
 import de.m4rc3l.luna.cacti.dto.Genus;
 import de.m4rc3l.luna.cacti.model.GenusModel;
-import net.getnova.framework.core.Converter;
+import de.m4rc3l.nova.core.Converter;
 import org.springframework.stereotype.Component;
 
 @Component

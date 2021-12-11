@@ -5,7 +5,7 @@ import de.m4rc3l.luna.cacti.dto.CactusSmall;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.UUID;
-import net.getnova.framework.core.controller.SmallCrudController;
+import de.m4rc3l.nova.core.controller.SmallCrudController;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

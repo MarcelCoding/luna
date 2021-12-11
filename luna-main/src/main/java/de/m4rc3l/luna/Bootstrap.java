@@ -2,7 +2,7 @@ package de.m4rc3l.luna;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import net.getnova.framework.core.NovaBanner;
+import de.m4rc3l.nova.core.NovaBanner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;

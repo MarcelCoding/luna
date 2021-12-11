@@ -6,7 +6,7 @@ import de.m4rc3l.luna.weather.dto.Sensor.Data;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
-import net.getnova.framework.core.service.CrudService;
+import de.m4rc3l.nova.core.service.CrudService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

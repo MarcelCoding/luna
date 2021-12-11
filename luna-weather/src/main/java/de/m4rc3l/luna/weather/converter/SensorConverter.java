@@ -4,8 +4,8 @@ import de.m4rc3l.luna.weather.dto.Sensor;
 import de.m4rc3l.luna.weather.model.SensorModel;
 import de.m4rc3l.luna.weather.repository.SensorGroupRepository;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.core.Converter;
-import net.getnova.framework.core.exception.NotFoundException;
+import de.m4rc3l.nova.core.Converter;
+import de.m4rc3l.nova.core.exception.NotFoundException;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Component;
 

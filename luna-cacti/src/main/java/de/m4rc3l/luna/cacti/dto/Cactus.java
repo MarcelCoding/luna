@@ -9,8 +9,8 @@ import java.util.Set;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import net.getnova.framework.core.Validatable;
-import net.getnova.framework.core.exception.ValidationException;
+import de.m4rc3l.nova.core.Validatable;
+import de.m4rc3l.nova.core.exception.ValidationException;
 
 @Data
 @AllArgsConstructor

@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.getnova.framework.jpa.model.TableModelAutoId;
+import de.m4rc3l.nova.jpa.model.TableModelAutoId;
 
 @Setter
 @Getter

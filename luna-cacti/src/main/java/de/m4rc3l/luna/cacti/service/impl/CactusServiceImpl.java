@@ -10,7 +10,7 @@ import de.m4rc3l.luna.cacti.repository.CactusRepository;
 import de.m4rc3l.luna.cacti.repository.CactusSmallRepository;
 import de.m4rc3l.luna.cacti.service.CactusService;
 import java.util.UUID;
-import net.getnova.framework.core.service.AbstractSmallCommonIdCrudService;
+import de.m4rc3l.nova.core.service.AbstractSmallCommonIdCrudService;
 import org.springframework.stereotype.Service;
 
 @Service

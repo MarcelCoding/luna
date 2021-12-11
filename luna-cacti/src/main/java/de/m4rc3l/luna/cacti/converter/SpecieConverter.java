@@ -5,8 +5,8 @@ import de.m4rc3l.luna.cacti.model.GenusModel;
 import de.m4rc3l.luna.cacti.model.SpecieModel;
 import de.m4rc3l.luna.cacti.repository.GenusRepository;
 import lombok.RequiredArgsConstructor;
-import net.getnova.framework.core.Converter;
-import net.getnova.framework.core.exception.NotFoundException;
+import de.m4rc3l.nova.core.Converter;
+import de.m4rc3l.nova.core.exception.NotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component

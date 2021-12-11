@@ -8,7 +8,7 @@ import de.m4rc3l.luna.weather.service.SensorService;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
-import net.getnova.framework.core.controller.AbstractCrudController;
+import de.m4rc3l.nova.core.controller.AbstractCrudController;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
