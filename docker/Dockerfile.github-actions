@@ -26,8 +26,11 @@ FROM eclipse-temurin:${JVM_VERSION}-jdk-focal AS extractor
 
 WORKDIR /src
 
-COPY ./luna-main-*.jar luna.jar
-RUN java -Djarmode=layertools -jar luna.jar extract
+COPY ./luna-main-*.jar .
+RUN rm -rf ./luna-main-*-all.jar ./luna-main-*-plain.jar \
+ && ls \
+ && mv luna-main-*.jar luna.jar \
+ && java -Djarmode=layertools -jar luna.jar extract
 
 FROM ubuntu:focal
 
