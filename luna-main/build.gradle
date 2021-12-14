@@ -12,7 +12,7 @@ dependencies {
 
   runtimeOnly project(':luna-cacti')
   // runtimeOnly project(':luna-dvb')
-  // runtimeOnly project(':luna-weather')
+  runtimeOnly project(':luna-weather')
 
   runtimeOnly 'org.postgresql:postgresql'
 //   runtimeOnly 'org.liquibase:liquibase-core'
