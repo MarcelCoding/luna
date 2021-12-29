@@ -6,6 +6,8 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter'
 
   implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+  annotationProcessor "com.github.therapi:therapi-runtime-javadoc-scribe:${therapiRuntimeJavadocVersion}"
   implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocVersion}"
 
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
