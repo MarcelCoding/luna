@@ -14,7 +14,7 @@ plugins {
   id 'com.github.spotbugs' version '5.0.3' apply false
   id 'io.freefair.lombok' version '6.3.0' // apply, because javadoc
   id 'org.hibernate.orm' version '5.5.7.Final' apply false
-  id 'com.palantir.git-version' version '0.12.3'
+  id 'com.palantir.git-version' version '0.13.0'
   id 'com.github.jk1.dependency-license-report' version '2.1'
   id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
   id 'org.springframework.experimental.aot' version '0.11.1' apply false
