@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    novaVersion = '3.0.1'
+    novaVersion = '3.0.2'
     springBootVersion = '2.6.2'
     autoServiceVersion = '1.0.1'
     springDocVersion = '1.5.12'
