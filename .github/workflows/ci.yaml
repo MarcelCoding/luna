@@ -37,7 +37,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Lint with Gradle
-        run: ./gradlew checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon --refresh-dependencies
+        run: ./gradlew checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon
 
       #- name: Annotate Checkstyle Issues
       #  uses: jwgmeligmeyling/checkstyle-github-action@master
@@ -79,7 +79,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: NoHttp with Gradle
-        run: ./gradlew nohttp --stacktrace --no-daemon --refresh-dependencies
+        run: ./gradlew nohttp --stacktrace --no-daemon
 
   test:
     runs-on: ubuntu-latest
@@ -111,7 +111,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run tests with Gradle
-        run: ./gradlew test --stacktrace --no-daemon --refresh-dependencies
+        run: ./gradlew test --stacktrace --no-daemon
 
   build:
     needs: [ lint, nohttp, test ]
@@ -139,7 +139,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon --refresh-dependencies
+        run: ./gradlew :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
 
       - uses: actions/upload-artifact@v2
         with:
@@ -204,7 +204,7 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - uses: actions/download-artifact@v2
