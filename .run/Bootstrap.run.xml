@@ -4,13 +4,14 @@
     <option name="SPRING_BOOT_MAIN_CLASS" value="de.m4rc3l.luna.Bootstrap" />
     <option name="ACTIVE_PROFILES" value="dev" />
     <option name="ALTERNATIVE_JRE_PATH" />
-    <option name="SHORTEN_COMMAND_LINE" value="NONE" />
     <additionalParameters>
       <param>
+        <option name="enabled" value="true" />
         <option name="name" value="SQL_USER" />
         <option name="value" value="root" />
       </param>
       <param>
+        <option name="enabled" value="true" />
         <option name="name" value="SQL_PASS" />
         <option name="value" value="root" />
       </param>
