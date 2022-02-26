@@ -24,9 +24,10 @@ RUN set -o errexit -o nounset \
 
 FROM eclipse-temurin:${JVM_VERSION}-jdk-jammy AS extractor
 
+# the following line has to and with a slash, becuase <from> contains multiple files
+COPY ./luna-main-*.jar /src/
 WORKDIR /src
 
-COPY ./luna-main-*.jar .
 RUN rm -rf ./luna-main-*-all.jar ./luna-main-*-plain.jar ./luna-main-*-aot.jar \
  && mv luna-main-*.jar luna.jar \
  && java -Djarmode=layertools -jar luna.jar extract
