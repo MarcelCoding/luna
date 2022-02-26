@@ -1,9 +1,9 @@
 buildscript {
   ext {
-    novaVersion = '3.0.2'
+    novaVersion = '3.0.3'
     springBootVersion = '2.6.4'
     autoServiceVersion = '1.0.1'
-    springDocVersion = '1.5.12'
+    springDocVersion = '1.6.6'
   }
 }
 
@@ -13,7 +13,7 @@ plugins {
 //  id 'com.palantir.graal' version '0.7.2' apply false
   id 'com.github.spotbugs' version '5.0.3' apply false
   id 'io.freefair.lombok' version '6.4.1' // apply, because javadoc
-  id 'org.hibernate.orm' version '5.5.7.Final' apply false
+  id 'org.hibernate.orm' version '5.6.5.Final' apply false
   id 'com.palantir.git-version' version '0.13.0'
   id 'com.github.jk1.dependency-license-report' version '2.1'
   id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
