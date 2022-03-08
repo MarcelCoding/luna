@@ -2,15 +2,14 @@ package de.m4rc3l.luna.cacti.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.m4rc3l.nova.core.Validatable;
+import de.m4rc3l.nova.core.exception.ValidationException;
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import de.m4rc3l.nova.core.Validatable;
-import de.m4rc3l.nova.core.exception.ValidationException;
 
 @Data
 @AllArgsConstructor
@@ -64,23 +63,6 @@ public final class Cactus implements Validatable {
     }
   }
 
-  public Duration getAge() {
-    if (this.acquisition == null
-        || this.acquisition.getTimestamp() == null
-        || this.acquisition.getAge() == null) {
-      return null;
-    }
-
-    return Duration.between(
-      // born
-      this.acquisition.getTimestamp().minus(this.acquisition.getAge()),
-      // death or now
-      Optional.ofNullable(this.state)
-        .map(State::getNoLongerInPossessionTimestamp)
-        .orElseGet(OffsetDateTime::now)
-    );
-  }
-
   @Data
   public static final class State {
 
@@ -117,6 +99,14 @@ public final class Cactus implements Validatable {
       this.age = age;
       this.place = place;
       this.plantType = plantType;
+    }
+
+    public OffsetDateTime getBorn() {
+      if (this.timestamp == null || this.age == null) {
+        return null;
+      }
+
+      return this.timestamp.minus(this.age);
     }
   }
 }
