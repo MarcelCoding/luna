@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -60,7 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -92,7 +92,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -120,7 +120,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -185,7 +185,7 @@ jobs:
       - uses: docker/setup-buildx-action@v1
 
       - name: Cache Docker layers
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ matrix.jvm-impl }}-${{ github.sha }}
