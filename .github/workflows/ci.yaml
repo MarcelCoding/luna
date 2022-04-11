@@ -141,7 +141,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: luna
           path: luna-main/build/libs
