@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  JAVA_VERSION: 17
+  JAVA_VERSION: 18
   JAVA_DISTRO: temurin
   DOCKER_HUB_IMAGE_NAME: marcelcoding/luna
 
@@ -86,8 +86,8 @@ jobs:
 
     strategy:
       matrix:
-        java-version: [ 17 ]
-        java-distro: [ temurin, zulu, liberica, microsoft ]
+        java-version: [ 18 ]
+        java-distro: [ temurin, zulu, liberica ] # microsoft
 
     steps:
       - uses: actions/checkout@v3

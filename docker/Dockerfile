@@ -1,4 +1,4 @@
-ARG JVM_VERSION=17
+ARG JVM_VERSION=18
 
 FROM eclipse-temurin:${JVM_VERSION}-jdk-focal AS builder
 
