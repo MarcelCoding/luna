@@ -3,7 +3,7 @@ buildscript {
     novaVersion = '3.0.5'
     springBootVersion = '2.6.7'
     autoServiceVersion = '1.0.1'
-    springDocVersion = '1.6.6'
+    springDocVersion = '1.6.8'
     therapiRuntimeJavadocVersion = '0.13.0'
   }
 }
