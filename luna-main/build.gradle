@@ -23,7 +23,7 @@ dependencies {
   implementation "org.springdoc:springdoc-openapi-javadoc:${springDocVersion}"
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-  implementation platform('io.sentry:sentry-bom:5.6.1')
+  implementation platform('io.sentry:sentry-bom:5.7.3')
   implementation 'io.sentry:sentry-spring-boot-starter'
   implementation 'io.sentry:sentry-logback'
 
