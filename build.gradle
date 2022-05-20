@@ -1,7 +1,7 @@
 buildscript {
   ext {
     novaVersion = '3.0.5'
-    springBootVersion = '2.6.7'
+    springBootVersion = '2.7.0'
     autoServiceVersion = '1.0.1'
     springDocVersion = '1.6.8'
     therapiRuntimeJavadocVersion = '0.13.0'
