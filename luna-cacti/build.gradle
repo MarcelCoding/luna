@@ -15,7 +15,7 @@ dependencies {
   annotationProcessor "com.github.therapi:therapi-runtime-javadoc-scribe:${therapiRuntimeJavadocVersion}"
   implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocVersion}"
 
-  implementation 'org.jsoup:jsoup:1.15.1'
+  implementation 'org.jsoup:jsoup:1.15.2'
 
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   annotationProcessor 'org.springframework:spring-context-indexer'
