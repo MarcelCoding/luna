@@ -4,7 +4,7 @@ buildscript {
     springBootVersion = '2.7.0'
     autoServiceVersion = '1.0.1'
     springDocVersion = '1.6.9'
-    therapiRuntimeJavadocVersion = '0.13.0'
+    therapiRuntimeJavadocVersion = '0.15.0'
   }
 }
 
