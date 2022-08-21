@@ -1,6 +1,6 @@
 ARG JVM_VERSION=18
 
-FROM eclipse-temurin:${JVM_VERSION}-jdk-focal AS builder
+FROM eclipse-temurin:${JVM_VERSION}-jdk-jammy AS builder
 
 RUN set -o errexit -o nounset \
  && apt-get update \
@@ -13,7 +13,7 @@ RUN set -o errexit -o nounset \
  && chmod +x ./gradlew \
  && ./gradlew :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
 
-FROM eclipse-temurin:${JVM_VERSION}-jdk-focal AS jre
+FROM eclipse-temurin:${JVM_VERSION}-jdk-jammy AS jre
 ARG JVM_VERSION
 
 WORKDIR /src
@@ -35,14 +35,14 @@ RUN set -o errexit -o nounset \
      --compress 2 \
      --output ./jre
 
-FROM eclipse-temurin:${JVM_VERSION}-jdk-focal AS extractor
+FROM eclipse-temurin:${JVM_VERSION}-jdk-jammy AS extractor
 
 WORKDIR /src
 
 COPY --from=builder /src/luna-main/build/libs/luna-main-*.jar luna.jar
 RUN java -Djarmode=layertools -jar luna.jar extract
 
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 ENV JAVA_HOME=/opt/jre
 ENV PATH="/opt/jre/bin:${PATH}"
