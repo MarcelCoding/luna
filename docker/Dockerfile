@@ -11,14 +11,13 @@ WORKDIR /src
 
 RUN set -o errexit -o nounset \
  && chmod +x ./gradlew \
- && ./gradlew :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
+ && ./gradlew clean :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
 
 FROM eclipse-temurin:${JVM_VERSION}-jdk-jammy AS jre
 ARG JVM_VERSION
 
+COPY --from=builder /src/luna-main/build/libs/luna-main-*-all.jar /src/luna.jar
 WORKDIR /src
-
-COPY --from=builder /src/luna-main/build/libs/luna-main-*-all.jar luna.jar
 
 RUN set -o errexit -o nounset \
  && jdeps \
@@ -37,10 +36,13 @@ RUN set -o errexit -o nounset \
 
 FROM eclipse-temurin:${JVM_VERSION}-jdk-jammy AS extractor
 
+# the following line has to and with a slash, becuase <from> contains multiple files
+COPY --from=builder /src/luna-main/build/libs/luna-main-*.jar /src/
 WORKDIR /src
 
-COPY --from=builder /src/luna-main/build/libs/luna-main-*.jar luna.jar
-RUN java -Djarmode=layertools -jar luna.jar extract
+RUN rm -rf ./luna-main-*-all.jar ./luna-main-*-plain.jar ./luna-main-*-aot.jar \
+ && mv luna-main-*.jar luna.jar \
+ && java -Djarmode=layertools -jar luna.jar extract
 
 FROM ubuntu:jammy
 
@@ -76,6 +78,7 @@ ENV JAVA_APP_DIR=${DATA_DIR}
 ENV JAVA_MAIN_CLASS=org.springframework.boot.loader.JarLauncher
 ENV JAVA_APP_NAME=luna
 ENV JAVA_CLASSPATH=/opt/luna
+ENV JAVA_OPTIONS="-DspringAot=true"
 
 USER ${LUNA_USER}:${LUNA_GROUP}
 VOLUME ${DATA_DIR}
