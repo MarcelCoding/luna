@@ -2,12 +2,12 @@ package de.m4rc3l.luna.weather.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.m4rc3l.nova.core.Validatable;
+import de.m4rc3l.nova.core.exception.ValidationException;
 import java.time.Instant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import de.m4rc3l.nova.core.Validatable;
-import de.m4rc3l.nova.core.exception.ValidationException;
 
 @Data
 @AllArgsConstructor

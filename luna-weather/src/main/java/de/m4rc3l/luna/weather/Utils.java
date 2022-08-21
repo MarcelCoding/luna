@@ -1,10 +1,8 @@
 package de.m4rc3l.luna.weather;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 public final class Utils {
 
   private Utils() {

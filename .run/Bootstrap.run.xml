@@ -1,9 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Bootstrap" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <module name="luna.luna-main.main" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="de.m4rc3l.luna.Bootstrap" />
     <option name="ACTIVE_PROFILES" value="dev" />
-    <option name="ALTERNATIVE_JRE_PATH" />
     <additionalParameters>
       <param>
         <option name="enabled" value="true" />
@@ -31,8 +28,8 @@
         <option name="value" value="root" />
       </param>
     </additionalParameters>
-    <method v="2">
-      <option name="Gradle.BeforeRunTask" enabled="true" tasks="compileJava processResources" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
-    </method>
+    <module name="luna.luna-main.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="de.m4rc3l.luna.Bootstrap" />
+    <method v="2" />
   </configuration>
 </component>

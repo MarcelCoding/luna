@@ -1,6 +1,7 @@
 package de.m4rc3l.luna.weather.model;
 
 import de.m4rc3l.luna.weather.dto.Sensor.Illustration;
+import de.m4rc3l.nova.jpa.model.TableModelAutoId;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,7 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import de.m4rc3l.nova.jpa.model.TableModelAutoId;
 
 @Entity
 @Setter
