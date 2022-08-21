@@ -44,7 +44,6 @@ public class Source {
     @JsonProperty("forecast") FORECAST,
     @JsonProperty("synop") SYNOP,
     @JsonProperty("current") CURRENT,
-    @JsonProperty("recent") RECENT,
     @JsonProperty("historical") HISTORICAL
   }
 }

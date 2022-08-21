@@ -5,10 +5,10 @@ import de.m4rc3l.luna.weather.dto.Resolution;
 import de.m4rc3l.luna.weather.dto.Sensor;
 import de.m4rc3l.luna.weather.dto.Sensor.Data;
 import de.m4rc3l.luna.weather.service.SensorService;
+import de.m4rc3l.nova.core.controller.AbstractCrudController;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
-import de.m4rc3l.nova.core.controller.AbstractCrudController;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,9 +18,7 @@ public class SensorControllerImpl
   extends AbstractCrudController<Sensor, UUID>
   implements SensorController {
 
-  public SensorControllerImpl(
-    final SensorService service
-  ) {
+  public SensorControllerImpl(final SensorService service) {
     super(service);
   }
 

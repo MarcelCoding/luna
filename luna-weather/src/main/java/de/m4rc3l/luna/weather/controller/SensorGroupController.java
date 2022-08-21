@@ -1,9 +1,9 @@
 package de.m4rc3l.luna.weather.controller;
 
 import de.m4rc3l.luna.weather.dto.SensorGroup;
+import de.m4rc3l.nova.core.controller.CrudController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.UUID;
-import de.m4rc3l.nova.core.controller.CrudController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Tag(name = "Sensor Group")
