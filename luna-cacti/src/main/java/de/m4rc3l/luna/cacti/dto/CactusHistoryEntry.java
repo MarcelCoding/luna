@@ -17,6 +17,7 @@ public final class CactusHistoryEntry implements Validatable {
     .addEnforcedAttribute("a", "target", "_blank")
     .addEnforcedAttribute("a", "rel", "nofollow noopener noreferrer")
     .addTags("span")
+    .addTags("hr")
     .addAttributes("span", "style");
 
   private static final OutputSettings OUTPUT_SETTINGS = new OutputSettings()
