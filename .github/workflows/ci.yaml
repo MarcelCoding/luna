@@ -18,26 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
       - name: Set up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DISTRO }}
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
       - name: Lint with Gradle
-        run: ./gradlew checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon
 
       #- name: Annotate Checkstyle Issues
       #  uses: jwgmeligmeyling/checkstyle-github-action@master
@@ -54,52 +44,16 @@ jobs:
       #  with:
       #    path: '**/build/reports/pmd/*.xml'
 
-  nohttp:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DISTRO }}
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: NoHttp with Gradle
-        run: ./gradlew nohttp --stacktrace --no-daemon
-
   test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         java-version: [ 18 ]
-        java-distro: [ temurin, zulu, liberica ] # microsoft
+        java-distro: [ temurin ]
 
     steps:
       - uses: actions/checkout@v3
-
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ matrix.java-distro }}-${{ matrix.java-version }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-${{ matrix.java-distro }}-${{ matrix.java-version }}-
 
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v3
@@ -107,27 +61,17 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: ${{ matrix.java-distro }}
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
       - name: Run tests with Gradle
-        run: ./gradlew test --stacktrace --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test --stacktrace --no-daemon
 
   build:
-    needs: [ lint, nohttp, test ]
+    needs: [ lint, test ]
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
 
       - name: Set up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
@@ -135,11 +79,10 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DISTRO }}
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
       - name: Build with Gradle
-        run: ./gradlew :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
 
       - uses: actions/upload-artifact@v3
         with:
@@ -230,15 +173,3 @@ jobs:
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-
-#      - name: Inspect image
-#        if: github.event_name != 'pull_request'
-#        run: |
-#          docker pull ${{ env.DOCKER_HUB_IMAGE_NAME }}:${{ steps.docker_meta.outputs.version }}
-#          docker image inspect ${{ env.DOCKER_HUB_IMAGE_NAME }}:${{ steps.docker_meta.outputs.version }}
-#
-#      - name: Check manifest
-#        if: github.event_name != 'pull_request'
-#        run: |
-#          docker buildx imagetools inspect ${{ env.DOCKER_HUB_IMAGE_NAME }}:${{ steps.docker_meta.outputs.version }}
-#          docker buildx imagetools inspect ghcr.io/${{ github.repository }}:${{ steps.docker_meta.outputs.version }}
