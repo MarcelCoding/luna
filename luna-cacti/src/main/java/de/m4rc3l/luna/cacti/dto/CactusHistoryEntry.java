@@ -2,10 +2,10 @@ package de.m4rc3l.luna.cacti.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDate;
-import lombok.Data;
 import de.m4rc3l.nova.core.Validatable;
 import de.m4rc3l.nova.core.exception.ValidationException;
+import java.time.LocalDate;
+import lombok.Data;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Safelist;
@@ -13,12 +13,9 @@ import org.jsoup.safety.Safelist;
 @Data
 public final class CactusHistoryEntry implements Validatable {
 
-  private static final Safelist WHITELIST = Safelist.relaxed()
-    .addEnforcedAttribute("a", "target", "_blank")
-    .addEnforcedAttribute("a", "rel", "nofollow noopener noreferrer")
-    .addTags("span")
-    .addTags("hr")
-    .addAttributes("span", "style");
+  private static final Safelist WHITELIST = Safelist.none()
+    .addTags("h1", "h2", "h3", "h4", "h5", "h6", "p", "blockquote", "font", "b", "i", "u", "ol", "ul")
+    .addAttributes("font", "color");
 
   private static final OutputSettings OUTPUT_SETTINGS = new OutputSettings()
     .prettyPrint(false);
