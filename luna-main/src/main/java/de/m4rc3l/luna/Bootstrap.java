@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication(scanBasePackages = "de.m4rc3l.nova")
+@SpringBootApplication(scanBasePackages = "de.m4rc3l")
 @SuppressWarnings("checkstyle:HideUtilityClassConstructor")
 public class Bootstrap {
 
