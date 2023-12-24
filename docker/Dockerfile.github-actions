@@ -1,4 +1,4 @@
-ARG JVM_VERSION=18
+ARG JVM_VERSION=21
 
 FROM eclipse-temurin:${JVM_VERSION}-jdk-jammy AS jre
 ARG JVM_VERSION
