@@ -1,24 +1,3 @@
-pluginManagement {
-  repositories {
-    maven {
-      url 'https://repo1.maven.org/maven2'
-      content { includeModule('org.hibernate', 'hibernate-gradle-plugin') }
-    }
-    gradlePluginPortal()
-    maven { url 'https://repo.spring.io/release' }
-    maven { url 'https://repo.spring.io/milestone' }
-    maven { url 'https://repo.spring.io/snapshot' }
-  }
-
-  resolutionStrategy {
-    eachPlugin {
-      if (requested.id.id == 'org.hibernate.orm') {
-        useModule("org.hibernate:hibernate-gradle-plugin:${requested.version}")
-      }
-    }
-  }
-}
-
 rootProject.name = 'luna'
 include(
   'luna-cacti',

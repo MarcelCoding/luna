@@ -10,7 +10,7 @@ import de.m4rc3l.luna.cacti.repository.CactusSmallRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import de.m4rc3l.nova.core.exception.NotFoundException;
 import de.m4rc3l.nova.core.utils.ValidationUtils;

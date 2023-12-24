@@ -1,9 +1,8 @@
 buildscript {
   ext {
-    novaVersion = '3.0.5'
-    springBootVersion = '2.7.3'
-    autoServiceVersion = '1.0.1'
-    springDocVersion = '1.6.11'
+    novaVersion = 'edge'
+    springBootVersion = '3.2.1'
+    springDocVersion = '1.7.0'
     therapiRuntimeJavadocVersion = '0.15.0'
   }
 }
@@ -11,15 +10,14 @@ buildscript {
 plugins {
   id 'base'
 //  id 'com.palantir.graal' version '0.7.2' apply false
-  id 'com.github.spotbugs' version '5.0.6' apply false
-  id 'io.freefair.lombok' version '6.4.3.1' // apply, because javadoc
-  id 'org.hibernate.orm' version '5.6.5.Final' apply false
-  id 'com.palantir.git-version' version '0.15.0'
-  id 'com.github.jk1.dependency-license-report' version '2.1'
-  id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
-  id 'org.springframework.experimental.aot' version '0.12.1' apply false
+  id 'com.github.spotbugs' version '6.0.4' apply false
+  id 'io.freefair.lombok' version '8.4' // apply, because javadoc
+  id 'org.hibernate.orm' version '6.4.1.Final' apply false
+  id 'com.palantir.git-version' version '3.0.0'
+  id 'com.github.jk1.dependency-license-report' version '2.5'
+  id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
   id 'org.springframework.boot' version "${springBootVersion}" apply false
-  id 'io.spring.dependency-management' version '1.0.13.RELEASE' apply false
+  id 'io.spring.dependency-management' version '1.1.4' apply false
 //io.freefair.maven-optional
 }
 
@@ -86,17 +84,12 @@ subprojects {
     }
   }
 
-  lombok {
-    config.put('lombok.equalsandhashcode.callsuper', 'CALL')
-    config.put('lombok.tostring.callsuper', 'CALL')
-  }
-
   tasks.withType(Checkstyle) {
     exclude('**/module-info.java')
     ignoreFailures = true
     reports {
-      xml.enabled(true)
-      html.enabled(false)
+      xml.required = true
+      html.required = false
     }
   }
 
@@ -111,8 +104,8 @@ subprojects {
   tasks.withType(Pmd) {
     ignoreFailures = true
     reports {
-      xml.enabled(true)
-      html.enabled(false)
+      xml.required = true
+      html.required = false
     }
   }
 

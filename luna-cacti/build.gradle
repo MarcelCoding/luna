@@ -24,10 +24,10 @@ dependencies {
 }
 
 hibernate {
-  enhance {
-    enableLazyInitialization = true
-    enableDirtyTracking = true
-    enableAssociationManagement = true
-    enableExtendedEnhancement = false
+  enhancement {
+    lazyInitialization true
+    dirtyTracking true
+    associationManagement true
+    extendedEnhancement false
   }
 }
