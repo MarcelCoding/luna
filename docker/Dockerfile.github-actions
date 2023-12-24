@@ -63,7 +63,7 @@ COPY --from=jre /src/jre ${JAVA_HOME}
 WORKDIR ${DATA_DIR}
 
 ENV JAVA_APP_DIR=${DATA_DIR}
-ENV JAVA_MAIN_CLASS=org.springframework.boot.loader.JarLauncher
+ENV JAVA_MAIN_CLASS=org.springframework.boot.loader.launch.JarLauncher
 ENV JAVA_APP_NAME=luna
 ENV JAVA_CLASSPATH=/opt/luna
 
