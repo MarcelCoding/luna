@@ -54,8 +54,8 @@ subprojects {
   apply plugin: 'com.github.spotbugs'
   apply plugin: 'io.spring.dependency-management'
 
-  sourceCompatibility = JavaVersion.VERSION_18
-  targetCompatibility = JavaVersion.VERSION_18
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
 
   dependencyManagement {
     imports {
@@ -79,7 +79,7 @@ subprojects {
   tasks.withType(JavaCompile) {
     doFirst {
       options.encoding = 'UTF-8'
-      options.compilerArgsaddAll(['-parameters'])
+      options.compilerArgs.add("-parameters")
       // Java Modularity:
       // options.compilerArgs.addAll(['--module-path', classpath.asPath])
     }
