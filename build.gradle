@@ -79,7 +79,7 @@ subprojects {
   tasks.withType(JavaCompile) {
     doFirst {
       options.encoding = 'UTF-8'
-      options.compilerArgs << '-parameters'
+      options.compilerArgsaddAll(['-parameters'])
       // Java Modularity:
       // options.compilerArgs.addAll(['--module-path', classpath.asPath])
     }
