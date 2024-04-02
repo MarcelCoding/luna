@@ -25,7 +25,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRO }}
 
       - name: Lint with Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: checkstyleMain checkstyleTest spotbugsMain spotbugsTest pmdMain pmdTest --stacktrace --no-daemon
 
@@ -62,7 +62,7 @@ jobs:
           distribution: ${{ matrix.java-distro }}
 
       - name: Run tests with Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: test --stacktrace --no-daemon
 
@@ -80,7 +80,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRO }}
 
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: :luna-main:shadowJar :luna-main:assemble --stacktrace --no-daemon
 
